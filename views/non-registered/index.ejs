@@ -1,0 +1,102 @@
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./styles/index.css" />
+        <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"> <!-- this wont work find out why-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <title> <%= title %></title>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+                    <div class="container">
+                      <a class="navbar-brand" href="#">
+                        <strong>BookWithMe</strong>
+                      </a> 
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                        <ul class="navbar-nav mr-auto">
+                          <li class="nav-item active">
+                            <a class="nav-link" href="#">Login
+                              <span class="sr-only">(current)</span>
+                            </a>
+                          </li>
+
+                          <li class="nav-item active">
+                                <a class="nav-link" href="#">Signup
+                                  <span class="sr-only">(current)</span>
+                                </a>
+                        </li>
+
+                        <li class="nav-item active">
+                                <a class="nav-link" href="#">Help
+                                  <span class="sr-only">(current)</span>
+                                </a>
+                        </li>
+                          
+                        </ul>
+                        
+                      </div>
+                    </div>
+                  </nav>
+
+    <div class="view" style="background-image: url('<%= imageUrl %>'); background-repeat: no-repeat ; background-size: cover; background-position: center center;">
+                <div class="container">
+                        <div class="row align-items-end">
+                                    <div class="col-sm-8"></div>
+                                    <div class="col-sm-4 pt-5">
+                                        <div class="pt-5">
+                                            <div class="pt-5">
+                                                <h2 class="font-italic text-light"><strong>Book unique homes</strong></h2>
+                                                <h2 class="font-italic text-light"><strong>around the world</h2></strong>
+                                            </div>
+                                                
+                                        </div>
+                                            
+                                            <form action="www.google.com">
+                                                <div class="form-group">
+                                                  
+                                                  <input type="location" class="form-control" id="location" value="Enter the Location">
+                                                </div>
+                                                <div class="form-group">
+        
+                                                  <input type="check-in-date" class="form-control" id="check-in-date" value="Check-in Date">
+                                                </div>
+                                                <div class="form-group">
+        
+                                                        <input type="check-out-date" class="form-control" id="check-out-date" value="Check-out Date">
+                                                      </div>
+                                                <div class="form-group">
+        
+                                                        <input type="number" class="form-control" id="member" value="member">
+                                                    </div>
+                                                          
+                                                      
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                              </form>
+                                    </div>
+                                    
+                               
+                        </div>
+                    </div>
+            </div>
+</div>
+
+<main>
+        <div class="container">
+          <!--Grid row-->
+          <div class="row py-5">
+            <!--Grid column-->
+            <div class="col-md-12 text-center">
+                <p class="display-3">Welcome to BookWithMe !!</p>
+              <p class="display-5">Hi my name is Prayag Desai</p>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+      </main>
+
+</body>
+
+</html>
