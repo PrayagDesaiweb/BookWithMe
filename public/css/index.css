@@ -1,0 +1,8 @@
+.view{
+    background-image: url('/images/downtown.jpg');
+    background-color: coral;
+    background-repeat: no-repeat ; 
+    background-size: cover; 
+    background-position: center center;    
+}
+

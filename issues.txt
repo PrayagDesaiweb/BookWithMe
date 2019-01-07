@@ -1,3 +1,6 @@
 1. Refer to the following link https://expressjs.com/en/starter/static-files.html
 2.Check why bootstrap is not imported from the node_modules file
-3.passing imageUrl in the styles in the views div of index.ejs file from app.get
+3.passing imageUrl in the styles in the views div of index.ejs file from app.get solution is that in the ejs file when you have link for boottsrap always place the link for css files above the bootstrap files. All the css files will reside on the top of the bootstrap file itherwis the css files wont load.
+4.Good coding practice to use the static files in express app
+5.https://expressjs.com/en/starter/static-files.html
+6.Learn how to write good commit message in git
