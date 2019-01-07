@@ -7,3 +7,8 @@
 7.Learn how to use chrome developer tools
 8.in href of html if you want to navigate to aa do href ="aa" and not href = "/aa"
 9.
+
+
+project rerefence
+
+1. For the implementation on FAQ refer https://home.bt.com/lifestyle/travel/travel-advice/what-is-airbnb-11363981595930
