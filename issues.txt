@@ -3,7 +3,7 @@
 3.passing imageUrl in the styles in the views div of index.ejs file from app.get solution is that in the ejs file when you have link for boottsrap always place the link for css files above the bootstrap files. All the css files will reside on the top of the bootstrap file itherwis the css files wont load.
 4.Good coding practice to use the static files in express app
 5.https://expressjs.com/en/starter/static-files.html
-6.Learn how to write good commit message in git
+6.Learn how to write good commit message in git https://chris.beams.io/posts/git-commit/
 7.Learn how to use chrome developer tools
 8.in href of html if you want to navigate to aa do href ="aa" and not href = "/aa"
 9.

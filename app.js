@@ -15,11 +15,9 @@ app.set('views','views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Importing Routers
+const nonRegisteredUsersRouter = require('./routers/non_registered_users');
 
-app.get('/',(req, res, next) =>{
-    res.render('non-registered-users/index',{
-        title:'Index page',
-    });
-})
+app.use(nonRegisteredUsersRouter);
+
 
 app.listen(3000);
