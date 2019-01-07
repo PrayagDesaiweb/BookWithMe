@@ -14,10 +14,11 @@ app.set('views','views');
 // static folder to serve css images and js content
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Importing Routers
+
 app.get('/',(req, res, next) =>{
-    res.render('non-registered/index',{
+    res.render('non-registered-users/index',{
         title:'Index page',
-        imgUrl:'public/images/downtown.jpg'
     });
 })
 

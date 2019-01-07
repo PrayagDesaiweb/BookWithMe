@@ -4,3 +4,6 @@
 4.Good coding practice to use the static files in express app
 5.https://expressjs.com/en/starter/static-files.html
 6.Learn how to write good commit message in git
+7.Learn how to use chrome developer tools
+8.in href of html if you want to navigate to aa do href ="aa" and not href = "/aa"
+9.
