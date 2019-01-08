@@ -16,8 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Importing Routers
 const nonRegisteredUsersRouter = require('./routers/non_registered_users');
+const adminRouter = require('./routers/admin');
 
 app.use(nonRegisteredUsersRouter);
+app.use(adminRouter);
 
 
 app.listen(3000);
