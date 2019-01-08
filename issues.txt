@@ -6,7 +6,7 @@
 6.Learn how to write good commit message in git https://chris.beams.io/posts/git-commit/
 7.Learn how to use chrome developer tools
 8.in href of html if you want to navigate to aa do href ="aa" and not href = "/aa"
-9.
+9.Padding top and bottom and understanding css styles for padding
 
 
 project rerefence
