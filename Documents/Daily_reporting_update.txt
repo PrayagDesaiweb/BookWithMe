@@ -1,0 +1,6 @@
+08/01/19 reporting update:
+Already completed learnings of key technologies
+Put dates to each story today itself
+Will talk about timeline of the project tomorrow.
+Planning to finish http://localhost:3000/become-certified-host page
+
