@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const nonRegisteredUsersRouter = require('./routers/non_registered_users');
 const adminRouter = require('./routers/admin');
 const registeredHostsRouter = require('./routers/registered-hosts')
+const errorRouter = require('./routers/error');
 
 // importing database related logic
 const mongoConnect = require('./util/database');
@@ -32,6 +33,7 @@ const mongoConnect = require('./util/database');
 app.use(nonRegisteredUsersRouter);
 app.use(adminRouter);
 app.use(registeredHostsRouter);
+app.use(errorRouter);
 
 // start server on connecting the database server
 mongoConnect.mongoconnect( () => {
