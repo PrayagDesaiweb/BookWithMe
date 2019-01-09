@@ -8,8 +8,9 @@ let _db // this underscore variable is used in this file only to fetch the type 
 const mongoconnect = (callback) => { // callback function passed on creating and connecting application to the database server
     mongoClient.connect(url,{useNewUrlParser:true}).
     then(client =>{
-        console.log('Database connection successfull')
-        callback(client)
+        console.log('Connected');
+            _db = client.db()
+            callback(client);
     })
     .catch(err =>{
         console.log('Error in connecting database');
