@@ -3,7 +3,6 @@ const RegisterHost = require('../models/RegisterHost');
 exports.postbecomeHost = (req,res,next) =>{
 
     console.log(req.body)
-    //res.send('I am served')
 
     const name = req.body.name;
     const email = req.body.password;
@@ -15,5 +14,9 @@ exports.postbecomeHost = (req,res,next) =>{
     }).catch(err => {
         console.log(err)
     })
+
+    res.render('reg-hosts/host_reg_succ',{
+        name: name
+    });
 
 }
