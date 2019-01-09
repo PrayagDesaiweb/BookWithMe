@@ -6,7 +6,7 @@ let url = "mongodb://localhost:27017/practiceBookWithMe";
 let _db // this underscore variable is used in this file only to fetch the type of database schema
 
 const mongoconnect = (callback) => { // callback function passed on creating and connecting application to the database server
-    mongoClient.connect(url).
+    mongoClient.connect(url,{useNewUrlParser:true}).
     then(client =>{
         console.log('Database connection successfull')
         callback(client)
