@@ -22,8 +22,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const nonRegisteredUsersRouter = require('./routers/non_registered_users');
 const adminRouter = require('./routers/admin');
 
+// importing database related logic
+const mongoConnect = require('./util/database');
+
+
+
+// handling router as per as incoming requests
 app.use(nonRegisteredUsersRouter);
 app.use(adminRouter);
 
-
-app.listen(3000);
+mongoConnect.mongoconnect( () => {
+    app.listen(3000);
+})
