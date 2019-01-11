@@ -14,7 +14,7 @@ class RegisterHost{
         let db = getDb();
         return db.collection('host').insertOne(this)
         .then(result =>{
-            console.log(result);
+            //console.log(result);
         })
         .catch(err =>{
             console.log(err);
@@ -27,7 +27,8 @@ class RegisterHost{
         let db = getDb(name_of_host);
         return db.collection('host').findOne({name : name_of_host})
         .then(product => {
-            console.log(product);
+           // console.log(product);
+            return product
         }).catch(err => {
             console.log(err);
         })
