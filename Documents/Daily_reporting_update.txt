@@ -4,3 +4,8 @@ Put dates to each story today itself
 Will talk about timeline of the project tomorrow.
 Planning to finish http://localhost:3000/become-certified-host page
 
+10/01/2019
+Mongo db connection over yesterday
+Investigating issue with 404 routing
+Creating host model and serving the host requests
+Today Prayag would be working on CRUD for registered hosts
