@@ -19,7 +19,20 @@ class RegisterHost{
         .catch(err =>{
             console.log(err);
         })
+
+        
     }
+
+    static fetchIdByName(name_of_host) {
+        let db = getDb(name_of_host);
+        return db.collection('host').findOne({name : name_of_host})
+        .then(product => {
+            console.log(product);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
 }
 
 module.exports = RegisterHost;

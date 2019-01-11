@@ -34,9 +34,10 @@
             <br>
             <br>
             <br>
-            <form action="/create-rentals" method="get">
+            <form action="/create-first-rental" method="post">
                 <div class="md-5" align="center">
-                    <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Create Rental. register your property on rent and let others discover and explore. Click here for adding rentals">Create Rental</button>
+                    <input type="hidden" value="<%= name %>" name="user_name" />
+                    <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Create Rental. register your property on rent and let others discover and explore. Click here for adding rentals">Create your first Rental</button>
                 </div>
             </form>
         
