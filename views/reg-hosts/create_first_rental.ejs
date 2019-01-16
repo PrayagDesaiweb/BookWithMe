@@ -20,6 +20,8 @@
         <br>
 
         <form action="/path-to-manage-rentals" method="POST">
+          <input type="hidden" value="<%= hostName %>" name="host_name">
+          <input type="hidden" value="<%= hostId %>" name="host_id">
 
             <div class="form-group">
                     <label for="name">Name</label>
