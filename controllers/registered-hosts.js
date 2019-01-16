@@ -14,3 +14,8 @@ exports.postCreateOneRental = (req, res, next) => {
     })
     
 }
+
+exports.postFetchfromCreatefirstRentals = (req, res, next) => {
+    console.log(req.body)
+    res.send('I am handled');
+}
