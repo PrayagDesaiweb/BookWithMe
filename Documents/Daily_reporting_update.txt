@@ -9,3 +9,14 @@ Mongo db connection over yesterday
 Investigating issue with 404 routing
 Creating host model and serving the host requests
 Today Prayag would be working on CRUD for registered hosts
+
+17/01/2019
+Completed Become a host page without any validations. Validations are still pending.
+signup and login page for renter is priority, start working on it ASAP
+Next reportings:
+19/01/2019
+22/01/2019 - 9:30
+24/01/2019 - 1:30
+25/01/2019 - 1:30
+26/01/2019
+
