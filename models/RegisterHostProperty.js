@@ -3,7 +3,7 @@ const mongoDb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
 class RegisterHostProperty{
-    
+
     constructor(host_name, host_id, property_name, property_class,address, description,chk_in_date,chk_out_date){
         this.host_name = host_name;
         this.host_id = host_id;
@@ -16,6 +16,7 @@ class RegisterHostProperty{
     }
 
     save(){
+
         let db = getDb();
         return db.collection('hostProperty').insertOne(this)
         .then(result =>{
@@ -25,3 +26,5 @@ class RegisterHostProperty{
         });
     }
 }
+
+module.exports = RegisterHostProperty;
