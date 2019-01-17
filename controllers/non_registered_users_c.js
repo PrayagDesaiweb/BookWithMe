@@ -11,5 +11,5 @@ exports.getbecomeHost = (req, res, next) => {
 }
 
 exports.getbecomeUser = (req, res, next) => {
-    res.send('I am handled');
+    res.render('non-registered-users/become-registered-user');
 }
