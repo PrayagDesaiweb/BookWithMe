@@ -1,4 +1,5 @@
 const RegisterHost = require('../models/RegisterHost');
+const RegisterUser = require('../models/RegisterUser');
 
 exports.postbecomeHost = (req,res,next) =>{
 
@@ -10,7 +11,7 @@ exports.postbecomeHost = (req,res,next) =>{
     const contactNo = req.body.contactNo;
     const registered_host = new RegisterHost(name, email, password, contactNo);
     registered_host.save().then(result =>{
-        console.log(result);
+       // console.log(result);
     }).catch(err => {
         console.log(err)
     })
@@ -22,6 +23,16 @@ exports.postbecomeHost = (req,res,next) =>{
 }
 
 exports.postbecomeUser = (req, res, next) => {
-    console.log(req.body);
+    //console.log(req.body);
+    const user_name = req.body.user_name;
+    const user_email = req.body.user_email;
+    const user_password = req.body.user_password;
+    const registeruser = new RegisterUser(user_name, user_email, user_password)
+    registeruser.save().then(result => {
+        console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+
     res.send('I am handled and the user registration is successfull');
 }
