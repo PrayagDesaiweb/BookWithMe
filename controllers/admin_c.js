@@ -34,5 +34,9 @@ exports.postbecomeUser = (req, res, next) => {
         console.log(err);
     });
 
-    res.send('I am handled and the user registration is successfull');
+    // fetching the userId from the user collection in which the credenatials are added
+
+    res.render('registered-users/welcome-registered-users',{
+        user_name : user_name
+    });
 }
