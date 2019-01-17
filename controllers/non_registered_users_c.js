@@ -9,3 +9,7 @@ exports.getIndexPage = (req, res, next) =>{
 exports.getbecomeHost = (req, res, next) => {
     res.render('non-registered-users/become_certified_host');
 }
+
+exports.getbecomeUser = (req, res, next) => {
+    res.send('I am handled');
+}
