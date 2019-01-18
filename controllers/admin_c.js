@@ -48,11 +48,11 @@ exports.postAuthenticateUser = (req, res, next) => {
     const user_password_entered = req.body.user_password;
     //console.log(user_password_entered);
     const authenticate = new UserAuthentication(user_name_entered, user_password_entered);
-    const x = authenticate.authenticateUser().then(result => {
-        // console.log(result); this will return true
+    authenticate.authenticateUser().then(result => {
+        // console.log(result); this will return true or false as per as the method return value
+        console.log(result);
     }).catch(err =>{
-        //console.log(err);  // this will return false
-        
+        console.log(err); 
     })
     res.send('Compeleted authentication');
 }

@@ -8,4 +8,5 @@ router.get('/', nonRegisteredController.getIndexPage);
 router.get('/become-certified-host',nonRegisteredController.getbecomeHost);
 router.get('/become-registered-user',nonRegisteredController.getbecomeUser);
 router.get('/user-login',nonRegisteredController.getuserLogin);
+router.get('/host-login',nonRegisteredController.gethostLogin);
 module.exports = router;
