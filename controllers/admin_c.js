@@ -1,5 +1,6 @@
 const RegisterHost = require('../models/RegisterHost');
 const RegisterUser = require('../models/RegisterUser');
+const UserAuthentication = require('../models/UserAuthentication');
 
 exports.postbecomeHost = (req,res,next) =>{
 
@@ -39,4 +40,19 @@ exports.postbecomeUser = (req, res, next) => {
     res.render('registered-users/welcome-registered-users',{
         user_name : user_name
     });
+}
+
+exports.postAuthenticateUser = (req, res, next) => {
+    const user_name_entered = req.body.user_name;
+    //console.log(user_name_entered);
+    const user_password_entered = req.body.user_password;
+    //console.log(user_password_entered);
+    const authenticate = new UserAuthentication(user_name_entered, user_password_entered);
+    const x = authenticate.authenticateUser().then(result => {
+        // console.log(result); this will return true
+    }).catch(err =>{
+        //console.log(err);  // this will return false
+        
+    })
+    res.send('Compeleted authentication');
 }
