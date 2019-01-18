@@ -13,3 +13,7 @@ exports.getbecomeHost = (req, res, next) => {
 exports.getbecomeUser = (req, res, next) => {
     res.render('non-registered-users/become-registered-user');
 }
+
+exports.getuserLogin = (req, res, next) => {
+    res.send('this is the user login page');
+}
