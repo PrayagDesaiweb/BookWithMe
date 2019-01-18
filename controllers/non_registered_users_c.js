@@ -20,4 +20,4 @@ exports.getuserLogin = (req, res, next) => {
 
 exports.gethostLogin = (req, res, next) => {
     res.render('non-registered-users/host_login');
-}
+}   
