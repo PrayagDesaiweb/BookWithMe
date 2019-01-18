@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+        <nav class="navbar navbar-expand-sm bg-light">
+                <a class="navbar-brand" href="/">
+                        <strong>BookWithMe</strong>
+                </a>
+                <ul class="navbar-nav md-5">
+                  <li class="nav-item">
+                    <a class="nav-link" href="become-registered-user">User Signup</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Host Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="become-certified-host">Become cerified Host</a>
+                  </li>
+                  <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                      </li>
+                </ul>
+              
+              </nav>
+
+
+    <div class="container" align="center">
+        <p class="display-3">Log in</p>
+        <p class="display-4">User Log in for exploring and booking rentals anywhere and everywhere with us</p>
+        <br>
+        <br>
+        <div align="center md-5">
+                <form method="POST" action="user-auth">
+                        <div class="form-group md-5">
+                          <label for="exampleInputEmail1">User Name</label>
+                          <input type="text" class="form-control" id="exampleInputusername" aria-describedby="usernameHelp" placeholder="Enter your username" name="user_name">
+                          <small id="usernameHelp" class="form-text text-muted">Enter the username that you had used for registration</small>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="user_password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+        </div>
+    </div>
+</body>
+</html>

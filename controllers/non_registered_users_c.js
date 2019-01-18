@@ -15,5 +15,5 @@ exports.getbecomeUser = (req, res, next) => {
 }
 
 exports.getuserLogin = (req, res, next) => {
-    res.send('this is the user login page');
+    res.render('non-registered-users/user_login');
 }
