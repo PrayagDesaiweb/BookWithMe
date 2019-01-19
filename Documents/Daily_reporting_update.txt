@@ -20,3 +20,9 @@ Next reportings:
 25/01/2019 - 1:30
 26/01/2019
 
+19/01/2019
+Need to add username for host
+Authentication should be based on username instead of name
+Check reuse of username should not be possible
+Implemented login for host
+In next steps host should be able to know all the properties rented by him/her
