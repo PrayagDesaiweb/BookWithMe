@@ -2,6 +2,8 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 
 // express app running
@@ -17,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // middlware for parsing body
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({secret : 'prayagdesai'}));
 
 // Importing Routers
 const nonRegisteredUsersRouter = require('./routers/non_registered_users');
