@@ -6,12 +6,12 @@ const HostAuthentication = require('../models/HostAuthentication');
 exports.postbecomeHost = (req,res,next) =>{
 
     console.log(req.body)
-
+    const unique_user_name = req.body.unique_user_name;
     const name = req.body.name;
     const email = req.body.password;
     const password = req.body.password;
     const contactNo = req.body.contactNo;
-    const registered_host = new RegisterHost(name, email, password, contactNo);
+    const registered_host = new RegisterHost(name, email, password, contactNo, unique_user_name);
     registered_host.save().then(result =>{
        // console.log(result);
     }).catch(err => {
