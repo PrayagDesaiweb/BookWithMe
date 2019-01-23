@@ -29,6 +29,12 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const chk_in_date = req.body.chk_in_date;
     const chk_out_date = req.body.chk_out_date;
 
+    // setting sessions for hostname and host id to store the information of hosts across all the pages for remembering host sessions
+
+    let sess = req.session;
+    sess.host_name = host_name;
+    sess.host_id = host_id;
+
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state);
     registerProperty.save().then(result =>{
         console.log(result);
@@ -37,7 +43,10 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     })
 
 
-    res.send('I am handled');
+    res.render('reg-hosts/manage-rentals', {
+        name : sess.host_name,
+        id : sess.host_id
+    });
 }
 
-    
+
