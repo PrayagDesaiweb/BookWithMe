@@ -23,11 +23,13 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const property_name = req.body.property_name;
     const property_class = req.body.property_class;
     const address = req.body.address;
+    const city = req.body.city;
+    const state = req.body.state;
     const description = req.body.description;
     const chk_in_date = req.body.chk_in_date;
     const chk_out_date = req.body.chk_out_date;
 
-    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date);
+    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state);
     registerProperty.save().then(result =>{
         console.log(result);
     }).catch(err =>{
@@ -38,4 +40,4 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     res.send('I am handled');
 }
 
-
+    

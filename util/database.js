@@ -1,7 +1,7 @@
 const mongodb = require('mongodb')
 const mongoClient = mongodb.MongoClient; // calling the mogodb client costructor
 
-let url = "mongodb://localhost:27017/practiceBookWithMe";
+let url = "mongodb://localhost:27017/demodb";
 
 let _db // this underscore variable is used in this file only to fetch the type of database schema
 
