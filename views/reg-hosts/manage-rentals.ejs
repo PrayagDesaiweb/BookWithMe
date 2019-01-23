@@ -4,12 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
-    <%= name%>
-    <br>
-    <%=id%>
-    I am handled and I show the rentals delete update and also create more rentals
+    <!-- This can also be made like a sidebar navigation just like mobile apps-->
+    <!--<%= name%>
+    
+    <%=id%> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><strong>BookWithMe</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#"> Manage your credentials <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Create Rental</a>
+                      </li>
+                      <li class="nav-item active">
+                            <a class="nav-link" href="#">Delete Rental</a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link" href="#">Edit Rental</a>
+                          </li>
+
+                          
+            </ul>
+            </div>
+
+            <div class="topnav-right">
+                    
+                    <a href="#">Logout</a>
+                  </div>
+    </nav>
+    
 </body>
 </html>
