@@ -9,10 +9,7 @@
 </head>
 <body>
     <!-- This can also be made like a sidebar navigation just like mobile apps-->
-    <!--<%= name%>
-    
-    <%=id%> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/"><strong>BookWithMe</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -41,14 +38,19 @@
             </div>
     </nav>
     <div class= "container">
-        <div>
-            <% for (let rentals of host_rentals) {%>
-              <p>
-                name is <%= rentals.property_name%>
-                <br>
-              </p>
-              <% } %>
-        </div>
+
+
+    <%= name%>
+    <br>
+    <%=id%>
+    <br>
+    <div>
+    <% for (let p of host_rentals) { %>
+      <p>
+          <%= p._id %>
+        </p>
+    </div>
+    <% } %>
     </div>
 </body>
 </html>

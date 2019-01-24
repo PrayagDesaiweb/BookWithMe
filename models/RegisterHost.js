@@ -18,7 +18,7 @@ class RegisterHost{
             //console.log(result);
         })
         .catch(err =>{
-            console.log(err);
+            //console.log(err);
         })
 
         
@@ -31,7 +31,7 @@ class RegisterHost{
            // console.log(product);
             return product
         }).catch(err => {
-            console.log(err);
+            //console.log(err);
         })
     }
 

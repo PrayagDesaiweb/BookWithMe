@@ -15,7 +15,7 @@ exports.postbecomeHost = (req,res,next) =>{
     registered_host.save().then(result =>{
        // console.log(result);
     }).catch(err => {
-        console.log(err)
+        //console.log(err)
     })
 
     res.render('reg-hosts/host_reg_succ',{
@@ -31,9 +31,9 @@ exports.postbecomeUser = (req, res, next) => {
     const user_password = req.body.user_password;
     const registeruser = new RegisterUser(user_name, user_email, user_password)
     registeruser.save().then(result => {
-        console.log(result);
+        //console.log(result);
     }).catch(err =>{
-        console.log(err);
+        //console.log(err);
     });
 
     // fetching the userId from the user collection in which the credenatials are added
@@ -53,7 +53,7 @@ exports.postAuthenticateUser = (req, res, next) => {
         // console.log(result); this will return true or false as per as the method return value
         console.log(result);
     }).catch(err =>{
-        console.log(err); 
+        //console.log(err); 
     })
     res.send('Compeleted authentication');
 }
@@ -69,7 +69,7 @@ exports.postAuthenticateHost = (req, res, next) => {
         // console.log(result); this will return true or false as per as the method return value
         console.log(result);
     }).catch(err =>{
-        console.log(err); 
+        //console.log(err); 
     })
     res.send('Compeleted authentication');
 }

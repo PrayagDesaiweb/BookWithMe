@@ -35,31 +35,37 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     let sess = req.session;
     sess.host_name = host_name;
     sess.host_id = host_id;
+    let list_of_host_rentals;
 
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state);
     registerProperty.save().then(result =>{
-        console.log(result);
+        //console.log(result);
     }).catch(err =>{
-        console.log(err);
+        //console.log(err);
     })
 
     ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
         console.log('from the controller handling of fetching the host proprtties from the ManageHostProperties models ');
        // sess.list_of_host_rentals = result;
-        let list_of_host_rentals = new Array();
-        list_of_host_rentals = result;
-        console.log(list_of_host_rentals);
-        sess.list_of_host_rentals = result; // session vaiable for properties of hostname
+       // let list_of_host_rentals = new Array();
+
+        sess.list_of_host_rentals = result;
+        //console.log(list_of_host_rentals);
+        //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
+
+        res.render('reg-hosts/manage-rentals', {
+            name : sess.host_name,
+            id : sess.host_id,
+            host_rentals : result
+        });
+
+
 
     }).catch(err => {
         console.log(err);
     })
     
-    res.render('reg-hosts/manage-rentals', {
-        name : sess.host_name,
-        id : sess.host_id,
-        host_rentals : sess.list_of_host_rentals
-    });
+    
 }
 
 
