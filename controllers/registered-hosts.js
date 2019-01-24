@@ -1,5 +1,6 @@
 const RegisterHost = require('../models/RegisterHost')
 const RegisterHostProperty = require('../models/RegisterHostProperty');
+const ManageHostProperty = require('../models/ManageHostProprty');
 
 exports.postCreateOneRental = (req, res, next) => {
     user_name = req.body.user_name;
@@ -39,13 +40,24 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     registerProperty.save().then(result =>{
         console.log(result);
     }).catch(err =>{
-        console.log(err)
+        console.log(err);
     })
 
-
+    ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
+        console.log('from the controller handling of fetching the host proprtties from the ManageHostProperties models ');
+        sess.list_of_host_rentals = result;
+        let list_of_host_rentals = new Array();
+        list_of_rentals = result;
+        sess.list_of_host_rentals = list_of_rentals;
+        console.log(list_of_rentals);
+    }).catch(err => {
+        console.log(err);
+    })
+    
     res.render('reg-hosts/manage-rentals', {
         name : sess.host_name,
-        id : sess.host_id
+        id : sess.host_id,
+        host_rentals : sess.list_of_host_rentals
     });
 }
 
