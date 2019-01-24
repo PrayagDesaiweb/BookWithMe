@@ -45,11 +45,12 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
     ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
         console.log('from the controller handling of fetching the host proprtties from the ManageHostProperties models ');
-        sess.list_of_host_rentals = result;
+       // sess.list_of_host_rentals = result;
         let list_of_host_rentals = new Array();
-        list_of_rentals = result;
-        sess.list_of_host_rentals = list_of_rentals;
-        console.log(list_of_rentals);
+        list_of_host_rentals = result;
+        console.log(list_of_host_rentals);
+        sess.list_of_host_rentals = result; // session vaiable for properties of hostname
+
     }).catch(err => {
         console.log(err);
     })

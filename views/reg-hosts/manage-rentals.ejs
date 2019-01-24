@@ -42,7 +42,12 @@
     </nav>
     <div class= "container">
         <div>
-            
+            <% for (let rentals of host_rentals) {%>
+              <p>
+                name is <%= rentals.property_name%>
+                <br>
+              </p>
+              <% } %>
         </div>
     </div>
 </body>
