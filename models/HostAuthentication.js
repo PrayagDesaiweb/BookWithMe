@@ -11,7 +11,7 @@ class AuthenticateHost {
     authenticateHost(){
         
         let db = getDb();
-        return db.collection('host').findOne({name : this.user_name_entered, password : this.user_password_entered}).then(result =>{
+        return db.collection('host').findOne({unique_user_name : this.user_name_entered, password : this.user_password_entered}).then(result =>{
             if(result == null){
                 return false;
             }
