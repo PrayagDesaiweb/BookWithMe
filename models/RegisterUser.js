@@ -3,10 +3,11 @@ const mongoDb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
 class Registeruser{
-    constructor(user_name, user_email, user_password){
+    constructor(user_name, user_email, user_password, unique_user_name){
         this.user_name = user_name;
         this.user_email = user_email;
         this.user_password = user_password;
+        this.unique_user_name = unique_user_name;
     }
 
     save(){

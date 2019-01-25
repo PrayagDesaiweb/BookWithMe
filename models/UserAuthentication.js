@@ -14,7 +14,7 @@ class AuthenticateUser {
         //console.log(this.user_name_entered); // always use this to access the class variables inside the javascript class function. not doing this wil lead to error
         
         let db = getDb();
-        return db.collection('user').findOne({user_name : this.user_name_entered, user_password : this.user_password_entered}).then(result =>{
+        return db.collection('user').findOne({unique_user_name : this.user_name_entered, user_password : this.user_password_entered}).then(result =>{
             if(result == null){
                 return false;
             }

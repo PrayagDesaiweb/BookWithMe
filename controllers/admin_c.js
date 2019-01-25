@@ -26,10 +26,11 @@ exports.postbecomeHost = (req,res,next) =>{
 
 exports.postbecomeUser = (req, res, next) => {
     //console.log(req.body);
+    const unique_user_name = req.body.unique_user_name;
     const user_name = req.body.user_name;
     const user_email = req.body.user_email;
     const user_password = req.body.user_password;
-    const registeruser = new RegisterUser(user_name, user_email, user_password)
+    const registeruser = new RegisterUser(user_name, user_email, user_password, unique_user_name)
     registeruser.save().then(result => {
         //console.log(result);
     }).catch(err =>{
