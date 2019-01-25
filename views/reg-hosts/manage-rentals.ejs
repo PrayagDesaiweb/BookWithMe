@@ -66,16 +66,54 @@ Your Properties
           <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="https://www.gstatic.com/webp/gallery/1.jpg" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title"><strong><%= p.property_name %></strong></h5>
+                <p class="card-text"><%= p.description %></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">Property class - <%= p.property_class %></li>
+                <li class="list-group-item">
+                  <div>
+                    <p>
+                      Address -:
+                      <br>
+                      <%= p.address %>
+                      <br>
+                      <%= p.city %>
+                      <br>
+                      <%= p.state %>
+                    </p>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <p>
+                      Check-in date 
+                      <br>
+                      <%= p.chk_in_date %> 
+                  </p>
+                </li>
+
+                <li class="list-group-item">
+                    <p>
+                        Check-out date 
+                        <br>
+                        <%= p.chk_out_date %> 
+                    </p>
+                  </li>
+                  <li class="list-group-item">
+                      <p>
+                          Rental strength
+                          <br>
+                          <%= p.accomodation_strength %> 
+                      </p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>
+                            <%= p.cancellation_scheme %> 
+                        </p>
+                      </li>
               </ul>
               <div class="card-body">
-                <a href="#" class="card-link">Details</a>
+                <a href="#" class="card-link">Click here for more details</a>
                 
               </div>
             </div>
