@@ -29,6 +29,8 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const description = req.body.description;
     const chk_in_date = req.body.chk_in_date;
     const chk_out_date = req.body.chk_out_date;
+    const accomodation_strength = req.body.accomodation_strength;
+    const cancellation_scheme = req.body.cancellation_scheme;
 
     // setting sessions for hostname and host id to store the information of hosts across all the pages for remembering host sessions
 
@@ -37,7 +39,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     sess.host_id = host_id;
     let list_of_host_rentals;
 
-    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state);
+    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
         //console.log(result);
     }).catch(err =>{
@@ -50,6 +52,8 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
        // let list_of_host_rentals = new Array();
 
         sess.list_of_host_rentals = result;
+        console.log(result)
+        
         //console.log(list_of_host_rentals);
         //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
 
