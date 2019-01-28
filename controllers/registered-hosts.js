@@ -37,7 +37,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     let sess = req.session;
     sess.host_name = host_name;
     sess.host_id = host_id;
-    let list_of_host_rentals;
+    //let list_of_host_rentals;
 
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
@@ -51,7 +51,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
        // sess.list_of_host_rentals = result;
        // let list_of_host_rentals = new Array();
 
-        sess.list_of_host_rentals = result;
+       // sess.list_of_host_rentals = result;
         console.log(result);
         
         //console.log(list_of_host_rentals);
@@ -74,8 +74,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
 
 exports.getCreateRentals = (req, res, next) =>{
-    var sess = req.session;
-    console.log(sess.host_name);
+    //console.log(req.session);
     res.render('reg-hosts/create-rentals');
 }
 
