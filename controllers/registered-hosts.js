@@ -124,3 +124,8 @@ exports.postCreateRental = (req, res, next) => {
 }
 
 
+exports.getUpdateCredentials = (req, res, next) => {
+    res.render('reg-hosts/update-credentials');
+}
+
+
