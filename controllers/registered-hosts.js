@@ -79,7 +79,7 @@ exports.getCreateRental = (req, res, next) =>{
 }
 
 exports.postCreateRental = (req, res, next) => {
-
+    var sess = req.session;
     const host_name = req.session.host_name;
     console.log(host_name);
     const host_id = req.session.host_id;
@@ -97,12 +97,28 @@ exports.postCreateRental = (req, res, next) => {
 
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
-        console.log(result);
+
+
+        ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
+           
+    
+            res.render('reg-hosts/manage-rentals', {
+                name : sess.host_name,
+                id : sess.host_id,
+                host_rentals : result
+            });
+    
+    
+    
+        }).catch(err => {
+            console.log(err);
+    }); // this ends here
+        
     }).catch(err =>{
         console.log(err);
     })
 
-    res.send('successfull insertion');
+    
 
     
 }
