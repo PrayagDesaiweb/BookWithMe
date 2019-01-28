@@ -20,7 +20,7 @@
                         <a class="nav-link" href="#"> Manage your credentials <span class="sr-only">(current)</span></a>
                       </li>
                       <li class="nav-item active">
-                        <a class="nav-link" href="#">Create Rental</a>
+                        <a class="nav-link" href="/create-rentals">Create Rental</a>
                       </li>
                       <li class="nav-item active">
                             <a class="nav-link" href="#">Delete Rental</a>
@@ -113,7 +113,11 @@ Your Properties
                       </li>
               </ul>
               <div class="card-body">
-                <a href="#" class="card-link">Click here for more details</a>
+                <form action="/handleme">
+                  <a href="#" class="card-link">Click here for more details</a>
+                  <input type="hidden" name="hostProperty_id" value= <%= p._id%>>
+                </form>
+                
                 
               </div>
             </div>

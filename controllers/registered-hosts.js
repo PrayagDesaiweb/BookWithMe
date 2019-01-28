@@ -52,7 +52,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
        // let list_of_host_rentals = new Array();
 
         sess.list_of_host_rentals = result;
-        console.log(result)
+        console.log(result);
         
         //console.log(list_of_host_rentals);
         //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
@@ -70,6 +70,13 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     })
     
     
+}
+
+
+exports.getCreateRentals = (req, res, next) =>{
+    var sess = req.session;
+    console.log(sess.host_name);
+    res.render('reg-hosts/create-rentals');
 }
 
 

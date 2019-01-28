@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">BookWithMe</a>
+        </div>
+    </nav>
+    <div align = "center" class="container mb-5">
+        <p class="display-2"> Create Rental ..</p>
+        <br>
+        <br>
+
+        <form action="/path-to-manage-rentals" method="POST">
+          
+
+            <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="property_name" placeholder="Enter name of your property" name="property_name">
+                    <small id="property_name_Help" class="form-text text-muted">Your property must be having a name.Enter the name of your property</small>
+                  </div>
+
+                <div class="form-group">
+                  <label for="exampleInputaddress1">Address</label>
+                  <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter address of your property" name="address">
+                  <small id="addressHelp" class="form-text text-muted">Enter the address where your property is located</small>
+                </div>
+
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleInputaddress12">City</label>
+                                <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter city of where your proprrty is located" name="city">
+                                <small id="addressHelp" class="form-text text-muted">Enter the city name</small>
+                              </div>
+
+                        </div>
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label for="exampleInputaddress1">State </label>
+                                <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter address of your property" name="state">
+                                <small id="addressHelp" class="form-text text-muted">Enter the state where your property is located</small>
+                              </div>
+
+                        </div>
+                      </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+                
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Property description</label>
+                  <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="describe your property" name="description">
+                  <small id="addressHelp" class="form-text text-muted">Describe your property in brief</small>
+                </div>
+                <br>
+                <br>
+
+                      
+                <div class="form-check">
+                    <label for="exampletypeofpropety">Select the type of property</label>
+                    <br>
+                    <br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="property_class" id="inlineRadio1" value="entire_home">
+                    <label class="form-check-label" for="inlineRadio1">Entire Home</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="property_class" id="inlineRadio2" value="bwm_plus">
+                    <label class="form-check-label" for="inlineRadio1">BookWithMe plus</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="property_class" id="inlineRadio3" value="boutique_rooms">
+                    <label class="form-check-label" for="inlineRadio1">Boutique Rooms</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="property_class" id="inlineRadio4" value="unique_homes">
+                    <label class="form-check-label" for="inlineRadio1">Unique Homes</label>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="form-check">
+                    <label for="exampletypeofpropety">Select the rental cancellation scheme </label>
+                    <br>
+                    <br>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="cancellation_scheme" id="inlineRadio1" value="Free_cancelation">
+                      <label class="form-check-label" for="inlineRadio1">Free cancellation</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="cancellation_scheme" id="inlineRadio1" value="Paid_cancelation">
+                      <label class="form-check-label" for="inlineRadio1">Paid cancellation</label>
+                    </div>
+
+                  
+                              <br>
+                              <br>
+                              <br>
+
+
+    
+                              
+                                    <div class="row">
+                                      <div class="col-sm">
+                                        
+                                            <div class="form-group">
+                                                    <label for="name">Check-in Information</label>
+                                                    <input type="text" class="form-control" id="property_name" placeholder="Enter the check-in date" name="chk_in_date">
+                                                    <small id="property_name_Help" class="form-text text-muted">Check in date for your rentals in the form dd/mm/yy </small>
+                                                  </div>
+                                
+                                      </div>
+                                      <div class="col-sm">
+                                            <div class="form-group">
+                                                    <label for="name">Check-out Information</label>
+                                                    <input type="text" class="form-control" id="property_name" placeholder="Enter the check-out date" name="chk_out_date">
+                                                    <small id="property_name_Help" class="form-text text-muted">Check out date for your rentals in the form dd/mm/yy</small>
+                                                  </div>
+                                
+                                    </div>
+
+                                    <div class="col-sm">
+                                      <div class="form-group">
+                                        <label for="name">Accomodation strength per rental</label>
+                                        <input type="number" class="form-control" id="property_name" placehoder="accomodation strength" name="accomodation_strength">
+                                        <small id="property_name_Help" class="form-text text-muted">Enter the accomodation strength i.e how many people can be accomodated in your rental property</small>
+                                      </div>
+                    
+                                    </div>
+                                </div>
+
+
+                                      <br>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+    </div>
+</body>
+</html>
