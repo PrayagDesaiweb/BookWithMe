@@ -137,8 +137,11 @@ exports.getUpdateCredentials = (req, res, next) => {
 
     // fetch the host credentials from the host collection
     RegisterHost.fetchHostCredentials(req.session.host_name).then(result =>{
-        console.log('this is coming from the edit credntlas handler')
-        console.log(result);
+        //console.log('this is coming from the edit credntlas handler');
+        let sess = req.session;
+        sess.host_collection_id = result._id;
+        console.log(sess.host_collection_id)
+
         res.render('reg-hosts/update-credentials',{
             user_credentials_props : result
         });
@@ -147,6 +150,24 @@ exports.getUpdateCredentials = (req, res, next) => {
     });
 
     
+}
+
+exports.updateCredentials = (req, res, next) =>{
+    let sess = req.session;
+    const unique_user_name = req.body.unique_user_name;
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const contactNo = req.body.contactNo;
+
+    RegisterHost.updateHostCredentials(req.session.host_collection_id, unique_user_name, name, email, password, contactNo)
+    .then(result =>{
+        console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+    console.log('After')
+    res.send('I am handled');
 }
 
 

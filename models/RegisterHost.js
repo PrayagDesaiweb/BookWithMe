@@ -36,7 +36,7 @@ class RegisterHost{
     }
 
     static fetchHostCredentials(hostName){
-        let db = getDb(hostName);
+        let db = getDb();
         return db.collection('host').findOne({name : hostName})
         .then(credential =>{
             return credential;
@@ -46,6 +46,23 @@ class RegisterHost{
         });
     }
 
+    static updateHostCredentials(hostId, unique_user_name, name, email, password, contactNo){
+        let db = getDb();
+        return db.collection('host').updateOne({_id : hostId}, {$set : {
+            "unique_user_name" : unique_user_name,
+            "name" : name,
+            "email" : email,
+            "password" : password,
+            "contactNo" : contactNo
+        }}).then(result =>{
+            return result;
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
 }
+
 
 module.exports = RegisterHost;
