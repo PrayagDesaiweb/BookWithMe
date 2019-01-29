@@ -56,7 +56,8 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
         
         //console.log(list_of_host_rentals);
         //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
-
+        let sess = req.session;
+        sess.host_properties = result;
         res.render('reg-hosts/manage-rentals', {
             name : sess.host_name,
             id : sess.host_id,
@@ -97,12 +98,14 @@ exports.postCreateRental = (req, res, next) => {
 
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
-        sess.host_property = result;
+
+        
 
 
         ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
            
-    
+            let sess = req.session;
+            sess.host_properties = result;
             res.render('reg-hosts/manage-rentals', {
                 name : sess.host_name,
                 id : sess.host_id,
@@ -129,7 +132,8 @@ exports.postCreateRental = (req, res, next) => {
 
 exports.getUpdateCredentials = (req, res, next) => {
     // On the update 
-    res.send('I am handled');
+    console.log(req.session);
+    res.render('reg-hosts/update-credentials');
 }
 
 
