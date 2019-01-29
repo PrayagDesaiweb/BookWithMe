@@ -7,5 +7,5 @@ router.post('/path-to-manage-rentals',registeredHostsController.postFetchfromCre
 router.get('/create-rentals',registeredHostsController.getCreateRental);
 router.post('/create-rental',registeredHostsController.postCreateRental);
 router.get('/update-credentials',registeredHostsController.getUpdateCredentials);
-router.post('/updated-rental',registeredHostsController.updateCredentials);
+router.post('/updated-credentials',registeredHostsController.updateCredentials);
 module.exports = router;

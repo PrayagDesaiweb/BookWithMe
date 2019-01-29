@@ -15,3 +15,6 @@ project rerefence
 
 
  radio buttons vs checkboxes = https://www.justinmind.com/blog/checkboxes-or-radio-buttons-let-the-ui-design-battle-commence/
+
+================
+impleentation of host deleting their listed properties will be implemented later

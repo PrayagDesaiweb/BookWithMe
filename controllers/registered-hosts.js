@@ -162,12 +162,16 @@ exports.updateCredentials = (req, res, next) =>{
 
     RegisterHost.updateHostCredentials(req.session.host_collection_id, unique_user_name, name, email, password, contactNo)
     .then(result =>{
-        console.log(result);
+        let sess = req.session;
+        res.render('reg-hosts/manage-rentals', {
+            name : sess.host_name,
+            id : sess.host_id,
+            host_rentals : sess.host_properties
+        });
+
     }).catch(err =>{
         console.log(err);
-    })
-    console.log('After')
-    res.send('I am handled');
+    });
 }
 
 
