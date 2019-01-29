@@ -29,10 +29,21 @@ class RegisterHost{
         return db.collection('host').findOne({name : name_of_host})
         .then(product => {
            // console.log(product);
-            return product
+            return product;
         }).catch(err => {
             //console.log(err);
         })
+    }
+
+    static fetchHostCredentials(hostName){
+        let db = getDb(hostName);
+        return db.collection('host').findOne({name : hostName})
+        .then(credential =>{
+            return credential;
+        })
+        .catch(err =>{
+            console.log(err);
+        });
     }
 
 }

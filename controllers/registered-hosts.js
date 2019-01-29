@@ -82,9 +82,9 @@ exports.getCreateRental = (req, res, next) =>{
 exports.postCreateRental = (req, res, next) => {
     var sess = req.session;
     const host_name = req.session.host_name;
-    console.log(host_name);
+    //console.log(host_name);
     const host_id = req.session.host_id;
-    console.log(host_id);
+    //console.log(host_id);
     const property_name = req.body.property_name;
     const property_class = req.body.property_class;
     const address = req.body.address;
@@ -131,12 +131,25 @@ exports.postCreateRental = (req, res, next) => {
 
 
 exports.getUpdateCredentials = (req, res, next) => {
-    // On the update 
-    console.log(req.session);
-    res.render('reg-hosts/update-credentials');
+    // for the implementation of updating the credentials of user
+    //console.log(req.session);
+    
+
+    // fetch the host credentials from the host collection
+    RegisterHost.fetchHostCredentials(req.session.host_name).then(result =>{
+        console.log('this is coming from the edit credntlas handler')
+        console.log(result);
+        res.render('reg-hosts/update-credentials',{
+            user_credentials_props : result
+        });
+    }).catch(err =>{
+        console.log(err);
+    });
+
+    
 }
 
 
 
-// initial commit
+
  //    https://www.airbnb.co.in/rooms/plus/22377418?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=mGqJ4LKE
