@@ -97,6 +97,7 @@ exports.postCreateRental = (req, res, next) => {
 
     const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
+        sess.host_property = result;
 
 
         ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
@@ -107,6 +108,8 @@ exports.postCreateRental = (req, res, next) => {
                 id : sess.host_id,
                 host_rentals : result
             });
+
+            
     
     
     
@@ -125,7 +128,11 @@ exports.postCreateRental = (req, res, next) => {
 
 
 exports.getUpdateCredentials = (req, res, next) => {
-    res.render('reg-hosts/update-credentials');
+    // On the update 
+    res.send('I am handled');
 }
 
 
+
+
+ //    https://www.airbnb.co.in/rooms/plus/22377418?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=mGqJ4LKE
