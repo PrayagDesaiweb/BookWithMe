@@ -8,4 +8,5 @@ router.get('/create-rentals',registeredHostsController.getCreateRental);
 router.post('/create-rental',registeredHostsController.postCreateRental);
 router.get('/update-credentials',registeredHostsController.getUpdateCredentials);
 router.post('/updated-credentials',registeredHostsController.updateCredentials);
+router.get('/edit-rentals',registeredHostsController.getEditrentals);
 module.exports = router;

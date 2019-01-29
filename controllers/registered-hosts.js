@@ -174,6 +174,10 @@ exports.updateCredentials = (req, res, next) =>{
     });
 }
 
+exports.getEditrentals = (req, res, next) =>{
+    res.send('Hi I am handled')
+}
+
 
 
 
