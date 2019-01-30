@@ -20,14 +20,9 @@
                         <a class="nav-link" href="/update-credentials"> Manage your credentials <span class="sr-only">(current)</span></a>
                       </li>
                       <li class="nav-item active">
-                        <a class="nav-link" href="/create-rentals">Create Rental</a>
+                        <a class="nav-link" href="/create-rentals">Create Rentals</a>
                       </li>
-                      <li class="nav-item active">
-                            <a class="nav-link" href="#">Delete Rental</a>
-                    </li>
-                    <li class="nav-item active">
-                            <a class="nav-link" href="/edit-rentals">Edit Rental</a>
-                          </li>
+                      
 
                           
             </ul>
@@ -41,19 +36,6 @@
     <div class= "container">
 
 
-    <!--
-<%= name%>
-    <br>
-    <%=id%>
-    <br>
-    <div>
-    <% for (let p of host_rentals) { %>
-      <p>
-          <%= p._id %>
-        </p>
-    </div>
-    <% } %>
-    -->
 <p class='display-3'>
 Your Properties
 <br>
@@ -63,7 +45,7 @@ Your Properties
     <div class="row">
       <div class="col-sm"> 
           <div class= "container">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 34rem;">
               <img class="card-img-top" src="https://www.gstatic.com/webp/gallery/1.jpg" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title"><strong><%= p.property_name %></strong></h5>
@@ -111,13 +93,48 @@ Your Properties
                             <%= p.cancellation_scheme %> 
                         </p>
                       </li>
+
+                    </li>
+                    
+                        
+
+
+                        <li class="list-group-item"> 
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-sm">
+
+
+                        <form action="/edit-rental" method="POST">
+                          <input type="hidden" name="rental_id" value="<%= p._id%>">
+                        <button type="button" class="btn btn-success">Edit Rental</button>
+                        
+                      </form>
+
+
+                              </div>
+                              <div class="col-sm">
+                                  <form action="/handleme">
+                                    <input type="hidden" name="hostProperty_id" value= <%= p._id%>>
+                                    <button type="button" class="btn btn-warning">Rental Details</button>
+                                   
+                                  </form>
+                               </div>
+                              <div class="col-sm">
+                                  <form action="/delete-rental">
+                                    <input type="hidden" name="rental_id" value= <%= p._id%>>
+                                    <button type="button" class="btn btn-danger">Delete Rentals</button>
+                                   
+                                  </form>        
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                          
+                 
               </ul>
               <div class="card-body">
-                <form action="/handleme">
-                  <a href="#" class="card-link">Click here for more details</a>
-                  <input type="hidden" name="hostProperty_id" value= <%= p._id%>>
-                </form>
-                
+                                
                 
               </div>
             </div>

@@ -175,7 +175,9 @@ exports.updateCredentials = (req, res, next) =>{
 }
 
 exports.getEditrentals = (req, res, next) =>{
-    res.send('Hi I am handled')
+    var sess = req.session;
+    console.log(sess);
+    res.render(''); // impleent this later todays date 29*1*2019
 }
 
 
