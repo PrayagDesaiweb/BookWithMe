@@ -68,7 +68,7 @@ Your Properties
                 </li>
                 <li class="list-group-item">
                   <p>
-                      Check-in date 
+                      Book rental from
                       <br>
                       <%= p.chk_in_date %> 
                   </p>
@@ -76,7 +76,7 @@ Your Properties
 
                 <li class="list-group-item">
                     <p>
-                        Check-out date 
+                        Book rental till 
                         <br>
                         <%= p.chk_out_date %> 
                     </p>
@@ -94,49 +94,38 @@ Your Properties
                         </p>
                       </li>
 
-                    </li>
-                    
-                        
+                    <li class="list-group-item"> 
 
 
-                        <li class="list-group-item"> 
-                          <div class="container">
+                        <div class="container">
                             <div class="row">
                               <div class="col-sm">
-
-
-                        <form action="/edit-rental" method="POST">
-                          <input type="hidden" name="rental_id" value="<%= p._id%>">
-                        <button type="button" class="btn btn-success">Edit Rental</button>
-                        
-                      </form>
-
-
+                                <form action="/edit-rental" method="POST">
+                                  <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                  <button type="submit" class="btn btn-success">Edit Rental</button>
+                                </form>
                               </div>
                               <div class="col-sm">
-                                  <form action="/handleme">
-                                    <input type="hidden" name="hostProperty_id" value= <%= p._id%>>
-                                    <button type="button" class="btn btn-warning">Rental Details</button>
-                                   
+                                  <form action="/delete-rental" method="POST">
+                                    <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                    <button type="submit" class="btn btn-danger">Delete Rental</button>
                                   </form>
-                               </div>
+                              </div>
                               <div class="col-sm">
-                                  <form action="/delete-rental">
-                                    <input type="hidden" name="rental_id" value= <%= p._id%>>
-                                    <button type="button" class="btn btn-danger">Delete Rentals</button>
-                                   
-                                  </form>        
+                                  <form action="/rental-details" method="POST">
+                                    <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                    <button type="submit" class="btn btn-warning">Rental Details</button>
+                                  </form>
                               </div>
                             </div>
                           </div>
-                        </li>
+
+                    </li>
+                       
                           
                  
               </ul>
-              <div class="card-body">
-                                
-                
-              </div>
+              
             </div>
           </div>
 

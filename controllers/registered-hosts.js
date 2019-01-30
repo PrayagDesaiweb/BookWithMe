@@ -174,10 +174,25 @@ exports.updateCredentials = (req, res, next) =>{
     });
 }
 
-exports.getEditrentals = (req, res, next) =>{
+exports.postEditRental = (req, res, next) =>{
     var sess = req.session;
     console.log(sess);
-    res.render(''); // impleent this later todays date 29*1*2019
+    console.log(req.body);
+    res.send('edit rentals handled') // impleent this later todays date 29*1*2019
+}
+
+exports.postDeleteRental = (req, res, next) => {
+    var sess = req.session;
+    console.log(sess);
+    console.log(req.body);
+    res.send('This is delete rental handler. Deleting rentals will be implemeted later this is on 30 jan 2019');
+}
+
+exports.postRentalDetails = (req, res, next) => {
+    var sess = req.session;
+    console.log(sess);
+    console.log(req.body);
+    res.send('I am done working with the front end. This will be updated while I am bored and have nothing to do');
 }
 
 
