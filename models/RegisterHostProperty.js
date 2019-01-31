@@ -29,6 +29,17 @@ class RegisterHostProperty{
             //console.log(err);
         });
     }
+
+
+    static fetchPropertyFromId(hostId){
+
+        let db = getDb();
+        return db.collection('hostProperty').findOne({_id : new mongoDb.ObjectId(hostId)}).then(result =>{
+            console.log(result);
+        }).catch(err =>{
+            console.log(err)
+        });
+    }
 }
 
 module.exports = RegisterHostProperty;

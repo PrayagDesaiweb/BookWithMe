@@ -18,7 +18,7 @@ exports.postCreateOneRental = (req, res, next) => {
 }
 
 exports.postFetchfromCreatefirstRentals = (req, res, next) => {
-    console.log(req.body)
+
     const host_name = req.body.host_name;
     const host_id = req.body.host_id;
     const property_name = req.body.property_name;
@@ -176,9 +176,14 @@ exports.updateCredentials = (req, res, next) =>{
 
 exports.postEditRental = (req, res, next) =>{
     var sess = req.session;
+    var id = sess.hostProperty_id;
+    console.log('start');
+    RegisterHostProperty.fetchPropertyFromId(hostId);
+    console.log('end');
     console.log(sess);
     console.log(req.body);
-    res.send('edit rentals handled') // impleent this later todays date 29*1*2019
+   
+    res.render('reg-hosts/edit-rental'); // impleent this later todays date 29*1*2019
 }
 
 exports.postDeleteRental = (req, res, next) => {
@@ -194,6 +199,7 @@ exports.postRentalDetails = (req, res, next) => {
     console.log(req.body);
     res.send('I am done working with the front end. This will be updated while I am bored and have nothing to do');
 }
+
 
 
 
