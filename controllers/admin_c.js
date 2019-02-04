@@ -53,15 +53,33 @@ exports.postAuthenticateUser = (req, res, next) => {
     const user_password_entered = req.body.user_password;
 
     const authenticate = new UserAuthentication(user_name_entered, user_password_entered);
-    authenticate.authenticateUser().then(result => {
+    authenticate.authenticateUser().then(auth_result => {
         // console.log(result); this will return true or false as per as the method return value
-        console.log(result);
-        if (result){
-            console.log(result)
+        console.log(auth_result);
+
+        if (auth_result){
+
+            let sess = req.session;
+        sess.userName = user_name_entered;
+        //console.log(sess)
+        const manageuser = new ManageUser(sess.userName);
+        manageuser.fetchUserIdByUserName(sess.userName)
+        .then(result =>{
+            sess.userCredentials = result;
+            console.log(sess);
+        }).catch(err => {
+            console.log(err);
+        })
+        
         }
+    
         else{
-            console.log('error is there');
+            
+            res.render('non-registered-users/user_login',{
+                message : true
+            });
         }
+        
         
     }).catch(err =>{
         //console.log(err); 

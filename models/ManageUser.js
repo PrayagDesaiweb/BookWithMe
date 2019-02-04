@@ -6,11 +6,11 @@ class ManageUser{
         this.user_name = user_name;
     }
 
-    static fetchUserIdByUserName(user_name){ // this can also be a static method. Check for the same
+    fetchUserIdByUserName(userName){ // this can also be a static method. Check for the same
         let db = getDb();
-        return db.collection('user').findOne({user_name : user_name})
+        return db.collection('user').findOne({unique_user_name : userName })
         .then(result => {
-            console.log(result);
+            return result;
         }).catch(err => {
             console.log(err);
         })
