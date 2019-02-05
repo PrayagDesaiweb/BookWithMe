@@ -45,6 +45,7 @@ exports.getManageCredentials = (req, res, next) => {
 exports.postUpdateCredentials = (req, res, next) => {
     let sess = req.session;
     console.log( 'session is ' + sess);
+    //console.log(typeof(sess.userCredentials)); this is of type object
     //console.log('body is ' + req.body);
     const userId = sess.userCredentials._id;
     const uniqueUserName = req.body.unique_user_name;
@@ -53,9 +54,12 @@ exports.postUpdateCredentials = (req, res, next) => {
     const userPassword = req.body.user_password;
     ManageUser.updateUserCredentials(userId, uniqueUserName, userName, userEmail, userPassword )
     .then(result => {
+        // update the session here with the updated credentials.
+        // once the user changes the credentials, He is supposed to enter the credentials again. So redirect to the login page
+
         console.log(result);
     }).catch(err =>{
         console.log(err);
     })
-    res.send(req.body);
+    res.redirect('http://localhost:3000/user-login');
 }
