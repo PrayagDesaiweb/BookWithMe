@@ -15,6 +15,21 @@ class ManageUser{
             console.log(err);
         })
     }
+
+    static updateUserCredentials(userId, uniqueUserName, userName, userEmail, userPassword ){
+        let db = getDb();
+        return db.collection('user').updateOne({_id : new MongoDb.ObjectID(userId)} , {$set : {
+            unique_user_name : uniqueUserName,
+            user_name : userName,
+            user_email : userEmail,
+            user_password : userPassword
+
+        }}).then(result => {
+            console.log(result);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 }
 
 module.exports = ManageUser;
