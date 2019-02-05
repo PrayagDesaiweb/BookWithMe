@@ -8,15 +8,101 @@
     <title>Document</title>
 </head>
 <body>
+
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="/">BookWithMe</a>
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Manage your Credentials
+                                <span class="sr-only">(current)</span>
+                              </a>
+                            </li>
+  
+                            <li class="nav-item active">
+                                  <a class="nav-link" href="#">View your bookings
+                                    <span class="sr-only">(current)</span>
+                                  </a>
+                          </li>
+  
+                          <li class="nav-item active">
+                            <a class="nav-link" href="#">Manage Bookings
+                              <span class="sr-only">(current)</span>
+                            </a>
+                    </li>
+  
+                          
+                            
+                          </ul>
+                </div>
+            </nav>
+
+
         <div class="jumbotron">
-                <h1 class="display-3">Hello, <%= userName%></h1>
+                <h1 class="display-3">Hello, <%= userName%> !!</h1>
                 <br>
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <p class="lead display-4">Start booking properties with us. </p>
                 <hr class="my-4">
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <p>Book properties according to availibility and also view properties and check it's availability. Explore rental availibility and much more....   </p>
                 <p class="lead">
-                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  <a class="btn btn-primary btn-lg" href="#" role="button">View all Properties</a>
                 </p>
               </div>
+              <br>
+              <br>
+              <div class='container' align='center'>
+                    <form action="search-properties" method="POST">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">City</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter city name" name="city">
+                              <small id="emailHelp" class="form-text text-muted">Enter the name of the city where you want to search rental</small>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the state" name="state">
+                              <small id="emailHelp" class="form-text text-muted">Enter the name of the State where you want to search rental</small>
+                            </div>
+                           
+                            
+
+                            <br>
+                            
+                            <div class="row">
+                                    <div class="col-sm">
+                                      
+                                          <div class="form-group">
+                                                  <label for="name">Check-in Information</label>
+                                                  <input type="text" class="form-control" id="property_name" placeholder="Enter the check-in date" name="chk_in_date">
+                                                  <small id="property_name_Help" class="form-text text-muted">Check in date for your rentals in the form dd/mm/yy </small>
+                                                </div>
+                              
+                                    </div>
+                                    <div class="col-sm">
+                                          <div class="form-group">
+                                                  <label for="name">Check-out Information</label>
+                                                  <input type="text" class="form-control" id="property_name" placeholder="Enter the check-out date" name="chk_out_date">
+                                                  <small id="property_name_Help" class="form-text text-muted">Check out date for your rentals in the form dd/mm/yy</small>
+                                                </div>
+                              
+                                  </div>
+
+                                  <div class="col-sm">
+                                    <div class="form-group">
+                                      <label for="name">Accomodation strength per rental</label>
+                                      <input type="number" class="form-control" id="property_name" placehoder="accomodation strength" name="accomodation_strength">
+                                      <small id="property_name_Help" class="form-text text-muted">Enter the accomodation strength i.e how many people can be accomodated in your rental property</small>
+                                    </div>
+                  
+                                  </div>
+                              </div>
+
+                            
+                            <button type="submit" class="btn btn-primary">Look for properties </button>
+                          </form>
+              </div>
+              <br>
+              <br>
+              <br>
+              
 </body>
 </html>
