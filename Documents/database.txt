@@ -1,0 +1,10 @@
+                                        Database description for BookWithMe
+
+
+1. User
+
+User contains following attributes
+    a. _id of type MongoDb.ObjectId this attribute is the primary key of User collection
+    b. name refers to the user's user's user's name
+    c. user_name refers to the unique username assigned to the user at the time of registration
+    d. 

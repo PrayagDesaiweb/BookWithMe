@@ -19,7 +19,15 @@ exports.postSearchProperties = (req, res, next) => {
     const user_password = sess.user_password;
     const userName = sess.unique_user_name;
 
+    
+
+
+
     // fetch all the properties available meeting the requirement for 
+
+    
+
+
 
     res.send(req.session);
 
