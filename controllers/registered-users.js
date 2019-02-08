@@ -8,7 +8,7 @@ exports.postSearchProperties = (req, res, next) => {
     const state = req.body.state;
     const chk_in_date = req.body.chk_in_date;
     const chk_out_date = req.body.chk_in_date;
-    const accomodation_strength = req.body.accomodation_strength;
+    const accomodation_Strength = req.body.accomodation_strength;
 
     // this is coming from session
 
@@ -19,11 +19,39 @@ exports.postSearchProperties = (req, res, next) => {
     const user_password = sess.user_password;
     const userName = sess.unique_user_name;
 
+    // if there are more bookings in the booking database and how to check for multiple bookings of the same property is left to implement. Implement this later
+
+    ManageUser.fetchfromHostProperties(city, state)
+    .then(result => {
+        let sess = req.session;
+        //console.log(result); //this is working and this is printing the output of this query
+        const availableProperties = [];
+        result.forEach(element =>{
+            console.log(element);
+            if (element.accomodation_strength >= accomodation_Strength ){
+                //console.log(element)
+                var hostRentalFrom = new Date(element.chk_in_date);
+                var hostRentalTo = new Date(element.chk_out_date);
+                var userRentalFrom = new Date(chk_in_date);
+                var userRentalto = new Date(chk_out_date);
+
+                if (userRentalFrom > hostRentalFrom && userRentalFrom < hostRentalTo && userRentalto > hostRentalFrom && userRentalto < hostRentalTo)
+                {
+                    availableProperties.push(element);
+                }
+
+                //availableProperties.push(element);
+            }
+
+            console.log(availableProperties);
+        })
+    }).catch(err =>{
+        console.log(err);
+    })
+
     
 
 
-
-    // fetch all the properties available meeting the requirement for 
 
     
 

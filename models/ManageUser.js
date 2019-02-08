@@ -30,6 +30,17 @@ class ManageUser{
             console.log(err);
         })
     }
+
+    // this static method fetches the properties of all such properties of the host that meets the constraint of parameters passes on the method
+    static fetchfromHostProperties(city, state) {
+        let db = getDb();
+        return db.collection('hostProperty').find({city : city, state : state}).toArray()
+        .then(result => {
+            return result; // result here is an array cointain the result of the above querry
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = ManageUser;
