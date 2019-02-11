@@ -1,7 +1,7 @@
 const mongodb = require('mongodb')
 const mongoClient = mongodb.MongoClient; // calling the mogodb client costructor
 
-let url = "mongodb://localhost:27017/demodb";
+let url = "mongodb://localhost:27017/demodbTest";
 
 let _db // this underscore variable is used in this file only to fetch the type of database schema
 
@@ -49,3 +49,5 @@ exports.getDb = getDb;
 (node:24668) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a
 catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
 (node:24668) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. */
+
+// for resolving this error just simply repair the setting of mogodb
