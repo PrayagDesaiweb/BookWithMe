@@ -64,7 +64,12 @@ exports.postSearchProperties = (req, res, next) => {
 
 
         console.log(availableProperties);
-        res.send(req.session);
+        //res.send(req.session);
+        res.render('registered-users/view-properties',{
+            properties : availableProperties
+        })
+
+
 
     }).catch(err =>{
         console.log(err);
@@ -108,4 +113,22 @@ exports.postUpdateCredentials = (req, res, next) => {
         console.log(err);
     })
     res.redirect('http://localhost:3000/user-login');
+}
+
+
+exports.postExplorePropertiesByCity = (req, res, next) => {
+    const sess = req.session;
+    const city_name = req.body.city;
+    const state_name = req.body.state;
+    ManageUser.fetchfromHostProperties(city_name, state_name)
+    .then(result => {
+        // result is the array of the array of the database entries of the hostProperties tha matches the citya and the state names    
+        //console.log(result);
+        res.render('registered-users/view-properties',{
+            properties : result
+        })
+    }).catch(err =>{
+        console.log(err);
+    })
+    
 }

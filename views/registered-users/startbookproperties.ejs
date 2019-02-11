@@ -45,8 +45,37 @@
                 <hr class="my-4">
                 <p>Book properties according to availibility and also view properties and check it's availability. Explore rental availibility and much more....   </p>
                 <p class="lead">
-                  <a class="btn btn-primary btn-lg" href="#" role="button">View all Properties</a>
-                </p>
+                  <br>
+                  <p class= 'display-4'>
+                    Explore all the properties by location
+                  </p>
+                  <br>
+                  <br>
+
+                  <div class='container'>
+                      <form action="/explore-properties-by-city" method="POST">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1" align='center'>City</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the name of City" name='city'>
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="exampleInputEmail1" align='center'>State</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the name of State" name='state'>
+                              <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+                            <br>
+                            <div align='center'>
+                                <button type="submit" class="btn btn-success">View all properties</button>
+                            </div>
+                            
+                        </form>
+  
+                  </div>
+                  
+                    
+                 
               </div>
               <br>
               <br>

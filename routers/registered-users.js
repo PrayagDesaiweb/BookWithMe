@@ -6,5 +6,5 @@ const RegisteredUsersController = require('../controllers/registered-users');
 router.post('/search-properties',RegisteredUsersController.postSearchProperties);
 router.get('/manage-credentials',RegisteredUsersController.getManageCredentials);
 router.post('/credentials-update-successfull',RegisteredUsersController.postUpdateCredentials);
-
+router.post('/explore-properties-by-city',RegisteredUsersController.postExplorePropertiesByCity);
 module.exports = router;
