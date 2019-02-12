@@ -66,7 +66,11 @@ exports.postSearchProperties = (req, res, next) => {
         console.log(availableProperties);
         //res.send(req.session);
         res.render('registered-users/view-properties',{
-            properties : availableProperties
+            properties : availableProperties,
+            city : city,
+            state: state
+            
+            // here the credentials are not needed to paass to the ejs view. Update this later
         })
 
 
@@ -123,12 +127,19 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
     ManageUser.fetchfromHostProperties(city_name, state_name)
     .then(result => {
         // result is the array of the array of the database entries of the hostProperties tha matches the citya and the state names    
-        //console.log(result);
+        console.log(result);
         res.render('registered-users/view-properties',{
-            properties : result
+            properties : result,
+            city : city_name,
+            state : state_name
+            // here the credentials are not needed to paass to the ejs view. Update this later
         })
     }).catch(err =>{
         console.log(err);
     })
     
+}
+
+exports.postBookProperty = (req, res, next) =>{
+    res.send(req.body);
 }
