@@ -149,7 +149,9 @@ exports.postBookProperty = (req, res, next) =>{
 
         // here in this page only bookings is implemented right now
         res.render('registered-users/property-details-and-bookings',{
-            property_details : result // result is object which is document of hostProperty collection
+            property_details : result
+             // result is object which is document of hostProperty collection
+             // https://www.airbnb.co.in/rooms/plus/14741205?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=scBf0ZlJ this is how yoy make the web page
         })
         //console.log(result);
     }).catch(err =>{
