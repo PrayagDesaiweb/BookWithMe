@@ -141,5 +141,21 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 }
 
 exports.postBookProperty = (req, res, next) =>{
-    res.send(req.body);
+
+    const property_id = req.body.property_id;
+    // fetch the properties detail from the database according to the property_id
+    ManageUser.fetchPropertyFromPropertyId(property_id).then(result =>{
+        
+
+        // here in this page only bookings is implemented right now
+        res.render('registered-users/property-details-and-bookings',{
+            property_details : result // result is object which is document of hostProperty collection
+        })
+        //console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+
+
+    
 }

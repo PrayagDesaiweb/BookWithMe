@@ -41,6 +41,19 @@ class ManageUser{
             console.log(err);
         })
     }
+
+    
+    static fetchPropertyFromPropertyId(property_id){
+        let db = getDb();
+        return db.collection('hostProperty').findOne({_id : new MongoDb.ObjectId(property_id)})
+        .then(result => {
+            return result; // result here is a single javascript object which contain the fields for hostProperty Document  
+        }).catch(err =>{
+            console.log(err);
+        }) 
+    } 
+
+
 }
 
 module.exports = ManageUser;
