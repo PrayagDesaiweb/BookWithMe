@@ -6,10 +6,13 @@ exports.postSearchProperties = (req, res, next) => {
 
     const city = req.body.city;
     const state = req.body.state;
-    const chk_in_date = req.body.chk_in_date;
-    const chk_out_date = req.body.chk_out_date;
+    const dateArray = req.body.date;
+    const chk_in_date = dateArray[0];
+    const chk_out_date = dateArray[1];
     const accomodation_Strength = req.body.accomodation_strength;
-
+    console.log(chk_in_date);
+    console.log(chk_out_date);
+    console.log(accomodation_Strength);
     // this is coming from session
 
     let sess = req.session;
