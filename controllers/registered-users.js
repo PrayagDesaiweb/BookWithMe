@@ -3,18 +3,14 @@ const ManageUser  = require('../models/ManageUser');
 exports.postSearchProperties = (req, res, next) => {
 
     // this is coming from request body
-
     const city = req.body.city;
     const state = req.body.state;
     const dateArray = req.body.date;
     const chk_in_date = dateArray[0];
     const chk_out_date = dateArray[1];
     const accomodation_Strength = req.body.accomodation_strength;
-    console.log(chk_in_date);
-    console.log(chk_out_date);
-    console.log(accomodation_Strength);
-    // this is coming from session
 
+    // this is coming from session
     let sess = req.session;
     const user_id = sess._id;
     const name = sess.user_name;
@@ -160,6 +156,9 @@ exports.postBookProperty = (req, res, next) =>{
     }).catch(err =>{
         console.log(err);
     });
+
+
+    // Him and I hasley, G-easy
 
 
     

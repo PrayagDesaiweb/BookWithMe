@@ -17,28 +17,28 @@
     <title>Document</title>
 </head>
 <body>
-        <div class="row">
+         <!-- <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
              
-                 <!-- Form code begins -->
-                 <form method="post">
-                   <div class="form-group"> <!-- Date input -->
+                 
+                  <form method="post">
+                   <div class="form-group">
                      <label class="control-label" for="date">Date</label>
                      <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                    </div>
-                   <div class="form-group"> <!-- Submit button -->
+                   <div class="form-group">
                      <button class="btn btn-primary " name="submit" type="submit">Submit</button>
                    </div>
                   </form>
-                  <!-- Form code ends --> 
+                 
              
                  </div>
                </div>    
               </div>
-             </div>
+             </div>  -->
 
 
-             <script>
+            <!--   <script>
                     $(document).ready(function(){
                       var date_input=$('input[name="date"]'); //our date input has the name "date"
                       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -51,6 +51,240 @@
                       };
                       date_input.datepicker(options);
                     })
-                </script>
+                </script> -->
+
+                <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                
+                      <a class="navbar-brand" href="/">BookWithMe</a>
+                      <div class='container'>
+                      <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active">
+                                <a class="nav-link" href="manage-credentials">Manage your Credentials
+                                  <span class="sr-only">(current)</span>
+                                </a>
+                              </li>
+    
+                              <li class="nav-item active">
+                                    <a class="nav-link" href="#">View your bookings
+                                      <span class="sr-only">(current)</span>
+                                    </a>
+                            </li>
+    
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Manage Bookings
+                                <span class="sr-only">(current)</span>
+                              </a>
+                      </li>
+    
+                            
+                              
+                            </ul>
+                          </div>
+                
+              </nav>
+
+
+              <nav class="avbar fixed-bottom navbar-dark bg-dark mt-5">
+                <div class='container' align='center'>
+                  <br>
+                    <p class="navbar-text display-5"> <strong>Rent/Night for <%=  property_details.property_name%> is ₹1000 </strong></p>
+                </div>
+                  
+                </nav>
+
+            
+
+
+              <div class="jumbotron">
+
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                          
+                            <h1 class='display-3'><%= property_details. property_name %></h1> 
+                            <br>
+                            <br>
+                            <p><%= property_details.description %></p> 
+
+                            
+                        </div>
+                        <div class="col-sm">
+                            <img src="images/homeimage.jpg" class="img-fluid" alt="Responsive image">
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                
+              </div>
+              <br>
+              <div class='container'>
+                <div class='row'>
+                  <div class='col-sm'>
+                   <p class='display-5'>
+                      Detailed description given by the host which is left to add in the property. This is property specific detailed descripton
+                   </p> 
+                  </div>
+                  <div class='col-sm'> 
+                     
+                      <div class="card float-right border-0" style="width: 18rem;">
+                          <img class="card-img-top" src="http://pluspng.com/img-png/person-outline-clip-art-free-coloring-pages-of-outline-of-a-person-600.jpg" alt="Card image cap">
+                          <div class="card-body">
+                            <br>
+
+                            <p class="card-text">
+                                <blockquote class="blockquote text-right">
+                                    <p>"This is what the host has to tell about himself and this information will be entered when the host registers himself and fetch from the host collection"</p>
+                                    <footer class="blockquote-footer">Host Name this will come from the host collecion 
+                                      <br>
+                                      <cite title="Source Title">Host of this property</cite>
+                                    </footer>
+                                  </blockquote>
+                            </p>
+                            
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+<br>
+<br>
+              <div class='container-fluid'>
+                <h3 class='display-4'>
+                  Take a tour of this property
+                </h3>
+                <br>
+                this will contain images of the rentals in the form of cards with imgage top and its description
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+              <div class='jumbotron'>
+                <div class='container'>
+                  <div class='row'>
+                    <div class='col'>
+                        
+                        <% if (property_details.property_class === "bwm_plus") {%>
+                        <p class='h4'>BookWithMe Plus<p>
+                            <img src="images/plus.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                        <% } %>
+
+                        <% if (property_details.property_class === "boutique_rooms") {%>
+                          <p class='h4'>BookWithMe Boutique Rooms</p>
+
+                            <img src="images/boutique.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                          <% } %>
+
+                          <% if (property_details.property_class === "unique_homes") {%>
+                            <p class='h4'> BookWithMe Unique Homes</p>
+                            <img src="images/house.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                            <% } %>
+
+                            <% if (property_details.property_class === "entire_home") {%>
+                              <p class='h4'> BookWithMe Entire Homes</p>
+                              <img src="images/house.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                              <% } %>
+
+
+                    </div>
+                    <div>
+
+                    </div class='col'>
+                    fetch each information on classes of property from database
+                  </div>
+                </div>
+
+              </div>
+              <br>
+              <div class='container-fluid'>
+                  <h3 class='display-4'> Aminities </h3>
+                  <br>
+                  <p class='display-5'>
+                    Tell what kind of amenities are present. Get this data from HostProperty Collection. Take this in the text format
+                  </p>
+              </div>
+<br>
+
+<div class='container-fluid'>
+    <h3 class='display-4'> Bookings </h3>
+    <br>
+
+    <form action="/search-properties" method="POST">
+    <div class='row'>
+      <div class='col'>
+          <div class="form-group">
+              <label class="control-label" for="date">Check-in-Date</label>
+              <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text"/>
+            </div>
+      </div>
+      <div class='col'>
+          <div class="form-group">
+              <label class="control-label" for="date">Check-out-Date</label>
+              <input class="form-control" id="date" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text"/>
+            </div>
+      </div>
+      <div class='col'>
+          <div class="form-group">
+            <br>
+            <br>
+              <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+            </div>
+      </div>
+    </div>
+    
+    </div>
+  </form>
+    
+      
+</div>
+<br>
+<div class='container-fluid'>
+    <h3 class='display-4'> Directions </h3>
+</div>
+
+<div class='container-fluid'>
+    <h3 class='display-4'> Reviews </h3>
+</div>
+<div>
+    <h3 class='display-4'> Meet your host </h3>
+
+</div>
+
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+
+              <script>
+                  $(document).ready(function(){
+                    var date_input=$('input[name="date"]'); //our date input has the name "date"
+                    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                    var options={
+                      startDate: '<%= property_details.chk_in_date %>',
+                      endDate : '<%= property_details.chk_out_date %>',
+                      format: 'yyyy-mm-dd',
+                      container: container,
+                      todayHighlight: true,
+                      autoclose: true,
+                      datesDisabled: ['2019-02-15', '2019-02-20']
+                    };
+                    date_input.datepicker(options);
+                  })
+              </script>
+
 </body>
-</html>
+</html> 
+
