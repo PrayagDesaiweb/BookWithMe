@@ -220,7 +220,7 @@
     <h3 class='display-4'> Bookings </h3>
     <br>
 
-    <form action="/search-properties" method="POST">
+    <form action="/book" method="POST">
     <div class='row'>
       <div class='col'>
           <div class="form-group">
@@ -232,15 +232,17 @@
           <div class="form-group">
               <label class="control-label" for="date">Check-out-Date</label>
               <input class="form-control" id="date" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text"/>
+              <input type="hidden" name="host_id" value="<%= property_details.host_id %>">
+              <input type="hidden" name="host_property_id" value="<%= property_details._id %>">
             </div>
       </div>
       <div class='col'>
           <div class="form-group">
             <br>
             <br>
-              <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+              <button class="btn btn-primary" type="submit">Submit</button>
             </div>
-      </div>
+                  </div>
     </div>
     
     </div>

@@ -1,4 +1,5 @@
 const ManageUser  = require('../models/ManageUser');
+const Bookings = require('../models/Bookings');
 
 exports.postSearchProperties = (req, res, next) => {
 
@@ -140,6 +141,7 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 }
 
 exports.postBookProperty = (req, res, next) =>{
+    let sess = req.session;
 
     const property_id = req.body.property_id;
     // fetch the properties detail from the database according to the property_id
@@ -162,4 +164,21 @@ exports.postBookProperty = (req, res, next) =>{
 
 
     
+}
+
+
+exports.postBookProperty2 =(req, res, next) =>{
+    let sess = req.session;
+    const check_in_date = req.body.date[0];
+    const check_out_date = req.body.date[1];
+    const host_id = req.body.host_id;
+    const host_property_id = req.body.host_property_id;
+    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id)
+    .then(result =>{
+        //console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+    
+    res.send(req.body);
 }
