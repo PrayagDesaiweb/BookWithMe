@@ -127,7 +127,7 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
     ManageUser.fetchfromHostProperties(city_name, state_name)
     .then(result => {
         // result is the array of the array of the database entries of the hostProperties tha matches the citya and the state names    
-        console.log(result);
+        //console.log(result);
         res.render('registered-users/view-properties',{
             properties : result,
             city : city_name,
@@ -147,14 +147,30 @@ exports.postBookProperty = (req, res, next) =>{
     // fetch the properties detail from the database according to the property_id
     ManageUser.fetchPropertyFromPropertyId(property_id).then(result =>{
         
+    // Also fetch the property that is booked currently by property_id and this is used to disable the calendar dates from the calendar while new bookings
+    
+    // this fetches all the bookings from the bookings collection for checking which dates are avaiable for bookings
+        
 
-        // here in this page only bookings is implemented right now
+    // Promise inside another promise
+    Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
+        console.log(result1);
         res.render('registered-users/property-details-and-bookings',{
-            property_details : result
+            property_details : result,
+            property_booking_details : result1
              // result is object which is document of hostProperty collection
-             // https://www.airbnb.co.in/rooms/plus/14741205?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=scBf0ZlJ this is how yoy make the web page
-        })
-        //console.log(result);
+             // result1 is the result of fetchfromPropertyId() which contains the booking from and to date of the host_property. With this management of booked property becomes very easy
+            })
+    
+    
+    }).catch(err => {
+        console.log(err);
+    })
+
+
+    
+
+        
     }).catch(err =>{
         console.log(err);
     });
@@ -182,3 +198,10 @@ exports.postBookProperty2 =(req, res, next) =>{
     
     res.send(req.body);
 }
+
+
+
+// here in this page only bookings is implemented right now
+     // https://www.airbnb.co.in/rooms/plus/14741205?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=scBf0ZlJ this is how yoy make the web page
+
+//console.log(result);

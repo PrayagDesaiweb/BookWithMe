@@ -17,6 +17,16 @@ class BookProperty{
         });
     }
 
+    static fetchBookingsFromPropertyId(property_id){
+        let db = getDb();
+        return db.collection('bookings').find({host_property_id : property_id}).toArray()
+        .then(result =>{
+            console.log(result);
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
 }
 
 module.exports = BookProperty;
