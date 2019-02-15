@@ -154,12 +154,32 @@ exports.postBookProperty = (req, res, next) =>{
 
     // Promise inside another promise
     Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
+
         console.log(result1);
+        var propertyBookedDatesArray = new Array();
+
+        result1.forEach((element) =>{
+    
+        from = new Date(element.check_in_date);
+        console.log(from);
+        to = new Date(element.check_out_date);
+         console.log(to);
+        while(from <= to){
+            x = from.toISOString().slice(0,10);
+            console.log(x);
+            propertyBookedDatesArray.push(x);
+            from.setDate(from.getDate() + 1);
+        }
+        console.log(propertyBookedDatesArray);
+   
+   
+})
+
         res.render('registered-users/property-details-and-bookings',{
             property_details : result,
-            property_booking_details : result1
+             bookedProperties: propertyBookedDatesArray
              // result is object which is document of hostProperty collection
-             // result1 is the result of fetchfromPropertyId() which contains the booking from and to date of the host_property. With this management of booked property becomes very easy
+            
             })
     
     

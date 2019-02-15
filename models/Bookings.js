@@ -21,7 +21,7 @@ class BookProperty{
         let db = getDb();
         return db.collection('bookings').find({host_property_id : property_id}).toArray()
         .then(result =>{
-            console.log(result);
+            return result;
         }).catch(err =>{
             console.log(err);
         })
