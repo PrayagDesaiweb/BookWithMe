@@ -217,7 +217,7 @@
 <br>
 
 <div class='container-fluid'>
-    <h3 class='display-4'> Bookings </h3>
+    <h3 class='display-4'> Book this property </h3>
     <br>
 
     <form action="/book" method="POST">
@@ -225,29 +225,56 @@
       <div class='col'>
           <div class="form-group">
               <label class="control-label" for="date">Check-in-Date</label>
-              <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text"/>
+              <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text" onclick="myFunction()"/>
             </div>
       </div>
       <div class='col'>
           <div class="form-group">
               <label class="control-label" for="date">Check-out-Date</label>
-              <input class="form-control" id="date" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text"/>
+              <input class="form-control" id="date1" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text" onchange="check_dates()"/>
               <input type="hidden" name="host_id" value="<%= property_details.host_id %>">
               <input type="hidden" name="host_property_id" value="<%= property_details._id %>">
             </div>
       </div>
-      <div class='col'>
+      
+
+      <div class='container col' align  = "center">
           <div class="form-group">
-            <br>
-            <br>
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-                  </div>
-    </div>
+        
+              <br>
+                <button class="btn btn-primary" type="submit" id = 'submit_button'>Submit</button>
+              </div>
+    
+      </div>
     
     </div>
   </form>
-    
+
+  <div class="container">
+      <div class="alert alert-danger" role="alert" align="center">
+          Invalid Check-in and Check-out dates entered. The property you are trying to book are already bookes by someone. Please try again
+        </div>
+  </div>
+  
+   
+
+<script>
+function myFunction() {
+  document.getElementById("submit_button").disabled = false;
+}
+</script>
+
+<script>
+  function check_dates() {
+    document.getElementById("submit_button").disabled = true;
+    let user_check_in_date = document.getElementById('date').value;
+    let user_check_out_date = document.getElementById('date1').value;
+    let userArray = '<%= bookedProperties %>'.split(','); 
+    alert(typeof(userArray));
+
+  }
+
+</script>
       
 </div>
 <br>

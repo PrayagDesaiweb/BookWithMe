@@ -205,6 +205,7 @@ exports.postBookProperty = (req, res, next) =>{
 
 exports.postBookProperty2 =(req, res, next) =>{
     let sess = req.session;
+    // book the latest property
     const check_in_date = req.body.date[0];
     const check_out_date = req.body.date[1];
     const host_id = req.body.host_id;
