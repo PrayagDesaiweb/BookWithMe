@@ -281,7 +281,7 @@
                       container: container,
                       todayHighlight: true,
                       autoclose: true,
-                      datesDisabled: '<%= bookedProperties %>'
+                      datesDisabled: '<%= bookedProperties %>'.split(',')
                     };
                     date_input.datepicker(options);
                   })
