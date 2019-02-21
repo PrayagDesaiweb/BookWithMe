@@ -9,4 +9,5 @@ router.post('/credentials-update-successfull',RegisteredUsersController.postUpda
 router.post('/explore-properties-by-city',RegisteredUsersController.postExplorePropertiesByCity);
 router.post('/book-property',RegisteredUsersController.postBookProperty);
 router.post('/book',RegisteredUsersController.postBookProperty2);
+router.get('/view/bookings',RegisteredUsersController.getViewBookingsPage);
 module.exports = router;

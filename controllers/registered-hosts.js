@@ -27,8 +27,11 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const city = req.body.city;
     const state = req.body.state;
     const description = req.body.description;
+    const specifications = req.body.specifications ;
+    const amenities = req.body.amenities;
     const chk_in_date = req.body.chk_in_date;
     const chk_out_date = req.body.chk_out_date;
+    const rate = req.body.rate;
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
 
@@ -39,7 +42,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     sess.host_id = host_id;
     //let list_of_host_rentals;
 
-    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
+    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate );
     registerProperty.save().then(result =>{
         //console.log(result);
     }).catch(err =>{

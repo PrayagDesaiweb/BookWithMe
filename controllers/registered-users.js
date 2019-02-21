@@ -210,14 +210,33 @@ exports.postBookProperty2 =(req, res, next) =>{
     const check_out_date = req.body.date[1];
     const host_id = req.body.host_id;
     const host_property_id = req.body.host_property_id;
-    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id)
+    const status = true;
+    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id,status)
     .then(result =>{
+
+        
         //console.log(result);
+        res.render('registered-users/booking-successfull',{
+            check_in_date : check_in_date,
+            check_out_date: check_out_date,
+            host_id : req.body.host_id,
+            host_property_id : host_property_id
+        })
     }).catch(err =>{
         console.log(err);
-    })
+    });
+
+    // display the page that leads you to the view/bookings page
+
+    
     
     res.send(req.body);
+}
+
+
+exports.getViewBookingsPage = (req, res, next) =>{
+    let sess = req.session;
+    res.send(sess);
 }
 
 
