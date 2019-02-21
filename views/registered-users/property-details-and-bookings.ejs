@@ -225,13 +225,13 @@
       <div class='col'>
           <div class="form-group">
               <label class="control-label" for="date">Check-in-Date</label>
-              <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text" onclick="myFunction()"/>
+              <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text" onchange="check_dates1()" />
             </div>
       </div>
       <div class='col'>
           <div class="form-group">
               <label class="control-label" for="date">Check-out-Date</label>
-              <input class="form-control" id="date1" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text" onchange="check_dates()"/>
+              <input class="form-control" id="date1" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text" onchange="check_dates1()"/>
               <input type="hidden" name="host_id" value="<%= property_details.host_id %>">
               <input type="hidden" name="host_property_id" value="<%= property_details._id %>">
             </div>
@@ -250,27 +250,69 @@
     </div>
   </form>
 
-  <div class="container">
-      <div class="alert alert-danger" role="alert" align="center">
-          Invalid Check-in and Check-out dates entered. The property you are trying to book are already bookes by someone. Please try again
+ 
+  <div class="container" id="idis">
+      <div class="alert alert-danger" role="alert" align="center" id = "error">
+          
         </div>
   </div>
+
   
    
 
-<script>
-function myFunction() {
-  document.getElementById("submit_button").disabled = false;
-}
-</script>
+
+
+
 
 <script>
-  function check_dates() {
+  function check_dates1(){
+
     document.getElementById("submit_button").disabled = true;
-    let user_check_in_date = document.getElementById('date').value;
-    let user_check_out_date = document.getElementById('date1').value;
-    let userArray = '<%= bookedProperties %>'.split(','); 
-    alert(typeof(userArray));
+    let x = document.getElementById('date').value;
+    const user_check_in_date = new Date(x);
+    let y = document.getElementById('date1').value;
+    const user_check_out_date = new Date(y);
+    const bookedProperties = '<%= bookedProperties %>'.split(','); 
+    console.log(user_check_in_date);
+    console.log(user_check_out_date);
+
+    const set1 = new Set(bookedProperties);
+
+    if(user_check_in_date < user_check_out_date){
+
+        var userDatesInterval = [];
+
+        while(user_check_in_date <= user_check_out_date){
+            x = user_check_in_date.toISOString().slice(0,10);
+            userDatesInterval.push(x);
+            user_check_in_date.setDate(user_check_in_date.getDate() + 1);
+        } // while ends
+        console.log(userDatesInterval);
+
+
+        // for loops to check the membreship of bookedProperties with the userDatesInterval array
+        for(let i=0; i< (userDatesInterval.length) -1 ;i++){
+          if(set1.has(userDatesInterval[i])){
+          console.log('conflict');
+          document.getElementById("error").innerHTML = 'It seems this property is already booked by someone with this dates. Please try entering dates again '
+          document.getElementById("submit_button").disabled = true;
+          break;
+
+        } // if ends
+        
+        document.getElementById("submit_button").disabled = false;
+        
+      } // for ends
+        
+    
+  } // big if ends here
+
+  else{
+    documentgetElementById("error")
+    document.getElementById("error").innerHTML = 'It seems there is some problem with check-in and check-out dates you entered. Check-out cannot happen before Check-in. Please try entering dates again '
+    document.getElementById("submit_button").disabled = true;
+    
+  }
 
   }
 
@@ -299,7 +341,8 @@ function myFunction() {
 
               <script>
                   $(document).ready(function(){
-                    var date_input=$('input[name="date"]'); //our date input has the name "date"
+      
+                    var date_input = $('input[name="date"]') //our date input has the name "date"
                     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
                     var options={
                       startDate: '<%= property_details.chk_in_date %>',
