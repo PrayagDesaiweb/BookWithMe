@@ -46,19 +46,20 @@ class RegisterHost{
         });
     }
 
-    static updateHostCredentials(hostId, unique_user_name, name, email, password, contactNo){
+    static updateHostCredentials(hostId, unique_user_name, name, email, password, contactNo, something_about_me){
         let db = getDb();
         return db.collection('host').updateOne({_id : new mongoDb.ObjectId(hostId)}, {$set : {
             "unique_user_name" : unique_user_name,
             "name" : name,
             "email" : email,
             "password" : password,
-            "contactNo" : contactNo
+            "contactNo" : contactNo,
+            "something_about_me" : something_about_me
         }}).then(result =>{
             return result;
         }).catch(err => {
-            console.log(err)
-        })
+            console.log(err);
+        });
 
     }
 

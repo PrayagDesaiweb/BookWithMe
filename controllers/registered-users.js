@@ -155,7 +155,17 @@ exports.postBookProperty = (req, res, next) =>{
     // Promise inside another promise
     Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
 
-        console.log(result1);
+        // fetch the information of the host from the host Collection so that you can display the correct host information from the host page.
+        //console.log('prayag' + result1[0].host_id);
+
+        // passing the host_id of the property that is to be booked
+        Bookings.fetchHostInformation(result1[0].host_id).then(hostInformation =>{
+            console.log('hostInformation is    ' + hostInformation[0]);
+        }).catch(err =>{
+            console.log(err);
+        })
+
+        //console.log(result1);
         var propertyBookedDatesArray = new Array();
 
         result1.forEach((element) =>{
@@ -230,7 +240,7 @@ exports.postBookProperty2 =(req, res, next) =>{
 
     
     
-    res.send(req.body);
+    res.send(sess);
 }
 
 

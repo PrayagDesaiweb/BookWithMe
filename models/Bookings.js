@@ -27,6 +27,19 @@ class BookProperty{
         })
     }
 
+    // This method fetches the information regarding host name and what the host have to say about himself in the section of Know Your Host
+    static fetchHostInformation(hostId){
+        let db = getDb();
+        return db.collection('host').findOne({ _id : new MongoDb.ObjectID(hostId)})
+        .then(result =>{
+            console.log(result);
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        });
+    
+    }
+
 }
 
 module.exports = BookProperty;

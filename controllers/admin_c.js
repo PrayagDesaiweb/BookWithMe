@@ -12,7 +12,8 @@ exports.postbecomeHost = (req,res,next) =>{
     const email = req.body.password;
     const password = req.body.password;
     const contactNo = req.body.contactNo;
-    const registered_host = new RegisterHost(name, email, password, contactNo, unique_user_name);
+    const something_about_me = req.body.something_about_me;
+    const registered_host = new RegisterHost(name, email, password, contactNo, unique_user_name, something_about_me);
     registered_host.save().then(result =>{
        // console.log(result);
     }).catch(err => {
