@@ -87,7 +87,7 @@
               <nav class="avbar fixed-bottom navbar-dark bg-dark mt-5">
                 <div class='container' align='center'>
                   <br>
-                    <p class="navbar-text display-5"> <strong>Rent/Night for <%=  property_details.property_name%> is ₹1000 </strong></p>
+                    <p class="navbar-text display-5"> <strong>Rent/Night for <%=  property_details.property_name%> is <%= property_details.rate %> </strong></p>
                 </div>
                   
                 </nav>
@@ -122,13 +122,13 @@
                 <div class='row'>
                   <div class='col-sm'>
                    <p class='display-5'>
-                      Detailed description given by the host which is left to add in the property. This is property specific detailed descripton
+                      <%= property_details.specifications %>
                    </p> 
                   </div>
                   <div class='col-sm'> 
                      
                       <div class="card float-right border-0" style="width: 18rem;">
-                          <img class="card-img-top" src="http://pluspng.com/img-png/person-outline-clip-art-free-coloring-pages-of-outline-of-a-person-600.jpg" alt="Card image cap">
+                          
                           <div class="card-body">
                             <br>
 
@@ -211,7 +211,7 @@
                   <h3 class='display-4'> Aminities </h3>
                   <br>
                   <p class='display-5'>
-                    Tell what kind of amenities are present. Get this data from HostProperty Collection. Take this in the text format
+                    <%= property_details.amenities%>
                   </p>
               </div>
 <br>
