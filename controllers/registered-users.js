@@ -142,75 +142,82 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 
 exports.postBookProperty = (req, res, next) =>{
     let sess = req.session;
-
     const property_id = req.body.property_id;
+    
     // fetch the properties detail from the database according to the property_id
-    ManageUser.fetchPropertyFromPropertyId(property_id).then(result =>{
+        ManageUser.fetchPropertyFromPropertyId(property_id).then(result =>{
+    
+             Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
+                 console.log(result1);
+    
+                  Bookings.fetchHostInformation(result1[0].host_id).then(hostInformation =>{
+    
+                       var propertyBookedDatesArray = new Array();
+    
+                        result1.forEach((element) =>{
         
-    // Also fetch the property that is booked currently by property_id and this is used to disable the calendar dates from the calendar while new bookings
-    
-    // this fetches all the bookings from the bookings collection for checking which dates are avaiable for bookings
-        
-
-    // Promise inside another promise
-    Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
-
-        // fetch the information of the host from the host Collection so that you can display the correct host information from the host page.
-        //console.log('prayag' + result1[0].host_id);
-
-        // passing the host_id of the property that is to be booked
-        Bookings.fetchHostInformation(result1[0].host_id).then(hostInformation =>{
-            console.log('hostInformation is    ' + hostInformation[0]);
-        }).catch(err =>{
-            console.log(err);
-        })
-
-        //console.log(result1);
-        var propertyBookedDatesArray = new Array();
-
-        result1.forEach((element) =>{
-    
-        from = new Date(element.check_in_date);
-        console.log(from);
-        to = new Date(element.check_out_date);
-         console.log(to);
-        while(from <= to){
-            x = from.toISOString().slice(0,10);
-            console.log(x);
-            propertyBookedDatesArray.push(x);
-            from.setDate(from.getDate() + 1);
-        }
-        console.log(propertyBookedDatesArray);
-   
-   
-})
-
-        res.render('registered-users/property-details-and-bookings',{
-            property_details : result,
-             bookedProperties: propertyBookedDatesArray
-             // result is object which is document of hostProperty collection
-            
-            })
+                        from = new Date(element.check_in_date);
+                        //console.log(from);
+                            to = new Date(element.check_out_date);
+                         //console.log(to);
+                        while(from <= to){
+                        x = from.toISOString().slice(0,10);
+                        //console.log(x);
+                        propertyBookedDatesArray.push(x);
+                        from.setDate(from.getDate() + 1);
+                    }
+            //console.log(propertyBookedDatesArray);
+       
+       
+                }) // foop ends here.
     
     
-    }).catch(err => {
-        console.log(err);
-    })
-
-
+                         res.render('registered-users/property-details-and-bookings',{
+                property_details : result,
+                 bookedProperties: propertyBookedDatesArray,
+                 hostInformation : hostInformation
+                 // result is object which is document of hostProperty collection
+                
+                })
     
-
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                      }).catch(err =>{
+                 console.log('Bookings.fetchBookingsFromPropertyId' + err);
+             }); // Bookings.fetchHostInformation ends
+    
+    
+    
+    
+             }).catch(err =>{
+                 console.log('Bookings.fetchBookingsFromPropertyId' + err);
+             }); // Bookings.fetchBookingsFromPropertyId ends
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }).catch(err =>{
-        console.log(err);
-    });
-
-
-    // Him and I hasley, G-easy
-
-
+        console.log('fetchPropertyFromPropertyId  ' + err);
+    }) // ManageUser.fetchPropertyFromPropertyId ends here
     
-}
+    } // exports ends here
 
 
 exports.postBookProperty2 =(req, res, next) =>{
