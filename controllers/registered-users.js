@@ -174,8 +174,27 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
             
             if(properties.length === 0){
                 // no properties currently booked. This will be the first property to be booked
+                // So no need to mantain the array which has the properties dates which are already booked. 
+                Bookings.fetchPropertyFromHostProperty(property_id).then(hostProperty => {
+                    //console.log(hostProperty); this will have the hostProperty collection document. This will be passed to the page for rendering
 
-            }
+                    // Now fetch the host details from the host collection as per as the host_id obtained from the result from hostProperty promise 
+                    Bookings.fetchHostInformation(hostProperty.host_id).then(hostInformation =>{
+                        //console.log(hostInformation); This will contain the information on the host document colllection.
+                        res.render('registered-users/property-details-and-bookings',{
+                            property_details : hostProperty,
+                             bookedProperties: [],
+                             hostDetails : hostInformation                 
+                            }) // rendering ends
+                    }).catch(err =>{
+                        console.log(err);
+                    }) // promise 2 ends here
+                    
+                 }).catch(err =>{
+                    consolee.log(err);
+                }) // promise 3 ends
+
+            } // if ends here
             else{
                 // properties are booked and this is returned in the form of array which has the entries from the bookings collection
                 // this for loop will get the arrays of the dates which are booked. This information will be rendered with the response to the next page
