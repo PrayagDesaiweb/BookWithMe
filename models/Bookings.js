@@ -17,10 +17,21 @@ class BookProperty{
         });
     }
 
-    static fetchBookingsFromPropertyId(property_id){
+    static fetchPropertyFromBookings(property_id){
         let db = getDb();
         return db.collection('bookings').find({host_property_id : property_id}).toArray()
         .then(result =>{
+            //console.log(result);
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
+    static fetchPropertyFromHostProperty(property_id){
+        let db = getDb();
+        return db.collection('hostProperty').findOne({ _id : new MongoDb.ObjectId(property_id) }).
+        then(result =>{
             return result;
         }).catch(err =>{
             console.log(err);
@@ -32,11 +43,10 @@ class BookProperty{
         let db = getDb();
         return db.collection('host').findOne({ _id : new MongoDb.ObjectID(hostId)})
         .then(result =>{
-            console.log(result);
             return result;
         }).catch(err =>{
             console.log(err);
-        });
+        })
     
     }
 

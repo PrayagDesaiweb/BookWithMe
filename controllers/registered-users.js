@@ -24,6 +24,7 @@ exports.postSearchProperties = (req, res, next) => {
     ManageUser.fetchfromHostProperties(city, state)
     .then(result => {
         let sess = req.session;
+        
         //console.log(result); //this is working and this is printing the output of this query
         const availableProperties = [];
 
@@ -63,7 +64,7 @@ exports.postSearchProperties = (req, res, next) => {
         }) // foreach ends here
 
 
-        console.log(availableProperties);
+        //console.log(availableProperties);
         //res.send(req.session);
         res.render('registered-users/view-properties',{
             properties : availableProperties,
@@ -84,8 +85,8 @@ exports.postSearchProperties = (req, res, next) => {
 exports.getManageCredentials = (req, res, next) => {
 
     let sess = req.session;
-    console.log(sess);
-    console.log('hi' + sess.userCredentials.user_name);
+   // console.log(sess);
+   // console.log('hi' + sess.userCredentials.user_name);
     
     res.render('registered-users/manage-credentials', {
         unique_user_name : sess.userCredentials.unique_user_name,
@@ -112,7 +113,7 @@ exports.postUpdateCredentials = (req, res, next) => {
         // update the session here with the updated credentials.
         // once the user changes the credentials, He is supposed to enter the credentials again. So redirect to the login page
 
-        console.log(result);
+       // console.log(result);
     }).catch(err =>{
         console.log(err);
     })
@@ -140,84 +141,91 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
     
 }
 
-exports.postBookProperty = (req, res, next) =>{
-    let sess = req.session;
-    const property_id = req.body.property_id;
     
-    // fetch the properties detail from the database according to the property_id
-        ManageUser.fetchPropertyFromPropertyId(property_id).then(result =>{
-    
-             Bookings.fetchBookingsFromPropertyId(property_id).then(result1 => {
-                 console.log(result1);
-    
-                  Bookings.fetchHostInformation(result1[0].host_id).then(hostInformation =>{
-    
-                       var propertyBookedDatesArray = new Array();
-    
-                        result1.forEach((element) =>{
+
+    exports.postBookProperty = (req, res, next) => {
+        let sess = req.session;
         
-                        from = new Date(element.check_in_date);
-                        //console.log(from);
-                            to = new Date(element.check_out_date);
-                         //console.log(to);
-                        while(from <= to){
+        // property_id here is obtained from the request body
+        const property_id = req.body.property_id;
+        //console.log(property_id) this worked
+        
+        // fetch the properties array from the bookings collection as per as the property_id
+        Bookings.fetchPropertyFromBookings(property_id).then(properties =>{
+            // If the bookings collection has previous bookings properties will contain the array of the entries of the bookings collection
+            /*
+            console.log(properties);
+            [ { _id: 5c659c591d80ff0dcc9e2297,
+    check_in_date: '2018-01-03',
+    check_out_date: '2018-01-05',
+    host_id: '5c61153a55d41f32a8ac8e49',
+    host_property_id: '5c61156c55d41f32a8ac8e4a' },
+  { _id: 5c6fbddf38b9dd65682f019f,
+    check_in_date: '2018-01-08',
+    check_out_date: '2018-01-10',
+    host_id: '5c61153a55d41f32a8ac8e49',
+    host_property_id: '5c61156c55d41f32a8ac8e4a' },
+  { _id: 5c6fc423e75ed902c8a17e29,
+    check_in_date: '2018-01-01',
+    check_out_date: '2018-01-02',
+    host_id: '5c61153a55d41f32a8ac8e49',
+    host_property_id: '5c61156c55d41f32a8ac8e4a' } ] or if not properties are not booked properties will contain []
+            */ 
+            
+            if(properties.length === 0){
+                // no properties currently booked. This will be the first property to be booked
+
+            }
+            else{
+                // properties are booked and this is returned in the form of array which has the entries from the bookings collection
+                // this for loop will get the arrays of the dates which are booked. This information will be rendered with the response to the next page
+                const propertyBookedDatesArray = []
+                properties.forEach((element) =>{
+                    from = new Date(element.check_in_date);
+                    
+                    to = new Date(element.check_out_date);
+                     
+                    while(from <= to){
                         x = from.toISOString().slice(0,10);
-                        //console.log(x);
+                     
                         propertyBookedDatesArray.push(x);
                         from.setDate(from.getDate() + 1);
-                    }
-            //console.log(propertyBookedDatesArray);
-       
-       
-                }) // foop ends here.
-    
-    
-                         res.render('registered-users/property-details-and-bookings',{
-                property_details : result,
-                 bookedProperties: propertyBookedDatesArray,
-                 hostInformation : hostInformation
-                 // result is object which is document of hostProperty collection
+                    } // while ends
+
+                }) // foreach ends
+
+               // console.log('booked dates on this property are  ' + propertyBookedDatesArray);
+                // get the information on the property and pass to the page to render the information to the next page
+                Bookings.fetchPropertyFromHostProperty(property_id).then(hostProperty => {
+                    //console.log(hostProperty); this will have the hostProperty collection document. This will be passed to the page for rendering
+
+                    // Now fetch the host details from the host collection as per as the host_id obtained from the result from hostProperty promise 
+                    Bookings.fetchHostInformation(hostProperty.host_id).then(hostInformation =>{
+                        //console.log(hostInformation); This will contain the information on the host document colllection.
+                        res.render('registered-users/property-details-and-bookings',{
+                            property_details : hostProperty,
+                             bookedProperties: propertyBookedDatesArray,
+                             hostDetails : hostInformation                 
+                            }) // rendering ends
+                    }).catch(err =>{
+                        console.log(err);
+                    }) // promise ends here
+                    
+                 }).catch(err =>{
+                    consolee.log(err);
+                }) // promise ends
+
                 
-                })
+
+            } // else ends
+            
+
+        }).catch(err =>{
+            console.log(err);
+        }) // promise ends 
+
+    } // exports ends
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                      }).catch(err =>{
-                 console.log('Bookings.fetchBookingsFromPropertyId' + err);
-             }); // Bookings.fetchHostInformation ends
-    
-    
-    
-    
-             }).catch(err =>{
-                 console.log('Bookings.fetchBookingsFromPropertyId' + err);
-             }); // Bookings.fetchBookingsFromPropertyId ends
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    }).catch(err =>{
-        console.log('fetchPropertyFromPropertyId  ' + err);
-    }) // ManageUser.fetchPropertyFromPropertyId ends here
-    
-    } // exports ends here
 
 
 exports.postBookProperty2 =(req, res, next) =>{
