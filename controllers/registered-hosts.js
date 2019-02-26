@@ -29,8 +29,8 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const description = req.body.description;
     const specifications = req.body.specifications ;
     const amenities = req.body.amenities;
-    const chk_in_date = req.body.chk_in_date;
-    const chk_out_date = req.body.chk_out_date;
+    const chk_in_date = req.body.date[0];
+    const chk_out_date = req.body.date[1];
     const rate = req.body.rate;
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
@@ -92,8 +92,8 @@ exports.postCreateRental = (req, res, next) => {
     const city = req.body.city;
     const state = req.body.state;
     const description = req.body.description;
-    const chk_in_date = req.body.chk_in_date;
-    const chk_out_date = req.body.chk_out_date;
+    const chk_in_date = req.body.date[0];
+    const chk_out_date = req.body.date[1];
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
 
