@@ -3,12 +3,13 @@ const getDb = require('../util/database').getDb;
 
 class RegisterHost{
 
-    constructor(name, email, password, contactNo, unique_user_name){
+    constructor(name, email, password, contactNo, unique_user_name,something_about_me){
         this.name = name;
         this.email = email;
         this.password = password;
         this.contactNo = contactNo;
         this.unique_user_name = unique_user_name;
+        this.something_about_me = something_about_me;
     }
 
         save(){
