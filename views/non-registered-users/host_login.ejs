@@ -51,5 +51,17 @@
                       </form>
         </div>
     </div>
-</body>
+    <br>
+
+    <div class="container" align='center'>
+        <%if (message) { %>
+          <div class="alert alert-danger" role="alert">
+              Invalid Credentials. Please enter your Credentials again
+            </div>
+      <% } else { %>
+        <div>
+
+        </div>
+        <% } %>
+    </div>
 </html>

@@ -3,6 +3,7 @@ const RegisterUser = require('../models/RegisterUser');
 const UserAuthentication = require('../models/UserAuthentication');
 const HostAuthentication = require('../models/HostAuthentication');
 const ManageUser = require('../models/ManageUser');
+const ManageHostProperty = require('../models/ManageHostProprty');
 
 exports.postbecomeHost = (req,res,next) =>{
 
@@ -101,8 +102,33 @@ exports.postAuthenticateHost = (req, res, next) => {
     authenticate.authenticateHost().then(result => {
         // console.log(result); this will return true or false as per as the method return value
         console.log(result);
+        if(result === true){
+            const sess = req.session;
+            sess.host_name = user_name_entered;
+            ManageHostProperty.findPropertyByHostName(sess.host_name).then(result =>{
+    
+                sess.host_properties = result;
+
+                res.render('reg-hosts/manage-rentals', {
+                    host_rentals : result
+                });
+        
+        
+        
+            }).catch(err => {
+                console.log(err);
+            })
+        } // ifends
+
+        else{
+
+            res.render('non-registered-users/host_login',{
+                message : true
+            });
+        } // else ends here
+
     }).catch(err =>{
-        //console.log(err); 
+        console.log(err); 
     })
-    res.send('Compeleted authentication');
+
 }

@@ -189,8 +189,8 @@ exports.postEditRental = (req, res, next) =>{
 
 exports.postDeleteRental = (req, res, next) => {
     var sess = req.session;
-    console.log(sess);
-    console.log(req.body);
+    console.log('session is ' + sess);
+    console.log('request body is + ' + req.body);
     res.send('This is delete rental handler. Deleting rentals will be implemeted later this is on 30 jan 2019');
 }
 
