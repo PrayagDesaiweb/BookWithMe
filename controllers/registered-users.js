@@ -248,8 +248,11 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 
 
 exports.postBookProperty2 =(req, res, next) =>{
+
+    // also from the hidden fields from the host fetch the host information so that on the page renered the user can also view the host infirmation
+    
     let sess = req.session;
-    // book the latest property
+    // This will book the property
     const check_in_date = req.body.date[0];
     const check_out_date = req.body.date[1];
     const host_id = req.body.host_id;
@@ -274,7 +277,7 @@ exports.postBookProperty2 =(req, res, next) =>{
 
     
     
-    res.send(sess);
+    
 }
 
 
@@ -284,8 +287,3 @@ exports.getViewBookingsPage = (req, res, next) =>{
 }
 
 
-
-// here in this page only bookings is implemented right now
-     // https://www.airbnb.co.in/rooms/plus/14741205?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=scBf0ZlJ this is how yoy make the web page
-
-//console.log(result);

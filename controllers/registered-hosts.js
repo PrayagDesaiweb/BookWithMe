@@ -62,8 +62,6 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
         let sess = req.session;
         sess.host_properties = result;
         res.render('reg-hosts/manage-rentals', {
-            name : sess.host_name,
-            id : sess.host_id,
             host_rentals : result
         });
 
