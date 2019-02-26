@@ -8,6 +8,8 @@ const ManageHostProperty = require('../models/ManageHostProprty');
 exports.postbecomeHost = (req,res,next) =>{
 
     console.log(req.body)
+    let sess = req.session;
+    sess.unique_host_name = req.body.unique_user_name;
     const unique_user_name = req.body.unique_user_name;
     const name = req.body.name;
     const email = req.body.password;
@@ -104,10 +106,10 @@ exports.postAuthenticateHost = (req, res, next) => {
         console.log(result);
         if(result === true){
             const sess = req.session;
-            sess.host_name = user_name_entered;
+            sess.unique_host_name = user_name_entered;
             ManageHostProperty.findPropertyByHostName(sess.host_name).then(result =>{
     
-                sess.host_properties = result;
+               // sess.host_properties = result;
 
                 res.render('reg-hosts/manage-rentals', {
                     host_rentals : result

@@ -38,7 +38,7 @@ class RegisterHost{
 
     static fetchHostCredentials(hostName){
         let db = getDb();
-        return db.collection('host').findOne({name : hostName})
+        return db.collection('host').findOne({unique_host_name : hostName})
         .then(credential =>{
             return credential;
         })

@@ -19,6 +19,8 @@ exports.postCreateOneRental = (req, res, next) => {
 
 exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
+    let sess = req.session;
+    const unique_host_name = sess.unique_host_name
     const host_name = req.body.host_name;
     const host_id = req.body.host_id;
     const property_name = req.body.property_name;
@@ -37,12 +39,11 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
     // setting sessions for hostname and host id to store the information of hosts across all the pages for remembering host sessions
 
-    let sess = req.session;
-    sess.host_name = host_name;
+    
     sess.host_id = host_id;
     //let list_of_host_rentals;
 
-    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate );
+    const registerProperty = new RegisterHostProperty(unique_host_name,host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate );
     registerProperty.save().then(result =>{
         //console.log(result);
     }).catch(err =>{
@@ -82,6 +83,7 @@ exports.getCreateRental = (req, res, next) =>{
 
 exports.postCreateRental = (req, res, next) => {
     var sess = req.session;
+    const unique_host_name = sess.unique_host_name;
     const host_name = req.session.host_name;
     //console.log(host_name);
     const host_id = req.session.host_id;
@@ -97,7 +99,7 @@ exports.postCreateRental = (req, res, next) => {
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
 
-    const registerProperty = new RegisterHostProperty(host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
+    const registerProperty = new RegisterHostProperty(unique_host_name,host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
 
         
@@ -137,11 +139,12 @@ exports.getUpdateCredentials = (req, res, next) => {
     
 
     // fetch the host credentials from the host collection
-    RegisterHost.fetchHostCredentials(req.session.host_name).then(result =>{
+    RegisterHost.fetchHostCredentials(req.session.unique_host_name).then(result =>{
         //console.log('this is coming from the edit credntlas handler');
         let sess = req.session;
         sess.host_collection_id = result._id;
         console.log(sess.host_collection_id)
+        console.log(result);
 
         res.render('reg-hosts/update-credentials',{
             user_credentials_props : result
