@@ -5,6 +5,8 @@ const ManageHostProperty = require('../models/ManageHostProprty');
 exports.postCreateOneRental = (req, res, next) => {
     user_name = req.body.user_name;
     RegisterHost.fetchIdByName(user_name).then(result =>{
+        sess.host_id = result._id;
+        sess.unique_host_name = result.unique_user_name;
         hostName = result.name;
         hostId = result._id;
         res.render('reg-hosts/create_first_rental',{
@@ -20,7 +22,7 @@ exports.postCreateOneRental = (req, res, next) => {
 exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
     let sess = req.session;
-    const unique_host_name = sess.unique_host_name
+    const unique_host_name = sess.unique_host_name;
     const host_name = req.body.host_name;
     const host_id = req.body.host_id;
     const property_name = req.body.property_name;
@@ -50,7 +52,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
         //console.log(err);
     })
 
-    ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
+    ManageHostProperty.findPropertyByHostName(unique_host_name).then(result =>{
         //console.log('from the controller handling of fetching the host proprtties from the ManageHostProperties models ');
        // sess.list_of_host_rentals = result;
        // let list_of_host_rentals = new Array();
@@ -60,8 +62,6 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
         
         //console.log(list_of_host_rentals);
         //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
-        let sess = req.session;
-        sess.host_properties = result;
         res.render('reg-hosts/manage-rentals', {
             host_rentals : result
         });
@@ -105,10 +105,8 @@ exports.postCreateRental = (req, res, next) => {
         
 
 
-        ManageHostProperty.findPropertyByHostName(host_name).then(result =>{
+        ManageHostProperty.findPropertyByHostName(unique_host_name).then(result =>{
            
-            let sess = req.session;
-            sess.host_properties = result;
             res.render('reg-hosts/manage-rentals', {
                 name : sess.host_name,
                 id : sess.host_id,
@@ -134,18 +132,12 @@ exports.postCreateRental = (req, res, next) => {
 
 
 exports.getUpdateCredentials = (req, res, next) => {
-    // for the implementation of updating the credentials of user
-    //console.log(req.session);
     
-
+    let sess = req.session;
+    
     // fetch the host credentials from the host collection
-    RegisterHost.fetchHostCredentials(req.session.unique_host_name).then(result =>{
-        //console.log('this is coming from the edit credntlas handler');
-        let sess = req.session;
-        sess.host_collection_id = result._id;
-        console.log(sess.host_collection_id)
-        console.log(result);
-
+    RegisterHost.fetchHostCredentials(sess.unique_host_name).then(result =>{
+        
         res.render('reg-hosts/update-credentials',{
             user_credentials_props : result
         });
@@ -164,14 +156,19 @@ exports.updateCredentials = (req, res, next) =>{
     const password = req.body.password;
     const contactNo = req.body.contactNo;
 
-    RegisterHost.updateHostCredentials(req.session.host_collection_id, unique_user_name, name, email, password, contactNo)
+    RegisterHost.updateHostCredentials(sess.host_id, unique_user_name, name, email, password, contactNo)
     .then(result =>{
-        let sess = req.session;
+        // anoter nexted promise for fetching properties of the user from the hostProperty collection
+        ManageHostProperty.findPropertyByHostName(sess.unique_host_name).then(hostProperties =>{
         res.render('reg-hosts/manage-rentals', {
             name : sess.host_name,
             id : sess.host_id,
-            host_rentals : sess.host_properties
-        });
+            host_rentals : hostProperties
+        }); // rendering finished
+        }).catch(err =>{
+            console.log(err)
+        }); // Manageuser.findPropertyByHostName ends
+        
 
     }).catch(err =>{
         console.log(err);
