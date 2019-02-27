@@ -1,9 +1,10 @@
-const RegisterHost = require('../models/RegisterHost');
+
 const RegisterUser = require('../models/RegisterUser');
 const UserAuthentication = require('../models/UserAuthentication');
 const HostAuthentication = require('../models/HostAuthentication');
 const ManageUser = require('../models/ManageUser');
 const ManageHostProperty = require('../models/ManageHostProprty');
+const RegisterHost = require('../models/RegisterHost')
 
 exports.postbecomeHost = (req,res,next) =>{
 
@@ -105,9 +106,38 @@ exports.postAuthenticateHost = (req, res, next) => {
         // console.log(result); this will return true or false as per as the method return value
         console.log(result);
         if(result === true){
-            const sess = req.session;
+
+            let sess = req.session;
             sess.unique_host_name = user_name_entered;
-            ManageHostProperty.findPropertyByHostName(sess.host_name).then(result =>{
+
+
+            RegisterHost.fetchIdByName(sess.unique_host_name).then(result =>{
+                console.log(result._id);
+                sess.host_id = result._id;
+
+                ManageHostProperty.findPropertyById(sess.host_id).then(result1 =>{
+    
+                    // sess.host_properties = result;
+     
+                     res.render('reg-hosts/manage-rentals', {
+                         host_rentals : result1
+                     });
+             
+             
+             
+                 }).catch(err => {
+                     console.log(err);
+                 })
+                
+            }).catch(err =>{
+                console.log(err);
+            })
+
+
+
+            /* 
+            
+            ManageHostProperty.findPropertyById(sess.host_id).then(result =>{
     
                // sess.host_properties = result;
 
@@ -120,6 +150,13 @@ exports.postAuthenticateHost = (req, res, next) => {
             }).catch(err => {
                 console.log(err);
             })
+            
+            
+            
+            
+            */
+
+            
         } // ifends
 
         else{

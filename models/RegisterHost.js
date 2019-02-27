@@ -26,8 +26,8 @@ class RegisterHost{
     }
 
     static fetchIdByName(name_of_host) {
-        let db = getDb(name_of_host);
-        return db.collection('host').findOne({name : name_of_host})
+        let db = getDb();
+        return db.collection('host').findOne({unique_user_name : name_of_host})
         .then(product => {
            // console.log(product);
             return product;
@@ -36,9 +36,9 @@ class RegisterHost{
         })
     }
 
-    static fetchHostCredentials(hostName){
+    static fetchHostCredentials(hostId){
         let db = getDb();
-        return db.collection('host').findOne({unique_user_name : hostName})
+        return db.collection('host').findOne({_id : new mongoDb.ObjectId(hostId)})
         .then(credential =>{
             return credential;
         })

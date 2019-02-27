@@ -4,9 +4,8 @@ const getDb = require('../util/database').getDb;
 
 class RegisterHostProperty{
 
-    constructor(unique_host_name,host_name, host_id, property_name, property_class,address, description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme,specifications, amenities, rate){
-        this.unique_host_name = unique_host_name;
-        this.host_name = host_name;
+    constructor(host_id, property_name, property_class,address, description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme,specifications, amenities, rate){
+    
         this.host_id = host_id;
         this.property_name = property_name;
         this.property_class = property_class;

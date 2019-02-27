@@ -3,6 +3,7 @@ const RegisterHostProperty = require('../models/RegisterHostProperty');
 const ManageHostProperty = require('../models/ManageHostProprty');
 
 exports.postCreateOneRental = (req, res, next) => {
+    let sess = req.session;
     user_name = req.body.user_name;
     RegisterHost.fetchIdByName(user_name).then(result =>{
         sess.host_id = result._id;
@@ -22,9 +23,12 @@ exports.postCreateOneRental = (req, res, next) => {
 exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
     let sess = req.session;
+     
+    
+
     const unique_host_name = sess.unique_host_name;
-    const host_name = req.body.host_name;
-    const host_id = req.body.host_id;
+    const host_name = req.body.host_name; // do not use this information in the hostProperty table. because the hanges reflected in host will not be reflected inside this hostProprty Collection
+    const host_id = sess.host_id;
     const property_name = req.body.property_name;
     const property_class = req.body.property_class;
     const address = req.body.address;
@@ -39,41 +43,28 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
 
-    // setting sessions for hostname and host id to store the information of hosts across all the pages for remembering host sessions
 
-    
-    sess.host_id = host_id;
-    //let list_of_host_rentals;
+        const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate);
+        registerProperty.save().then(result => {
+            //console.log(result);
+            //Another promise to findProperty by username so that the correct page can be rendered
 
-    const registerProperty = new RegisterHostProperty(unique_host_name,host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate );
-    registerProperty.save().then(result =>{
-        //console.log(result);
-    }).catch(err =>{
-        //console.log(err);
-    })
+            ManageHostProperty.findPropertyByHostId(sess.host_id).then(hostProperties =>{
+                console.log(hostProperties);
+                let sess = req.session;
+                res.render('reg-hosts/manage-rentals', {
+                    host_rentals : hostProperties
+                });
+            }).catch(err =>{
+                console.log(err) // catch of the inner promise 
+            }); // inner promse ends here
 
-    ManageHostProperty.findPropertyByHostName(unique_host_name).then(result =>{
-        //console.log('from the controller handling of fetching the host proprtties from the ManageHostProperties models ');
-       // sess.list_of_host_rentals = result;
-       // let list_of_host_rentals = new Array();
-
-       // sess.list_of_host_rentals = result;
-        //console.log(result);
-        
-        //console.log(list_of_host_rentals);
-        //sess.list_of_host_rentals = result; // session vaiable for properties of hostname
-        res.render('reg-hosts/manage-rentals', {
-            host_rentals : result
+        }).catch(err =>{
+            console.log(err);
         });
-
-
-
-    }).catch(err => {
-        console.log(err);
-    })
+   
     
-    
-}
+} // exports ends here
 
 
 exports.getCreateRental = (req, res, next) =>{
@@ -99,13 +90,13 @@ exports.postCreateRental = (req, res, next) => {
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
 
-    const registerProperty = new RegisterHostProperty(unique_host_name,host_name,host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
+    const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
     registerProperty.save().then(result =>{
 
         
 
 
-        ManageHostProperty.findPropertyByHostName(unique_host_name).then(result =>{
+        ManageHostProperty.findPropertyByHostId(sess.host_id).then(result =>{
            
             res.render('reg-hosts/manage-rentals', {
                 name : sess.host_name,
@@ -136,7 +127,7 @@ exports.getUpdateCredentials = (req, res, next) => {
     let sess = req.session;
     
     // fetch the host credentials from the host collection
-    RegisterHost.fetchHostCredentials(sess.unique_host_name).then(result =>{
+    RegisterHost.fetchHostCredentials(sess.host_id).then(result =>{
         
         res.render('reg-hosts/update-credentials',{
             user_credentials_props : result
@@ -150,6 +141,8 @@ exports.getUpdateCredentials = (req, res, next) => {
 
 exports.updateCredentials = (req, res, next) =>{
     let sess = req.session;
+    console.log(sess);
+    console.log(req.body);
     const unique_user_name = req.body.unique_user_name;
     const name = req.body.name;
     const email = req.body.email;
@@ -158,8 +151,13 @@ exports.updateCredentials = (req, res, next) =>{
 
     RegisterHost.updateHostCredentials(sess.host_id, unique_user_name, name, email, password, contactNo)
     .then(result =>{
+
+        console.log(result);
         // anoter nexted promise for fetching properties of the user from the hostProperty collection
-        ManageHostProperty.findPropertyByHostName(sess.unique_host_name).then(hostProperties =>{
+        ManageHostProperty.findPropertyByHostId(sess.host_id).then(hostProperties =>{
+            let sess = req.session;
+            console.log('hostName is ' + sess.unique_host_name);
+            console.log(hostProperties);
         res.render('reg-hosts/manage-rentals', {
             name : sess.host_name,
             id : sess.host_id,

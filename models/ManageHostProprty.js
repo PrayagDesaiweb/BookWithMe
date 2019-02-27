@@ -6,9 +6,9 @@ class ManageHostProperty {
 
     }
 
-    static findPropertyByHostName(hostname){
+    static findPropertyByHostId(hostId){
         let db = getDb();
-        return db.collection('hostProperty').find({host_name : hostname}).toArray().then(result =>{
+        return db.collection('hostProperty').find({host_id : hostId}).toArray().then(result =>{
 
             return result;
         }).catch(err =>{
