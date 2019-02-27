@@ -4,7 +4,7 @@ const UserAuthentication = require('../models/UserAuthentication');
 const HostAuthentication = require('../models/HostAuthentication');
 const ManageUser = require('../models/ManageUser');
 const ManageHostProperty = require('../models/ManageHostProprty');
-const RegisterHost = require('../models/RegisterHost')
+const RegisterHost = require('../models/RegisterHost');
 
 exports.postbecomeHost = (req,res,next) =>{
 
@@ -112,13 +112,12 @@ exports.postAuthenticateHost = (req, res, next) => {
 
 
             RegisterHost.fetchIdByName(sess.unique_host_name).then(result =>{
-                console.log(result._id);
+                
                 sess.host_id = result._id;
 
-                ManageHostProperty.findPropertyById(sess.host_id).then(result1 =>{
+                ManageHostProperty.findPropertyByHostId(result._id.toString()).then(result1 =>{
     
-                    // sess.host_properties = result;
-     
+                    console.log(result1);
                      res.render('reg-hosts/manage-rentals', {
                          host_rentals : result1
                      });
@@ -135,27 +134,7 @@ exports.postAuthenticateHost = (req, res, next) => {
 
 
 
-            /* 
-            
-            ManageHostProperty.findPropertyById(sess.host_id).then(result =>{
-    
-               // sess.host_properties = result;
-
-                res.render('reg-hosts/manage-rentals', {
-                    host_rentals : result
-                });
-        
-        
-        
-            }).catch(err => {
-                console.log(err);
-            })
-            
-            
-            
-            
-            */
-
+           
             
         } // ifends
 
