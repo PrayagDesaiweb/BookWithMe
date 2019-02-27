@@ -149,23 +149,12 @@ exports.updateCredentials = (req, res, next) =>{
     const password = req.body.password;
     const contactNo = req.body.contactNo;
 
+    // On updating the credentials the user will again have to logIn using his new credentials
+
     RegisterHost.updateHostCredentials(sess.host_id, unique_user_name, name, email, password, contactNo)
     .then(result =>{
 
-        console.log(result);
-        // anoter nexted promise for fetching properties of the user from the hostProperty collection
-        ManageHostProperty.findPropertyByHostId(sess.host_id).then(hostProperties =>{
-            let sess = req.session;
-            console.log('hostName is ' + sess.unique_host_name);
-            console.log(hostProperties);
-        res.render('reg-hosts/manage-rentals', {
-            name : sess.host_name,
-            id : sess.host_id,
-            host_rentals : hostProperties
-        }); // rendering finished
-        }).catch(err =>{
-            console.log(err)
-        }); // Manageuser.findPropertyByHostName ends
+         res.redirect('http://localhost:3000/host-login');
         
 
     }).catch(err =>{
