@@ -163,12 +163,16 @@ exports.updateCredentials = (req, res, next) =>{
 }
 
 exports.postEditRental = (req, res, next) =>{
-    var sess = req.session;
-    var id = sess.hostProperty_id;
-    console.log('start');
-    RegisterHostProperty.fetchPropertyFromId(hostId);
-    console.log('end');
-    console.log(sess);
+    /* Scenarios for editing rentals
+    1. The host can edit the rental if the property has not been booked by users
+    2. The host can change the availiility of his/her property, i.e he-she can extend the date of bookings (this is the current priority)
+      */
+
+    let sess = req.session;
+    let host_id = sess.host_id;
+    console.log(host_id);
+    let host_property_id = req.body.hostProperty_id // this will come from the card's button click
+    
     console.log(req.body);
    
     res.render('reg-hosts/edit-rental'); // impleent this later todays date 29*1*2019
@@ -193,3 +197,4 @@ exports.postRentalDetails = (req, res, next) => {
 
 
  //    https://www.airbnb.co.in/rooms/plus/22377418?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=mGqJ4LKE
+// add password recovery 
