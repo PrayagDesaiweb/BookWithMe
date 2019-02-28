@@ -8,14 +8,43 @@
     <title>Document</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                
+        <a class="navbar-brand" href="/">BookWithMe</a>
+        <div class='container'>
+        <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="manage-credentials">Manage your Credentials
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+
+                <li class="nav-item active">
+                      <a class="nav-link" href="view/bookings">View your bookings
+                        <span class="sr-only">(current)</span>
+                      </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Manage Bookings
+                  <span class="sr-only">(current)</span>
+                </a>
+        </li>
+
+              
+                
+              </ul>
+            </div>
+  
+</nav>
     <div class="jumbotron">
         <h1 class="display-4">Booking Successfull !!</h1>
         <p class="lead">Your Booking for this property is Successfull </p>
         <hr class="my-4">
-        <p>Booking of property <> is done from <> to <>. The property is hosted by <>. </p>
+        <p>Booking of property <%= property_name %> is done from <%= check_in_date %> to <%=check_out_date %>. The property is hosted by <%= host_name %>. </p>
         <br>
         <p class="lead" align="center">
-          <a class="btn btn-primary btn-lg" href="#" role="button">Click here to view properties you have booked</a>
+          <a class="btn btn-primary btn-lg" href="http://localhost:3000/view/bookings" role="button">Click here to view properties you have booked</a>
         </p>
       </div>
 </body>

@@ -70,7 +70,9 @@ exports.postAuthenticateUser = (req, res, next) => {
         const manageuser = new ManageUser(sess.userName);
         manageuser.fetchUserIdByUserName(sess.userName)
         .then(result =>{
+            
             sess.userCredentials = result;
+            console.log(sess.userCredentials);
             //console.log(sess);
             res.render('registered-users/startbookproperties',{
                 userName : sess.userCredentials.user_name

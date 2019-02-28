@@ -7,9 +7,9 @@ class BookProperty{
 
     }
 
-    static bookProperty(check_in_date, check_out_date,host_id,host_property_id){
+    static bookProperty(check_in_date, check_out_date,host_id,host_property_id, status, date_when_property_booked, user_id){
         let db = getDb();
-        return db.collection('bookings').insertOne({check_in_date : check_in_date, check_out_date : check_out_date, host_id : host_id, host_property_id : host_property_id})
+        return db.collection('bookings').insertOne({check_in_date : check_in_date, check_out_date : check_out_date, host_id : host_id, host_property_id : host_property_id, property_is_booked : status, date_when_property_booked:date_when_property_booked, user_id : user_id})
         .then(result =>{
             return result;
         }).catch(err =>{
@@ -48,6 +48,16 @@ class BookProperty{
             console.log(err);
         })
     
+    }
+
+    static fetchCurrentlyBookedHostProperties(userId){
+        let db = getDb();
+        return db.collection('bookings').find({user_id : userId, property_is_booked: true }).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
     }
 
 }

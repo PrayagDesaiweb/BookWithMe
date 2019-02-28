@@ -253,12 +253,16 @@ exports.postBookProperty2 =(req, res, next) =>{
     
     let sess = req.session;
     // This will book the property
+    const user_id = sess.userCredentials._id; 
+    let date_when_property_booked = new Date();
     const check_in_date = req.body.date[0];
     const check_out_date = req.body.date[1];
     const host_id = req.body.host_id;
     const host_property_id = req.body.host_property_id;
+    const property_name = req.body.property_name;
     const status = true;
-    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id,status)
+    const host_name = req.body.host_name;
+    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id,status,date_when_property_booked, user_id)
     .then(result =>{
 
         
@@ -267,7 +271,10 @@ exports.postBookProperty2 =(req, res, next) =>{
             check_in_date : check_in_date,
             check_out_date: check_out_date,
             host_id : req.body.host_id,
-            host_property_id : host_property_id
+            host_property_id : host_property_id,
+            property_name : property_name,
+            host_name : host_name,
+            host_id : host_id
         })
     }).catch(err =>{
         console.log(err);
@@ -283,7 +290,18 @@ exports.postBookProperty2 =(req, res, next) =>{
 
 exports.getViewBookingsPage = (req, res, next) =>{
     let sess = req.session;
-    res.send(sess);
+    const user_name = sess.userCredentials.user_name;
+    const user_id = sess.userCredentials._id; // this is of typr string
+    
+    Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
+        //console.log(currentlyBookedProperties);
+    }).catch(err =>{
+        console.log(err);
+    });
+    
+    res.render('registered-users/view-booked-properties',{
+        user_name : user_name
+    });
 }
 
 
