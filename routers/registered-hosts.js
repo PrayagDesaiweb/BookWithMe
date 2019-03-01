@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/create-first-rental',registeredHostsController.postCreateOneRental);
 router.post('/path-to-manage-rentals',registeredHostsController.postFetchfromCreatefirstRentals);
 router.get('/create-rentals',registeredHostsController.getCreateRental);
-router.post('/create-rental',registeredHostsController.postCreateRental);
+router.post('/create-rental',registeredHostsController.postCreateOneRental);
 router.get('/update-credentials',registeredHostsController.getUpdateCredentials);
 router.post('/updated-credentials',registeredHostsController.updateCredentials);
 router.post('/edit-rental',registeredHostsController.postEditRental);

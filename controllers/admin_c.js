@@ -24,6 +24,13 @@ exports.postbecomeHost = (req,res,next) =>{
         //console.log(err)
     })
 
+    RegisterHost. fetchIdByName(sess.unique_host_name).then(hostId =>{
+        console.log(hostId);
+        sess.host_id = hostId;
+    }).catch(err =>{
+        console.log(err);
+    })
+
     res.render('reg-hosts/host_reg_succ',{
         name: name
     });

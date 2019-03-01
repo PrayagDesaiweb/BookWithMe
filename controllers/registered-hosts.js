@@ -4,7 +4,7 @@ const ManageHostProperty = require('../models/ManageHostProprty');
 
 exports.postCreateOneRental = (req, res, next) => {
     let sess = req.session;
-    user_name = req.body.user_name;
+    user_name = sess.unique_host_name;
     RegisterHost.fetchIdByName(user_name).then(result =>{
         sess.host_id = result._id;
         sess.unique_host_name = result.unique_user_name;
