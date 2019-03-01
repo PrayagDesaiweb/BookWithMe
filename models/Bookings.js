@@ -60,6 +60,28 @@ class BookProperty{
         })
     }
 
+    static fetchpreviouslyBookedHostProperties(userId){
+        let db = getDb();
+        return db.collection('bookings').find({user_id : userId, property_is_booked: false }).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
+    static fetchPropertyDetailsFromhostProperty(host_property_id){
+        let db = getDb();
+        return db.collection('hostProperty').findOne({_id : new MongoDb.ObjectID(host_property_id)})
+        .then(result =>{
+            //console.log(result);
+            return result;
+            
+        }).catch(err =>{
+            console.log(err);
+        }) 
+    }
+
 }
 
 module.exports = BookProperty;

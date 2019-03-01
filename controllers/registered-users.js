@@ -258,7 +258,9 @@ exports.postBookProperty2 =(req, res, next) =>{
     const check_in_date = req.body.date[0];
     const check_out_date = req.body.date[1];
     const host_id = req.body.host_id;
+    console.log(host_id);
     const host_property_id = req.body.host_property_id;
+   //console.log(host_property_id);
     const property_name = req.body.property_name;
     const status = true;
     const host_name = req.body.host_name;
@@ -291,17 +293,45 @@ exports.postBookProperty2 =(req, res, next) =>{
 exports.getViewBookingsPage = (req, res, next) =>{
     let sess = req.session;
     const user_name = sess.userCredentials.user_name;
-    const user_id = sess.userCredentials._id; // this is of typr string
-    
+    const user_id = sess.userCredentials._id; // this is of type string
+    let aux_array = [];
     Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
         //console.log(currentlyBookedProperties);
+        
+        // fetch the information from hostPropertyid of every single element of the currnentlyBookedproperties 
+         currentlyBookedProperties.forEach( (element) =>{
+            //console.log(element);
+        Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                //console.log(ans)
+                
+                //console.log(aux_array)
+                if(aux_array.length < currentlyBookedProperties.length){
+                    console.log(aux_array.length);
+                    console.log(aux_array);
+                    aux_array.push(ans);
+                    
+                }
+                
+                else{
+
+                    res.render('registered-users/view-booked-properties')
+                
+                }
+                
+            }).catch(err =>{
+                console.log(err);
+            })
+        })// foreach ends 
+
+        console.log('aux array is ' + aux_array);
+
+        
+
     }).catch(err =>{
         console.log(err);
-    });
+    }); // outer promise over
     
-    res.render('registered-users/view-booked-properties',{
-        user_name : user_name
-    });
+    
 }
 
 
