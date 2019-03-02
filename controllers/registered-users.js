@@ -264,6 +264,7 @@ exports.postBookProperty2 =(req, res, next) =>{
     const property_name = req.body.property_name;
     const status = true;
     const host_name = req.body.host_name;
+
     Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id,status,date_when_property_booked, user_id)
     .then(result =>{
 

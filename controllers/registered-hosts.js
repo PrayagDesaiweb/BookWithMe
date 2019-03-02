@@ -43,9 +43,10 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const rate = req.body.rate;
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
+    const date_when_booked = new Date();
 
 
-        const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate);
+        const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate, date_when_booked);
         registerProperty.save().then(result => {
             //console.log(result);
             //Another promise to findProperty by username so that the correct page can be rendered
@@ -92,8 +93,12 @@ exports.postCreateRental = (req, res, next) => {
     const chk_out_date = req.body.date[1];
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
+    const date_when_booked = new Date();
+    const rate = req.body.rate;
+    const specifications = req.body.specifications;
+    const amenities = req.body.amenities;
 
-    const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme);
+    const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate, date_when_booked);
     registerProperty.save().then(result =>{
 
         

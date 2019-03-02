@@ -4,7 +4,7 @@ const getDb = require('../util/database').getDb;
 
 class RegisterHostProperty{
 
-    constructor(host_id, property_name, property_class,address, description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme,specifications, amenities, rate){
+    constructor(host_id, property_name, property_class,address, description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme,specifications, amenities, rate, date_when_booked){
     
         this.host_id = host_id;
         this.property_name = property_name;
@@ -20,6 +20,7 @@ class RegisterHostProperty{
         this. amenities =  amenities;
         this.specifications = specifications;
         this.rate = rate;
+        this.date_when_booked = date_when_booked;
     }
 
     save(){
