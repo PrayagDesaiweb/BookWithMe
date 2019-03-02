@@ -68,13 +68,39 @@
                     <div class="card">
 
                         <% for (let p of host_rentals) { %>
+                          <br>
+                          <br>
 
                         <div class="card-header">
-                          <%= p.property_class %>
+                            <p class="display-5 card-text font-italic font-weight-bold" >
+                                <%= p.property_name %>
+                              <br>
+                              <%= p.address %>
+                              <br>
+                            </p>
+                          
+                          
                         </div>
                         <div class="card-body">
-                          <h5 class="card-title"><%= p.property_name %></h5>
-                          <p class="card-text">Your property <%= p.property_name %> is currently active between  <%= p.chk_in_date %> to  <%= p.chk_out_date %></p>
+                          <h5 class="card-title">
+                            <p align="center">
+                                <%if (p.property_class === "entire_home") { %>
+                                  Entire Home
+                                  <% } %>
+
+                                  <%if (p.property_class === "bwm_plus") { %>
+                                    BookWithMe Plus Properties
+                                    <% } %>
+
+                                    <%if (p.property_class === "boutique_rooms") { %>
+                                      Boutique Rooms
+                                      <% } %>
+
+                                      <%if (p.property_class === "unique_homes") { %>
+                                        Unique Home
+                                        <% } %>
+                            </p>
+                          <p class="h6">Your property <%= p.property_name %> is currently active between  <%= p.chk_in_date %> to  <%= p.chk_out_date %> in <%= p.city %>, <%= p.state %> . Accomodation per rental is <%= p.accomodation_strength %>.</p>
                           <br>
                           
                           <div class="container">
@@ -103,122 +129,16 @@
                             </div>
                         </div>
                       </div>
-                      <br>
-                      <br>
-
+                     
                       <% } %>
-
-                    <% } %>
-                  
+                  <br>
+                  <br>
                 </div>
+                <% } %>
               </div>
     </div>
 
 
-<!--
-
-<p class='display-3'>
-Your Properties
-<br>
-<br>
-<div class="container">
-    <% for (let p of host_rentals) { %>
-    <div class="row">
-      <div class="col-sm"> 
-          <div class= "container">
-          <div class="card" style="width: 34rem;">
-              <img class="card-img-top" src="https://www.gstatic.com/webp/gallery/1.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title"><strong><%= p.property_name %></strong></h5>
-                <p class="card-text"><%= p.description %></p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Property class - <%= p.property_class %></li>
-                <li class="list-group-item">
-                  <div>
-                    <p>
-                      Address -:
-                      <br>
-                      <%= p.address %>
-                      <br>
-                      <%= p.city %>
-                      <br>
-                      <%= p.state %>
-                    </p>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <p>
-                      Book rental from
-                      <br>
-                      <%= p.chk_in_date %> 
-                  </p>
-                </li>
-
-                <li class="list-group-item">
-                    <p>
-                        Book rental to 
-                        <br>
-                        <%= p.chk_out_date %> 
-                    </p>
-                  </li>
-                  <li class="list-group-item">
-                      <p>
-                          Rental strength
-                          <br>
-                          <%= p.accomodation_strength %> 
-                      </p>
-                    </li>
-                    <li class="list-group-item">
-                        <p>
-                            <%= p.cancellation_scheme %> 
-                        </p>
-                      </li>
-
-                    <li class="list-group-item"> 
-
-
-                        <div class="container">
-                            <div class="row">
-                              <div class="col-sm">
-                                <form action="/edit-rental" method="POST">
-                                  <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
-                                  <button type="submit" class="btn btn-success">Edit Rental</button>
-                                </form>
-                              </div>
-                              <div class="col-sm">
-                                  <form action="/delete-rental" method="POST">
-                                    <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
-                                    <button type="submit" class="btn btn-danger">Delete Rental</button>
-                                  </form>
-                              </div>
-                              <div class="col-sm">
-                                  <form action="/rental-details" method="POST">
-                                    <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
-                                    <button type="submit" class="btn btn-warning">Rental Details</button>
-                                  </form>
-                              </div>
-                            </div>
-                          </div>
-
-                    </li>
-                       
-                          
-                 
-              </ul>
-              
-            </div>
-          </div>
-
-      </div>
-      
-    <br>
-    <br>
-    <% } %>
-      </div>
-
-
--->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

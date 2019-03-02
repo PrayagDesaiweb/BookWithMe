@@ -306,24 +306,29 @@ exports.getViewBookingsPage = (req, res, next) =>{
                 
                 //console.log(aux_array)
                 if(aux_array.length < currentlyBookedProperties.length){
-                    console.log(aux_array.length);
-                    console.log(aux_array);
+                    //console.log(aux_array.length);
+                    //console.log('aux array is ' + aux_array);
                     aux_array.push(ans);
+
+                    if(aux_array.length == currentlyBookedProperties.length){
+                        console.log('aux array is ' + aux_array.length);
+                        console.log(aux_array);
+                        res.render('registered-users/view-booked-properties',{
+                            a : aux_array,
+                            b : currentlyBookedProperties
+                        })
+                    }
                     
                 }
                 
-                else{
-
-                    res.render('registered-users/view-booked-properties')
                 
-                }
                 
             }).catch(err =>{
                 console.log(err);
             })
         })// foreach ends 
 
-        console.log('aux array is ' + aux_array);
+       
 
         
 
