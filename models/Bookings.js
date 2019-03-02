@@ -82,6 +82,16 @@ class BookProperty{
         }) 
     }
 
+    static fetchHostPropertiesFromBookings(host_property_id){
+        let db = getDb();
+        return db.collection('bookings').findOne({host_property_id : host_property_id})
+        .then(result =>{
+            console.log('Hi' + result)
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = BookProperty;

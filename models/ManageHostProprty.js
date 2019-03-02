@@ -15,6 +15,9 @@ class ManageHostProperty {
             console.log(err);
         });
     }
+
+   
+
 }
 
 module.exports = ManageHostProperty;

@@ -29,12 +29,93 @@
             </div>
 
             <div class="topnav-right">
-                    <a href="#">Logout</a>
+                    <a href="#">Logout  <%= host_name %></a>
             </div>
     </nav>
-    <br>
-    <div class= "container">
+    <div class="jumbotron" align='center'>
+      <h1 class="display-4">Hello, <%= host_name %>!</h1>
+      <p class="lead">Welcome to your personalised <p class="font-weight-bold font-italic">Host DashBoard.</p></p>
+      <hr class="my-4">
+      <div class="container">
+        You can view the properties you have which are currently on rent by renters from here. Also you can update your credentials, Update your property details, delete your property when you no longer feel to rent the same. You can also extend your property's rental date and edit the property information
+      </div>
+      
+      <p class="lead">
+        <br>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more about our Terms and Policies</a>
+      </p>
+    </div>
 
+    <div class= "container" align="center">
+        <div id="accordion">
+            <div class="card">
+              <div class="card-header">
+                <h5>
+                  <a href="#collapse1" data-parent="#accordion" data-toggle="collapse" align="center" class="btn btn-success btn-lg active">
+                    View your currently Booked Properties
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapse1" class="collapse show">
+                <% if (host_rentals.length === 0) { %>
+                  <div class="display-5">
+                    <br>
+                    You have no Property which is currently occupied by renters
+                  </div>
+                  <% } else { %>
+
+                    <div class="card">
+
+                        <% for (let p of host_rentals) { %>
+
+                        <div class="card-header">
+                          <%= p.property_class %>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title"><%= p.property_name %></h5>
+                          <p class="card-text">Your property <%= p.property_name %> is currently active between  <%= p.chk_in_date %> to  <%= p.chk_out_date %></p>
+                          <br>
+                          
+                          <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                    <form action="/edit-rental" method="POST">
+                                      <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                      <button type="submit" class="btn btn-success">Edit Rental</button>
+                                    </form>
+                                    
+                                    <br>
+                                </div>
+                                <div class="col-sm">
+                                    <form action="/rental-details" method="POST">
+                                      <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                      <button type="submit" class="btn btn-warning">Rental Details</button>
+                                    </form>
+                                </div>
+                                <div class="col-sm">
+                                    <form action="/delete-rental" method="POST">
+                                      <input type="hidden" name="hostProperty_id" value="<%= p._id%>">
+                                      <button type="submit" class="btn btn-danger">Delete Rental</button>
+                                    </form>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+
+                      <% } %>
+
+                    <% } %>
+                  
+                </div>
+              </div>
+    </div>
+
+
+<!--
 
 <p class='display-3'>
 Your Properties
@@ -130,13 +211,23 @@ Your Properties
           </div>
 
       </div>
-      <div class="col-sm"> information on who has rented this property  </div> 
-    </div>
+      
     <br>
     <br>
     <% } %>
       </div>
 
+
+-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+crossorigin="anonymous"></script>
+</body>
+
+</html>
 </body>
 </html>
     

@@ -128,7 +128,8 @@ exports.postAuthenticateHost = (req, res, next) => {
     
                     console.log(result1);
                      res.render('reg-hosts/manage-rentals', {
-                         host_rentals : result1
+                         host_rentals : result1,
+                         host_name : sess.unique_host_name
                      });
              
              

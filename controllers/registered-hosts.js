@@ -1,6 +1,7 @@
 const RegisterHost = require('../models/RegisterHost')
 const RegisterHostProperty = require('../models/RegisterHostProperty');
 const ManageHostProperty = require('../models/ManageHostProprty');
+const Bookings = require('../models/Bookings');
 
 exports.postCreateOneRental = (req, res, next) => {
     let sess = req.session;
@@ -53,7 +54,8 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
                 console.log(hostProperties);
                 let sess = req.session;
                 res.render('reg-hosts/manage-rentals', {
-                    host_rentals : hostProperties
+                    host_rentals : hostProperties,
+                    host_name : sess.unique_host_name
                 });
             }).catch(err =>{
                 console.log(err) // catch of the inner promise 
@@ -68,6 +70,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
 
 exports.getCreateRental = (req, res, next) =>{
+    let sess = req.session;
     //console.log(req.session);
     res.render('reg-hosts/create-rentals');
 }
@@ -99,7 +102,7 @@ exports.postCreateRental = (req, res, next) => {
         ManageHostProperty.findPropertyByHostId(sess.host_id).then(result =>{
            
             res.render('reg-hosts/manage-rentals', {
-                name : sess.host_name,
+                host_name : sess.host_name,
                 id : sess.host_id,
                 host_rentals : result
             });
@@ -168,12 +171,19 @@ exports.postEditRental = (req, res, next) =>{
     2. The host can change the availiility of his/her property, i.e he-she can extend the date of bookings (this is the current priority)
       */
 
+     // fetch the properties from hostProperty. If the property shows bookings on that property than only host can extend dates.
+       
     let sess = req.session;
     let host_id = sess.host_id;
     console.log(host_id);
-    let host_property_id = req.body.hostProperty_id // this will come from the card's button click
+    const host_property_id = req.body.hostProperty_id;
+    console.log('Hi' + typeof(host_property_id)) // this will come from the card's button click
+    Bookings.fetchHostPropertiesFromBookings(host_property_id).then(result =>{
+        console.log('hi' + result);
+    }).catch(err =>{
+        console.log(err);
+    })
     
-    console.log(req.body);
    
     res.render('reg-hosts/edit-rental'); // impleent this later todays date 29*1*2019
 }
