@@ -96,8 +96,7 @@ exports.postCreateRental = (req, res, next) => {
     const date_when_booked = new Date();
     const rate = req.body.rate;
     const specifications = req.body.specifications;
-    const amenities = req.body.amenities;
-
+    const amenities = req.body.amenities; 
     const registerProperty = new RegisterHostProperty(host_id,property_name,property_class,address,description,chk_in_date,chk_out_date, city, state, accomodation_strength, cancellation_scheme, specifications, amenities, rate, date_when_booked);
     registerProperty.save().then(result =>{
 
@@ -245,10 +244,25 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
     const address = req.body.address;
     const city = req.body.city;
     const state = req.body.state;
+    const rate = req.body.rate;
     const property_class= req.body.property_class;
     const cancellation_scheme = req.body.cancellation_scheme;
     const accomodation_strength = req.body.accomodation_strength;
-
+    const date_updated  = new Date();
+    ManageHostProperty.updatePropertyAfterEditingCredentials(date_updated,cancellation_scheme,accomodation_strength,amenities,property_name,description,specifications,chk_in_date,chk_out_date,host_property_id,city,state,address,property_class,rate)
+    .then(result =>{
+        Bookings.fetchPropertyFromBookings(host_property_id).then(bookingElement =>{
+            console.log(bookingElement);
+            res.render('reg-hosts/rental-details',{
+                hostProperty : req.body,
+                
+            })
+        }).catch(err =>{
+            console.log(err);
+        }) // Bookings.fetchPropertyFromBookings
+    }).catch(err =>{
+        console.log(err) // ManageHostProperty.updatePropertyAfterEditingCredentials promise 
+    })
     res.send(req.body);
 }
 

@@ -107,7 +107,10 @@
                             </p>
                           <p class="h6">Your property <%= p.property_name %> is currently active between  <%= p.chk_in_date %> to  <%= p.chk_out_date %> in <%= p.city %>, <%= p.state %> . Accomodation per rental is <%= p.accomodation_strength %>. This property was made available to the renters on <%= p.date_when_booked %></p>
                           <br>
-                          
+                          <% if (p.date_when_booked !== '') { %>
+                            <p class="h6">You Edited this property on <%= p.date_when_booked %> </p>
+                            <br>
+                            <% } %>
                           <div class="container">
                               <div class="row">
                                 <div class="col-sm">
