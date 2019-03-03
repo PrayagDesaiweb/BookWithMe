@@ -149,8 +149,7 @@ exports.getUpdateCredentials = (req, res, next) => {
 
 exports.updateCredentials = (req, res, next) =>{
     let sess = req.session;
-    console.log(sess);
-    console.log(req.body);
+    
     const unique_user_name = req.body.unique_user_name;
     const name = req.body.name;
     const email = req.body.email;
@@ -180,21 +179,40 @@ exports.postEditRental = (req, res, next) =>{
        
     let sess = req.session;
     let host_id = sess.host_id;
-    console.log(host_id);
+    //console.log(host_id);
     const host_property_id = req.body.hostProperty_id;
-    console.log('Hi' + typeof(host_property_id)) // this will come from the card's button click
+    //console.log('Hi' + typeof(host_property_id)) // this will come from the card's button click
     Bookings.fetchHostPropertiesFromBookings(host_property_id).then(result =>{
-        console.log('hi' + result);
+        //console.log(result); 
+        if(result === null){
+            res.render('reg-hosts/edit-rental0',{
+                host_name : sess.host_name
+            })
+        } // if ends
+        else{
+
+            Bookings.fetchPropertyFromHostProperty(req.body.hostProperty_id).then(property =>{
+                console.log(property);
+                res.render('reg-hosts/edit-rental1',{
+                    host_name : sess.host_name,
+                hostProperty : property
+                })
+            }).catch(err =>{
+                console.log(err)
+            })
+            // Fetch the hostProperty Details from hostProperty collections and pass data to registered-users/edit-rental1
+            
+        }
     }).catch(err =>{
         console.log(err);
     })
     
    
-    res.render('reg-hosts/edit-rental'); // impleent this later todays date 29*1*2019
+   
 }
 
 exports.postDeleteRental = (req, res, next) => {
-    var sess = req.session;
+    let sess = req.session;
     console.log('session is ' + sess);
     console.log('request body is + ' + req.body);
     res.send('This is delete rental handler. Deleting rentals will be implemeted later this is on 30 jan 2019');
