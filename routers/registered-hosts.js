@@ -11,5 +11,6 @@ router.post('/updated-credentials',registeredHostsController.updateCredentials);
 router.post('/edit-rental',registeredHostsController.postEditRental);
 router.post('/delete-rental',registeredHostsController.postDeleteRental);
 router.post('/rental-details',registeredHostsController.postRentalDetails);
+router.post('/update-rental',registeredHostsController.postUpdatePropertyInformation);
 
 module.exports = router;

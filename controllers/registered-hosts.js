@@ -185,12 +185,20 @@ exports.postEditRental = (req, res, next) =>{
     Bookings.fetchHostPropertiesFromBookings(host_property_id).then(result =>{
         //console.log(result); 
         if(result === null){
-            res.render('reg-hosts/edit-rental0',{
-                host_name : sess.host_name
+            // if someone has not booked the property the host can change multiple properties details.
+            Bookings.fetchPropertyFromHostProperty(req.body.hostProperty_id).then(property =>{
+                console.log(property);
+                res.render('reg-hosts/edit-rental0',{
+                host_name : sess.host_name,
+                hostProperty : property
+                })
+            }).catch(err =>{
+                console.log(err)
             })
+            
         } // if ends
         else{
-
+            // if the property is booked. The host can change limited credentials of the property
             Bookings.fetchPropertyFromHostProperty(req.body.hostProperty_id).then(property =>{
                 console.log(property);
                 res.render('reg-hosts/edit-rental1',{
@@ -223,6 +231,25 @@ exports.postRentalDetails = (req, res, next) => {
     console.log(sess);
     console.log(req.body);
     res.send('I am done working with the front end. This will be updated while I am bored and have nothing to do');
+}
+
+exports.postUpdatePropertyInformation = (req, res, next) =>{
+    
+    const property_name = req.body.property_name;
+    const description = req.body.description;
+    const specifications = req.body.specifications;
+    const amenities = req.body.amenities;
+    const chk_in_date = req.body.date[0];
+    const chk_out_date = req.body.date[1];
+    const host_property_id = req.body.host_property_id;
+    const address = req.body.address;
+    const city = req.body.city;
+    const state = req.body.state;
+    const property_class= req.body.property_class;
+    const cancellation_scheme = req.body.cancellation_scheme;
+    const accomodation_strength = req.body.accomodation_strength;
+
+    res.send(req.body);
 }
 
 

@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+             <!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -32,14 +41,113 @@
                 </div>
         </nav>
 
-        <div class="jumbotron" align="center">
-                <h1 class="display-4">Hello, world!</h1>
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <div class="jumbotron" align='center'>
+                <h1 class="display-4">Hi again,! <%= host_name %></h1>
+                <p class="lead">It seems that this property is already occupied by renters.</p>
                 <hr class="my-4">
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <p>If the property is already occupied, then you cannot change credentials such as the Property name, property class, cancellation scheme, rent rate per night. Although you can make your property available for longer durations to th renters. Please fill in the updated details of yor property.</p>
                 <p class="lead">
-                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Take me to Host Dashboard</a>
                 </p>
               </div>
+              <br>
+              <div class="container" align='center'> 
+                <p class="display-4">
+                    Fill in details about property that you want to change
+                    <br>
+                    <p class='display-5'>
+                        Change the fields that you intend to change. Leave others as it is. The other fields with retain their original value
+                    </p>
+                </p>
+                <br>
+              </div>
+              <br>
+              <div class="container" align="center">
+                    <form action="/update-rental" method="POST">
+                        <div class="form-group">
+                                <label for="name">Property Name</label>
+                                <input type="text" class="form-control" id="property_name" placeholder="Enter name of your property" name="property_name" value="<%= hostProperty.property_name%>">
+                                <small id="property_name_Help" class="form-text text-muted">Your property name is <%= hostProperty.property_name%></small>
+                              </div>
+
+
+                              <div class="form-group">
+                                    <label for="exampleInputPassword1">Property description</label>
+                                    <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="describe your property" name="description" value="<%= hostProperty.description%>">
+                                    <small id="addressHelp" class="form-text text-muted">Describe your property</small>
+                                  </div>
+                                  <br>
+                                  <br>
+
+                                  <div class="form-group">
+                                        <label for="exampleInputPassword1">Property specifications</label>
+                                        <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="Describe why your property is special" name="specifications" value="<%=hostProperty.specifications%>">
+                                        <small id="addressHelp" class="form-text text-muted">Describe why your property is special to our customers</small>
+                                      </div>
+                                      <br>
+                                      <br>
+
+                                
+                                      <div class="form-group">
+                                            <label for="exampleInputPassword1">Amenities</label>
+                                            <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="List the amenities included in your property" name="amenities" value="<%= hostProperty.amenities%>">
+                                            <small id="addressHelp" class="form-text text-muted">What Amenities does your property has.</small>
+                                          </div>
+                                          <br>
+                                          <br>
+
+                                    <div class="form-group">
+                                        <br>
+                                        This property is made available from <%= hostProperty.chk_in_date %> to <%= hostProperty.chk_out_date %>. Eventhough you can extend the property's availablity
+                                        <br>
+                                        <br>
+                                                <label class="control-label" for="date">Rent your property to</label>
+                                                <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text" value="<%= hostProperty.chk_out_date%>" />
+                                              <input type="hidden" name="host_property_id" value="<%= hostProperty._id%>">
+                                              <input type="hidden" name="address" value="<%= hostProperty.address%>">
+                                              <input type="hidden" name="city" value="<%= hostProperty.city%>">
+                                              <input type="hidden" name="state" value="<%= hostProperty.state%>">
+                                              <input type="hidden" name="rate" value="<%= hostProperty.rate%>">
+                                              <input type="hidden" name="property_class" value="<%= hostProperty.property_class%>">
+                                              <input type="hidden" name="cancellation_scheme" value="<%= hostProperty.cancellation_scheme%>">
+                                              <input type="hidden" name="date" value="<%= hostProperty.chk_in_date%>">
+                                              
+                                              <input type="hidden" name="accomodation_strength" value="<%= hostProperty.accomodation_strength%>">
+                                             
+                                        <br>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    
+
+                                    </div>
+
+
+                    </form>
+         
+                </div>
+
+
+                <script>
+                        $(document).ready(function(){
+                  
+                          var date_input = $('input[name="date"]') //our date input has the name "date"
+                          var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                          var options={
+                            startDate: '<%=hostProperty.chk_in_date %>',
+                            endDate : '',
+                            format: 'yyyy-mm-dd',
+                            container: container,
+                            todayHighlight: true,
+                            autoclose: true,
+                            datesDisabled: []
+                          };
+                          date_input.datepicker(options);
+                        })
+                    </script> 
+                
 </body>
 </html>
