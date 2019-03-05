@@ -346,11 +346,34 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
 }
 
 exports.displayHostDashboard = (req, res, next) =>{
-    res.send('host DashBoard');
+    let sess = req.session;
+    
+    RegisterHost.fetchIdByName(sess.unique_host_name).then(result =>{
+                
+        sess.host_id = result._id;
+
+        ManageHostProperty.findPropertyByHostId(result._id.toString()).then(result1 =>{
+
+            console.log(result1);
+             res.render('reg-hosts/manage-rentals', {
+                 host_rentals : result1,
+                 host_name : sess.unique_host_name
+             });
+     
+     
+     
+         }).catch(err => {
+             console.log(err);
+         })
+        
+    }).catch(err =>{
+        console.log(err);
+    })
+
 }
 
 
 
 
  
-// add password recovery 
+// add password recovery
