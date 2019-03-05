@@ -8,6 +8,29 @@
     <title>Document</title>
 </head>
 <body>
-    Hi from tye hostdetails page
+    <div class="container" align="center">
+            <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Check-In Date</th>
+                        <th scope="col">Check-Out Date</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Date when Property is Booked</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                          <% for(var i = 0 ; i < bookingDetails.length ; i++ ) { %>
+                        <tr>
+                        <th scope="row"><%= bookingDetails[i].check_in_date%></th>
+                        <td><%= bookingDetails[i].check_out_date%></td>
+                        <td><%= userDetails[i].user_name%></td>
+                        <td><%= bookingDetails[i].date_when_property_booked %></td>
+                      </tr>
+                      <% } %>
+                      
+                    </tbody>
+                  </table>
+    </div>
 </body>
 </html>
