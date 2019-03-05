@@ -227,13 +227,46 @@ exports.postDeleteRental = (req, res, next) => {
 
 exports.postRentalDetails = (req, res, next) => {
     var sess = req.session;
-    console.log(sess);
-    console.log(req.body);
-    res.send('I am done working with the front end. This will be updated while I am bored and have nothing to do');
+    const host_property_id = req.body.hostProperty_id;
+    Bookings.fetchPropertyDetailsFromhostProperty(host_property_id).then(hostpropertyDetails =>{
+        // this hostPropertyDetails will contaon the detalils for the host property
+        Bookings.fetchPropertiesFromhostProperty(host_property_id).then(propertyDetailsfromBookings =>{
+            let aux_array = [];
+            propertyDetailsfromBookings.forEach(element =>{
+
+                Bookings.fetchUserCredentialsFromUserId(element.user_id).then(result =>{
+                    if (aux_array.length < propertyDetailsfromBookings.length){
+                        aux_array.push(result);
+                        console.log(aux_array);
+    
+                        if(aux_array.length === propertyDetailsfromBookings.length){
+                            console.log(aux_array);
+                            res.render('reg-hosts/rental-details',{
+                                hostPropertyDetails : hostpropertyDetails ,
+                                userDetails : aux_array,
+                                bookingDetails : propertyDetailsfromBookings,
+                                message : false,
+                                host_name : sess.host_name
+                            }) // render ends
+                        } // inner if ends
+                    } // outer if ends
+                })
+                .catch(err =>{
+                    console.log(err);
+                }) // Bookings.fetchUserCredentialsFromUserId ends 
+
+            }) // forEach ends here
+        }).catch(err =>{
+            console.log(err)
+        }) // Bookings.fetchPropertiesFromhostPropertypromise ends 
+    }).catch(err =>{
+        console.log(err)
+    }); // Bookings.fetchPropertyDetailsFromhostProperty promise ands
+
 }
 
 exports.postUpdatePropertyInformation = (req, res, next) =>{
-    
+    let sess = req.session;
     const property_name = req.body.property_name;
     const description = req.body.description;
     const specifications = req.body.specifications;
@@ -270,7 +303,9 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
                             res.render('reg-hosts/rental-details',{
                                 hostPropertyDetails : req.body,
                                 userDetails : aux_array,
-                                bookingDetails : propertyDetails
+                                bookingDetails : propertyDetails,
+                                message : true,
+                                host_name : sess.host_name
                             }) // render ends
                         } // inner if ends
                     } // outer if ends
