@@ -92,6 +92,50 @@ class BookProperty{
             console.log(err);
         })
     }
+
+    static trysomethingNew(host_property_id){
+        let db = getDb();
+        return db.collection("bookings").aggregate([
+            { $project: {
+                host_id: {$toObjectId: host_property_id}
+            }},
+
+            { $lookup: {
+              from: "hostProperty",
+              localField: "host_id",
+              foreignField: "_id",
+              as: "country"
+            }}
+          ])
+    .toArray().then(result =>{
+        
+            //console.log(result)
+            return result;
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
+
+
+    static fetchPropertiesFromhostProperty(host_property_id){
+
+        let db = getDb();
+        return db.collection('bookings').find({host_property_id : host_property_id}).toArray().then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+
+    }
+
+    static fetchUserCredentialsFromUserId(user_id){
+        let db = getDb();
+        return db.collection("user").findOne({_id : new MongoDb.ObjectID(user_id)}).then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = BookProperty;
