@@ -201,7 +201,7 @@ exports.postEditRental = (req, res, next) =>{
             Bookings.fetchPropertyFromHostProperty(req.body.hostProperty_id).then(property =>{
                 console.log(property);
                 res.render('reg-hosts/edit-rental1',{
-                    host_name : sess.host_name,
+                host_name : sess.host_name,
                 hostProperty : property
                 })
             }).catch(err =>{
@@ -232,6 +232,20 @@ exports.postRentalDetails = (req, res, next) => {
         // this hostPropertyDetails will contaon the detalils for the host property
         Bookings.fetchPropertiesFromhostProperty(host_property_id).then(propertyDetailsfromBookings =>{
             let aux_array = [];
+            if(propertyDetailsfromBookings.length === 0){
+                res.render('reg-hosts/rental-details',{
+                    hostPropertyDetails : hostpropertyDetails ,
+                    userDetails : [],
+                    bookingDetails : [],
+                    message : false,
+                    chk_in_date : hostpropertyDetails.chk_in_date,
+                    chk_out_date : hostpropertyDetails.chk_in_date,
+                    host_name : sess.host_name
+                }) // render ends
+            }
+            else{
+
+            
             propertyDetailsfromBookings.forEach(element =>{
 
                 Bookings.fetchUserCredentialsFromUserId(element.user_id).then(result =>{
@@ -246,6 +260,8 @@ exports.postRentalDetails = (req, res, next) => {
                                 userDetails : aux_array,
                                 bookingDetails : propertyDetailsfromBookings,
                                 message : false,
+                                chk_in_date : hostpropertyDetails.chk_in_date,
+                                chk_out_date : hostpropertyDetails.chk_out_date,
                                 host_name : sess.host_name
                             }) // render ends
                         } // inner if ends
@@ -256,6 +272,7 @@ exports.postRentalDetails = (req, res, next) => {
                 }) // Bookings.fetchUserCredentialsFromUserId ends 
 
             }) // forEach ends here
+        } // else ends 
         }).catch(err =>{
             console.log(err)
         }) // Bookings.fetchPropertiesFromhostPropertypromise ends 
@@ -305,6 +322,8 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
                                 userDetails : aux_array,
                                 bookingDetails : propertyDetails,
                                 message : true,
+                                chk_in_date : chk_in_date,
+                                chk_out_date : chk_out_date,
                                 host_name : sess.host_name
                             }) // render ends
                         } // inner if ends
@@ -330,5 +349,5 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
 
 
 
- //    https://www.airbnb.co.in/rooms/plus/22377418?location=Dallas%2C%20Texas%2C%20United%20States&adults=2&guests=1&s=mGqJ4LKE
+ 
 // add password recovery 
