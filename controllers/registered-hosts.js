@@ -345,6 +345,9 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
     
 }
 
+exports.displayHostDashboard = (req, res, next) =>{
+    res.send('host DashBoard');
+}
 
 
 

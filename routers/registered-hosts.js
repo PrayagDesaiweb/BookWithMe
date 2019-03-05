@@ -12,5 +12,5 @@ router.post('/edit-rental',registeredHostsController.postEditRental);
 router.post('/delete-rental',registeredHostsController.postDeleteRental);
 router.post('/rental-details',registeredHostsController.postRentalDetails);
 router.post('/update-rental',registeredHostsController.postUpdatePropertyInformation);
-
+router.get('/host-dashboard',registeredHostsController.displayHostDashboard);
 module.exports = router;
