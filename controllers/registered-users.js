@@ -318,7 +318,8 @@ exports.getViewBookingsPage = (req, res, next) =>{
                         res.render('registered-users/view-booked-properties',{
                             a : aux_array,
                             b : currentlyBookedProperties,
-                            username : user_name
+                            username : user_name,
+                            message : false
                         })
                     }
                     
@@ -423,9 +424,61 @@ exports.postStoreRatings = (req, res, next) =>{
     const review = new Review(experience, feedback_of_property, feedback_about_host, rating, bookings_id, user_id, user_name,chk_in_date,chk_out_date, property_id );
     review.saveFeedback().then(result =>{
         console.log('success');
+        res.redirect('/view/bookings'); // go the user dashboard
     }).catch(err =>{
         console.log(err);
     })
 
+}
+
+exports.getUserDashBoard = (req, res, next) =>{
+    
+        let sess = req.session;
+        const user_name = sess.userCredentials.user_name;
+        const user_id = sess.userCredentials._id; // this is of type string
+        let aux_array = [];
+        Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
+            //console.log(currentlyBookedProperties);
+            
+            // fetch the information from hostPropertyid of every single element of the currnentlyBookedproperties 
+             currentlyBookedProperties.forEach( (element) =>{
+                //console.log(element);
+            Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    //console.log(ans)
+                    
+                    //console.log(aux_array)
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        //console.log(aux_array.length);
+                        //console.log('aux array is ' + aux_array);
+                        aux_array.push(ans);
+    
+                        if(aux_array.length == currentlyBookedProperties.length){
+                            console.log('aux array is ' + aux_array.length);
+                            console.log(aux_array);
+                            res.render('registered-users/view-booked-properties',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : true
+                            })
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }).catch(err =>{
+                    console.log(err);
+                })
+            })// foreach ends 
+    
+           
+    
+            
+    
+        }).catch(err =>{
+            console.log(err);
+        }); // outer promise over
+        
 }
 
