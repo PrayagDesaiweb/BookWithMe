@@ -94,13 +94,18 @@
                                 <div class="col-sm">
                                   <form action="/property-details" method ="POST">
                                   <input type="hidden" name="property_id" value="<%= a[i]._id%>">
+                                  
                                   <button type="submit" class="btn btn-info">View Property Details</button>
                                   </form>
                                 </div>
                                 <div class="col-sm">
-                                  <form action="/rate-property">
+                                  <form action="/rate-property" method="POST">
                                   <input type="hidden" value="<%= a[i]._id%>" name="property_id">
+                                  <input type="hidden" name="chk_in_date_from_booking" value="<%= b[i].check_in_date %>">
+                                  <input type="hidden" name="chk_out_date_from_booking" value="<%= b[i].check_out_date %>">
+                                  <input type="hidden" name="bookings_database_id" value="<%= b[i]._id %>">
                                   <button type="submit" class="btn btn-info">Rate this property</button>
+                                  
                                   </form>
                                 </div>
                                 

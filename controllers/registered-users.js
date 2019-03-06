@@ -1,5 +1,6 @@
 const ManageUser  = require('../models/ManageUser');
 const Bookings = require('../models/Bookings');
+const Review = require('../models/Review');
 
 exports.postSearchProperties = (req, res, next) => {
 
@@ -356,4 +357,52 @@ exports.postPropertyDetails = (req, res, next) =>{
     
 }
 
+
+exports.postRatings = (req, res, next) => {
+    let sess = req.session;
+    // User cannot give review on the property that he has not stayed in yet.
+    const user_name = sess.userCredentials.user_name;
+    const user_id = sess.userCredentials._id;
+    const property_id = req.body.property_id;
+    const chk_in_date_from_booking = req.body.chk_in_date_from_booking;
+    const chk_out_date_from_booking = req.body.chk_out_date_from_booking;
+    const bookings_database_id = req.body.bookings_database_id;
+
+    const today = new Date();
+    const check_in_date = new Date(chk_in_date_from_booking);
+    const check_out_date = new Date(chk_out_date_from_booking);
+
+    if(today < check_in_date){
+        // This will make sure that if you stayed in the property then and then you can rate and review the property else not.
+        res.render('registered-users/review',{
+            user_name : user_name,
+            user_id : user_id,
+            property_id : property_id,
+            isEligible : false,
+            message : "It seems that you are trying to book the property that you have not still stayed. This is not allowed. Once you have a nice and comfortable stay in this property, you can automatically then be able to have reviews and suggestions"
+             
+        });
+    }// if ends
+
+    else{
+        res.render('registered-users/review',{
+            user_name : user_name,
+            user_id : user_id,
+            property_id : property_id,
+            isEligible : true,
+            
+        });
+    }
+   /* res.render('registered-users/review',{
+        user_name : user_name,
+        user_id : user_id,
+        property_id : property_id,
+         
+    });
+    */
+}
+
+exports.postStoreRatings = (req, res, next) =>{
+    res.send(req.body);
+}
 

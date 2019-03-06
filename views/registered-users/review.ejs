@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                
+                <a class="navbar-brand" href="/">BookWithMe</a>
+                <div class='container'>
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="manage-credentials">Manage your Credentials
+                            <span class="sr-only">(current)</span>
+                          </a>
+                        </li>
+
+                        
+
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Manage Bookings
+                          <span class="sr-only">(current)</span>
+                        </a>
+                </li>
+
+                      
+                        
+                      </ul>
+                    </div>
+          
+        </nav>
+        <div class="jumbotron" align="center">
+                <h1 class="display-4">It's time for Feedback, <%= user_name %></h1>
+                <p class="lead">You can always help our hosts by giving honest feedback about your experiences</p>
+                <hr class="my-4">
+                <p>Give a detailed feedback about the property ans hosts. Describe your experience in brief and also provide our hosts insight on how they can help make your stay a memmorable one. Also this reviews will help fellow hosts to select properties on rent using your valuable reviews  </p>
+                <div class="alert alert-success" role="alert">
+                        We really appreciate your honest feedback and ratings!
+                      </div>
+                <p class="lead">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
+              </div>
+    <div class="container" align="center">
+
+
+        <% if (isEligible === true) { %>
+            <form action="/rental-reviews-compeleted" method="POST">
+
+
+                <div class="form-group">
+                        <label for="exampleInputPassword1">Describe your experience in brief </label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Feedback about your experience of this property" name="experience">
+                        <small id="emailHelp" class="form-text text-muted">Tell us about your experince about this property. </small>
+                      </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">General Feedback about the property </label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the feedback about host property" name="feedback_of_property">
+                      <small id="emailHelp" class="form-text text-muted">Giving us insight of how you feel about the property. Was the property good? If not also specify what you didn't like about property</small>
+                    </div>
+
+
+                   
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Feedback about the Host</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Feedback about the host of this property" name="feedback_about_host">
+                      <small id="emailHelp" class="form-text text-muted">Tell us about your experince with host of this property. </small>
+                    </div>
+
+                    
+                      
+                    </div>
+                    <div class="form-group" id="rating-ability-wrapper" align="center">
+                            <label class="control-label" for="rating">
+                            <span class="field-label-header">How would you overall rate your experience about the rental and the host combined ?</span><br>
+                            <span class="field-label-info"></span>
+                            <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+                            </label>
+                            <h2 class="bold rating-header" style="">
+                            <span class="selected-rating">0</span><small> / 5</small>
+                            </h2>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                        </div>  
+                </div>
+                <div class="form-group" align="center">
+                        <button type="submit" class="btn btn-primary">Submit your Ratings and Feedback</button>
+                </div>
+                    
+                </form>
+                <br>
+                <br>
+                <br>
+
+            
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <script>
+    
+    jQuery(document).ready(function($){
+	    
+        $(".btnrating").on('click',(function(e) {
+        
+        var previous_value = $("#selected_rating").val();
+        
+        var selected_value = $(this).attr("data-attr");
+        $("#selected_rating").val(selected_value);
+        
+        $(".selected-rating").empty();
+        $(".selected-rating").html(selected_value);
+        
+        for (i = 1; i <= selected_value; ++i) {
+        $("#rating-star-"+i).toggleClass('btn-warning');
+        $("#rating-star-"+i).toggleClass('btn-default');
+        }
+        
+        for (ix = 1; ix <= previous_value; ++ix) {
+        $("#rating-star-"+ix).toggleClass('btn-warning');
+        $("#rating-star-"+ix).toggleClass('btn-default');
+        }
+        
+        }));
+        
+            
+    });
+    </script>
+
+    <% }  else { %>
+        <div class="container">
+                <div class="alert alert-danger" role="alert">
+                        <%= message %>
+                        <br>
+                        <br>
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Go to User Dashboard</a>
+                </div>
+        </div>
+        <% } %>
+</body>
+</html>
