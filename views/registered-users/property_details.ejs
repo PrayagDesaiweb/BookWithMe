@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                
+        <a class="navbar-brand" href="/">BookWithMe</a>
+        <div class='container'>
+        <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="manage-credentials">Manage your Credentials
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+
+                
+
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Manage Bookings
+                  <span class="sr-only">(current)</span>
+                </a>
+        </li>
+
+              
+                
+              </ul>
+            </div>
+  
+</nav>
+    
+
+
+              <nav class="navbar fixed-bottom navbar-dark bg-dark mt-5">
+                <div class='container' align='center'>
+                  <br>
+                    <p class="navbar-text display-5"> <strong>Rent/Night for <%=  hostPropertyDetails.property_name%> is <%= hostPropertyDetails.rate %> </strong></p>
+                </div>
+                  
+                </nav>
+
+
+               
+                      
+                      
+
+            
+
+
+              <div class="jumbotron">
+
+                  <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                            <h5 class="lead">Property Name </h5>
+                            <h1 class='display-3'><%= hostPropertyDetails. property_name %></h1> 
+                            
+                            <br>
+                            <br>
+                            <h5 class="lead">Property description </h5>
+                            <p><%= hostPropertyDetails.description %></p> 
+
+                            
+                        </div>
+                        <div class="col-sm">
+                            <img src="images/homeimage.jpg" class="img-fluid" alt="Responsive image">
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                
+              </div>
+              <br>
+              <div class='container'>
+                <div class='row'>
+                  <div class='col-sm'>
+                        <h5 class="lead">Property Specifications </h5>
+                   <p class='display-5'>
+                      <%= hostPropertyDetails.specifications %>
+                   </p> 
+                  </div>
+                  <div class='col-sm'> 
+                     
+                      <div class="card float-right border-0" style="width: 18rem;">
+                          
+                          <div class="card-body">
+                            <br>
+
+                             
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+<br>
+<br>
+              <div class='container-fluid'  align="center">
+                <h3 class='display-4'>
+                  Take a tour of this property
+                </h3>
+                <br>
+                this will contain images of the rentals in the form of cards with imgage top and its description
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+              <div class='jumbotron'>
+                <div class='container'>
+                  <div class='row'>
+                    <div class='col'>
+                        
+                        <% if (hostPropertyDetails.property_class === "bwm_plus") {%>
+                        <p class='h4'>BookWithMe Plus<p>
+                            <img src="images/plus.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                        <% } %>
+
+                        <% if (hostPropertyDetails.property_class === "boutique_rooms") {%>
+                          <p class='h4'>BookWithMe Boutique Rooms</p>
+
+                            <img src="images/boutique.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                          <% } %>
+
+                          <% if (hostPropertyDetails.property_class === "unique_homes") {%>
+                            <p class='h4'> BookWithMe Unique Homes</p>
+                            <img src="images/house.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                            <% } %>
+
+                            <% if (hostPropertyDetails.property_class === "entire_home") {%>
+                              <p class='h4'> BookWithMe Entire Homes</p>
+                              <img src="images/house.png" class="img-fluid" alt="Responsive image">
+                            <br>
+                            <br>
+                              <% } %>
+
+
+                    </div>
+                    <div>
+
+                    </div class='col'>
+                    fetch each information on classes of property from database
+                  </div>
+                </div>
+
+              </div>
+              <br>
+              <div class='container-fluid' align="center">
+                    <h5 class="lead">Property Aminities </h5>
+                  <h3 class='display-4'> Aminities </h3>
+                  <br>
+                  <p class='display-5'>
+                    <%= hostPropertyDetails.amenities%>
+                  </p>
+              </div>
+<br>
+
+      
+</div>
+<br>
+<div class='container-fluid' align="center">
+    <h3 class='display-4'> Directions </h3>
+</div>
+
+<div class='container-fluid'  align="center">
+    <h3 class='display-4'> Reviews </h3>
+</div>
+<div  align="center">
+    <br>
+    <h3 class='display-4'> Bookings </h3>
+    <p class='display-5'>
+        <br>
+            This property is available from <%= hostPropertyDetails.chk_in_date %> to <%= hostPropertyDetails.chk_out_date %> to the hosts to book
+    </p>
+
+</div>
+
+
+
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+
+              
+
+
+
+
+
+
+
+
+
+
+    
+    
+</body>
+</html>

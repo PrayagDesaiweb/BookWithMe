@@ -10,4 +10,5 @@ router.post('/explore-properties-by-city',RegisteredUsersController.postExploreP
 router.post('/book-property',RegisteredUsersController.postBookProperty);
 router.post('/book',RegisteredUsersController.postBookProperty2);
 router.get('/view/bookings',RegisteredUsersController.getViewBookingsPage);
+router.post('/property-details',RegisteredUsersController.postPropertyDetails);
 module.exports = router;

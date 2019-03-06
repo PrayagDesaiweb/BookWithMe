@@ -341,4 +341,19 @@ exports.getViewBookingsPage = (req, res, next) =>{
     
 }
 
+exports.postPropertyDetails = (req, res, next) =>{
+    const sess = req.session;
+    const user_name = sess.userCredentials.user_name;
+    const property_id = req.body.property_id;
+    Bookings.fetchPropertyDetailsFromhostProperty(property_id).then(hostPropertyDetails =>{
+        res.render('registered-users/property_details',{
+            hostPropertyDetails : hostPropertyDetails,
+            host_name : user_name
+        });
+    }).catch(err =>{
+        console.log(err);
+    }); // promise ends 
+    
+}
+
 
