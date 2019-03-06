@@ -418,7 +418,7 @@ exports.postStoreRatings = (req, res, next) =>{
     const user_id = req.body.bookings_id;
     const user_name = req.body.user_name;
     const chk_in_date = req.body.check_in_date;
-    const chk_out_date = req.body.chk_out_date;
+    const chk_out_date = req.body.check_out_date;
     const property_id = req.body.property_id;
     const review = new Review(experience, feedback_of_property, feedback_about_host, rating, bookings_id, user_id, user_name,chk_in_date,chk_out_date, property_id );
     review.saveFeedback().then(result =>{
