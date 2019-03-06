@@ -15,3 +15,4 @@ router.post('/rate-property',RegisteredUsersController.postRatings);
 router.post('/rental-reviews-compeleted',RegisteredUsersController.postStoreRatings);
 
 module.exports = router;
+    

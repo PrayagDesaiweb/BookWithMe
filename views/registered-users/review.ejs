@@ -78,7 +78,7 @@
                     </div>
 
                     
-                      
+                    
                     </div>
                     <div class="form-group" id="rating-ability-wrapper" align="center">
                             <label class="control-label" for="rating">
@@ -107,7 +107,14 @@
                         </div>  
                 </div>
                 <div class="form-group" align="center">
-                        <button type="submit" class="btn btn-primary">Submit your Ratings and Feedback</button>
+                    <input type="hidden" name="bookings_id" value="<%= bookings_id%>">
+                    <input type="hidden" name="user_id" value="<%= user_id%>">
+                    <input type="hidden" name="user_name" value="<%= user_name %>">
+                    <input type="hidden" name="property_id" value="<%=  property_id%>">
+                    <input type="hidden" name="check_in_date" value="<%= check_in_date%>">
+                    <input type="hidden" name="check_out_date" value="<%= check_in_date%>">
+                    <button type="submit" class="btn btn-primary">Submit your Ratings and Feedback</button>
+                    
                 </div>
                     
                 </form>
@@ -155,7 +162,7 @@
                         <%= message %>
                         <br>
                         <br>
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Go to User Dashboard</a>
+                        <a class="btn btn-primary btn-lg" href="/user-dashboard" role="button">Go to User Dashboard</a>
                 </div>
         </div>
         <% } %>

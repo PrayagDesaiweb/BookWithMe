@@ -379,6 +379,9 @@ exports.postRatings = (req, res, next) => {
             user_id : user_id,
             property_id : property_id,
             isEligible : false,
+            bookings_id : bookings_database_id,
+            check_in_date : check_in_date,
+            check_out_date : check_out_date,
             message : "It seems that you are trying to book the property that you have not still stayed. This is not allowed. Once you have a nice and comfortable stay in this property, you can automatically then be able to have reviews and suggestions"
              
         });
@@ -390,6 +393,9 @@ exports.postRatings = (req, res, next) => {
             user_id : user_id,
             property_id : property_id,
             isEligible : true,
+            bookings_id : bookings_database_id,
+            check_in_date : check_in_date,
+            check_out_date : check_out_date
             
         });
     }
@@ -403,6 +409,23 @@ exports.postRatings = (req, res, next) => {
 }
 
 exports.postStoreRatings = (req, res, next) =>{
-    res.send(req.body);
+
+    const experience = req.body.experience;
+    const feedback_of_property = req.body.feedback_of_property;
+    const feedback_about_host = req.body.feedback_about_host;
+    const rating = req.body.selected_rating;
+    const bookings_id = req.body.bookings_id;
+    const user_id = req.body.bookings_id;
+    const user_name = req.body.user_name;
+    const chk_in_date = req.body.check_in_date;
+    const chk_out_date = req.body.chk_out_date;
+    const property_id = req.body.property_id;
+    const review = new Review(experience, feedback_of_property, feedback_about_host, rating, bookings_id, user_id, user_name,chk_in_date,chk_out_date, property_id );
+    review.saveFeedback().then(result =>{
+        console.log('success');
+    }).catch(err =>{
+        console.log(err);
+    })
+
 }
 
