@@ -316,7 +316,8 @@ exports.getViewBookingsPage = (req, res, next) =>{
                         console.log(aux_array);
                         res.render('registered-users/view-booked-properties',{
                             a : aux_array,
-                            b : currentlyBookedProperties
+                            b : currentlyBookedProperties,
+                            username : user_name
                         })
                     }
                     

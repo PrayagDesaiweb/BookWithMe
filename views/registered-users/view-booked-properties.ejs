@@ -35,7 +35,7 @@
           
         </nav>
     <div class="jumbotron" align="center">
-        <h1 class="display-4">Hello,</h1>
+        <h1 class="display-4">Hello, <%= username %></h1>
         <p class="lead">View properties booked by you.</p>
         <hr class="my-4">
         <p>We have your currently booked properties and also maintain properties booked by you in near past.</p>
@@ -60,36 +60,65 @@
             <p class='lead display-4'>
                     Currently Booked Properties are 
             </p>
-            <p>
-              <%= a %>
-              <%= b %>
-            </p>
+            
             <br>
                     <br>
-                    <br>
+                    
             
         </div>
+        <%if (a.length === 0) { %>
+          <div class="container">
+            <p class="lead">
+              You have not booked any properties.
+            </p>
+          </div>
+            <% } else { %>
+
+              <% for(var i = 0; i < a.length; i++ ) { %>
+                <div class="card" align="center">
+                        <div class="card-header" id="id1">
+                          <p class="h3">
+                              <%= a[i].property_name%> 
+                          </p>
+                        </div>
+                        
+    
+    
+                        <div class="card-body">
+                          <h5 class="card-title"><%= a[i].property_name%> %></h5>
+                          <p class="card-text"><%= a[i].address%></p>
+                          <p class="lead"> You booked this property on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
+                          <div class="center">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm">
+                                  <form action="/property-details" method ="POST">
+                                  <input type="hidden" name="property_id" value="<%= a[i]._id%>">
+                                  <button type="submit" class="btn btn-info">View Property Details</button>
+                                  </form>
+                                </div>
+                                <div class="col-sm">
+                                  <form action="/rate-property">
+                                  <input type="hidden" value="<%= a[i]._id%>" name="property_id">
+                                  <button type="submit" class="btn btn-info">Rate this property</button>
+                                  </form>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+    
+                      
+        </div>
+        <br>
+        <br>
+        <%  } %>
+              
+              <% } %>
         
-            <div class="card">
-                    <div class="card-header" id="id1">
-                      <p>
-                          \  
-                      </p>
-                    </div>
-                    
-
-
-                    <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">See Property Details</a>
-                    </div>
-                  </div>
-
-                  
-    </div>
-    <br>
-    <br>
 
     <div class="collapse mb-5" id="collapse-btn-2">
             <div class="card">
