@@ -185,9 +185,35 @@
 <div class='container-fluid' align="center">
     <h3 class='display-4'> Directions </h3>
 </div>
+<div class='container-fluid' align="center">
+  <h3 class='display-4'> Reviews </h3>
+  <br>
+  <br>
+  <% if( property_review.length === 0) { %>
+    <div class="alert alert-info" role="alert" align="center">
+      There are no reviews for this property
+    </div>
+    <% } else { %>
+      <%for (var i = 0; i < property_review.length; i++ ) { %>
+      <blockquote class="blockquote">
+        <p><%= property_review[i].experience%>.
+          <%= property_review[i].feedback_of_property%>. 
+          <%= property_review[i].feedback_about_host%></p>.
+          <%= property_review[i].user_name%> rates this property <%= property_review[i].rating %> <cite title="Source Title">
+            
 
-<div class='container-fluid'  align="center">
-    <h3 class='display-4'> Reviews </h3>
+            <span class="fa fa-star" style="color:orange;"></span>
+        
+        <footer class="blockquote-footer">In this property between <%=property_review[i].chk_in_date %> and <%=property_review[i].chk_out_date%>
+          <br>
+          
+          
+          </cite>
+        </footer>
+      </blockquote>
+      <br>
+  <% } %>
+      <% } %>
 </div>
 <div  align="center">
     <br>

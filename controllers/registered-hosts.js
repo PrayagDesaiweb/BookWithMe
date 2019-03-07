@@ -2,6 +2,7 @@ const RegisterHost = require('../models/RegisterHost')
 const RegisterHostProperty = require('../models/RegisterHostProperty');
 const ManageHostProperty = require('../models/ManageHostProprty');
 const Bookings = require('../models/Bookings');
+const Review = require('../models/Review');
 
 exports.postCreateOneRental = (req, res, next) => {
     let sess = req.session;
@@ -231,17 +232,24 @@ exports.postRentalDetails = (req, res, next) => {
     Bookings.fetchPropertyDetailsFromhostProperty(host_property_id).then(hostpropertyDetails =>{
         // this hostPropertyDetails will contaon the detalils for the host property
         Bookings.fetchPropertiesFromhostProperty(host_property_id).then(propertyDetailsfromBookings =>{
+            
             let aux_array = [];
             if(propertyDetailsfromBookings.length === 0){
-                res.render('reg-hosts/rental-details',{
-                    hostPropertyDetails : hostpropertyDetails ,
-                    userDetails : [],
-                    bookingDetails : [],
-                    message : false,
-                    chk_in_date : hostpropertyDetails.chk_in_date,
-                    chk_out_date : hostpropertyDetails.chk_in_date,
-                    host_name : sess.host_name
-                }) // render ends
+                Review.fetchReviewsByHostPropertyId(host_property_id).then(review =>{
+                    res.render('reg-hosts/rental-details',{
+                        hostPropertyDetails : hostpropertyDetails ,
+                        userDetails : [],
+                        bookingDetails : [],
+                        message : false,
+                        chk_in_date : hostpropertyDetails.chk_in_date,
+                        chk_out_date : hostpropertyDetails.chk_in_date,
+                        host_name : sess.host_name,
+                        property_review : review
+                    }) // render ends
+                }).catch(err =>{
+                    console.log(err);
+                })
+                
             }
             else{
 
@@ -255,15 +263,21 @@ exports.postRentalDetails = (req, res, next) => {
     
                         if(aux_array.length === propertyDetailsfromBookings.length){
                             console.log(aux_array);
-                            res.render('reg-hosts/rental-details',{
-                                hostPropertyDetails : hostpropertyDetails ,
-                                userDetails : aux_array,
-                                bookingDetails : propertyDetailsfromBookings,
-                                message : false,
-                                chk_in_date : hostpropertyDetails.chk_in_date,
-                                chk_out_date : hostpropertyDetails.chk_out_date,
-                                host_name : sess.host_name
-                            }) // render ends
+                            Review.fetchReviewsByHostPropertyId(host_property_id).then(review =>{
+                                res.render('reg-hosts/rental-details',{
+                                    hostPropertyDetails : hostpropertyDetails ,
+                                    userDetails : aux_array,
+                                    bookingDetails : propertyDetailsfromBookings,
+                                    message : false,
+                                    chk_in_date : hostpropertyDetails.chk_in_date,
+                                    chk_out_date : hostpropertyDetails.chk_out_date,
+                                    host_name : sess.host_name,
+                                    property_review : review
+                                }) // render ends
+                            }).catch(err =>{
+                                console.log(err);
+                            })
+                            
                         } // inner if ends
                     } // outer if ends
                 })
