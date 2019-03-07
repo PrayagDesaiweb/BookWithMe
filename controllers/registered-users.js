@@ -184,13 +184,20 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 
 
                         //  Do not Fetch the property reviews from the review database if there are no bookings of that property. because if no one has booked this property, There are no reviews for that property
-                        
+                        // In place of first , do rendering deiifrentlr
+                        Review.fetchReviewsByHostPropertyId(property_id).then(reviews =>{
+                            console.log(reviews);
+                            res.render('registered-users/property-details-and-bookings',{
+                                property_details : hostProperty,
+                                property_review : reviews,
+                                 bookedProperties: [],
+                                 hostDetails : hostInformation                 
+                                }) // rendering ends
+                        }).catch(err =>{
+                            console.log(err);
+                        }) // Review.fetchReviewsByHostPropertyId promise ends 
                         //console.log(hostInformation); This will contain the information on the host document colllection.
-                        res.render('registered-users/property-details-and-bookings',{
-                            property_details : hostProperty,
-                             bookedProperties: [],
-                             hostDetails : hostInformation                 
-                            }) // rendering ends
+                        
                     }).catch(err =>{
                         console.log(err);
                     }) // promise 2 ends here
@@ -361,13 +368,19 @@ exports.postPropertyDetails = (req, res, next) =>{
     const user_name = sess.userCredentials.user_name;
     const property_id = req.body.property_id;
     Bookings.fetchPropertyDetailsFromhostProperty(property_id).then(hostPropertyDetails =>{
-        res.render('registered-users/property_details',{
-            hostPropertyDetails : hostPropertyDetails,
-            host_name : user_name
-        });
+        Review.fetchReviewsByHostPropertyId(property_id).then(review =>{
+            res.render('registered-users/property_details',{
+                hostPropertyDetails : hostPropertyDetails,
+                host_name : user_name,
+                property_review : review
+            });
+        }).catch(err =>{
+            console.log(err);
+        }) // promise over Review.fetchReviewsByHostPropertyId
     }).catch(err =>{
         console.log(err);
     }); // promise ends 
+ 
     
 }
 
@@ -494,4 +507,6 @@ exports.getUserDashBoard = (req, res, next) =>{
         }); // outer promise over
         
 }
+
+// mean ratings on the search page
 
