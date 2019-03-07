@@ -14,6 +14,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -149,7 +150,7 @@
               </div>
 <br>
 <br>
-              <div class='container-fluid'>
+              <div class='container-fluid' align="center">
                 <h3 class='display-4'>
                   Take a tour of this property
                 </h3>
@@ -207,7 +208,7 @@
 
               </div>
               <br>
-              <div class='container-fluid'>
+              <div class='container-fluid' align="center">
                   <h3 class='display-4'> Aminities </h3>
                   <br>
                   <p class='display-5'>
@@ -216,7 +217,7 @@
               </div>
 <br>
 
-<div class='container-fluid'>
+<div class='container-fluid' align="center">
     <h3 class='display-4'> Book this property </h3>
     <br>
 
@@ -325,14 +326,41 @@
       
 </div>
 <br>
-<div class='container-fluid'>
+<div class='container-fluid' align="center">
     <h3 class='display-4'> Directions </h3>
 </div>
 
-<div class='container-fluid'>
+<div class='container-fluid' align="center">
     <h3 class='display-4'> Reviews </h3>
+    <br>
+    <br>
+    <% if( property_review.length === 0) { %>
+      <div class="alert alert-info" role="alert" align="center">
+        There are no reviews for this property
+      </div>
+      <% } else { %>
+        <%for (var i = 0; i < property_review.length; i++ ) { %>
+        <blockquote class="blockquote">
+          <p><%= property_review[i].experience%>.
+            <%= property_review[i].feedback_of_property%>. 
+            <%= property_review[i].feedback_about_host%></p>.
+            <%= property_review[i].user_name%> rates this property <%= property_review[i].rating %> <cite title="Source Title"><%= property_review[i].user_name%>
+              
+
+              <span class="fa fa-star" style="color:orange;"></span>
+          
+          <footer class="blockquote-footer">In this property between <%=property_review[i].chk_in_date %> and <%=property_review[i].chk_out_date%>
+            <br>
+            
+            
+            </cite>
+          </footer>
+        </blockquote>
+        <br>
+    <% } %>
+        <% } %>
 </div>
-<div>
+<div align="center">
     <h3 class='display-4'> Meet your host </h3>
 
 </div>

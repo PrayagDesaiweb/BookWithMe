@@ -181,6 +181,10 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
 
                     // Now fetch the host details from the host collection as per as the host_id obtained from the result from hostProperty promise 
                     Bookings.fetchHostInformation(hostProperty.host_id).then(hostInformation =>{
+
+
+                        //  Do not Fetch the property reviews from the review database if there are no bookings of that property. because if no one has booked this property, There are no reviews for that property
+                        
                         //console.log(hostInformation); This will contain the information on the host document colllection.
                         res.render('registered-users/property-details-and-bookings',{
                             property_details : hostProperty,
@@ -222,11 +226,20 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
                     // Now fetch the host details from the host collection as per as the host_id obtained from the result from hostProperty promise 
                     Bookings.fetchHostInformation(hostProperty.host_id).then(hostInformation =>{
                         //console.log(hostInformation); This will contain the information on the host document colllection.
-                        res.render('registered-users/property-details-and-bookings',{
-                            property_details : hostProperty,
-                             bookedProperties: propertyBookedDatesArray,
-                             hostDetails : hostInformation                 
-                            }) // rendering ends
+
+                        // Fetch the property reviews from the database.
+                        Review.fetchReviewsByHostPropertyId(property_id).then(reviews =>{
+                            console.log(reviews);
+                            res.render('registered-users/property-details-and-bookings',{
+                                property_review : reviews,
+                                property_details : hostProperty,
+                                 bookedProperties: propertyBookedDatesArray,
+                                 hostDetails : hostInformation                 
+                                }) // rendering ends
+                        }).catch(err =>{
+                            console.log(err);
+                        }) // Review.fetchReviewsByHostPropertyId promise ends 
+                        
                     }).catch(err =>{
                         console.log(err);
                     }) // promise ends here

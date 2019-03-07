@@ -25,6 +25,16 @@ class Review{
             console.log(err);
         }) // promise ends
     }
+
+    static fetchReviewsByHostPropertyId(host_property_id){
+        let db = getDb();
+        return db.collection('feedback').find({property_id:host_property_id}).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = Review;
