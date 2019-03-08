@@ -33,7 +33,7 @@ class ManageHostProperty {
             address : address,
             property_class : property_class,
             rate : rate,
-            date_updated : date_updated
+            date_updated : date_updated,
 
         }}).then(result => {
            // console.log(result);
