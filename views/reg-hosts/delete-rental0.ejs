@@ -4,9 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
-    delete rental 0
+    <!-- This can also be made like a sidebar navigation just like mobile apps-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><strong>BookWithMe</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/host-dashboard">Host Dashboard</a>
+                          </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/update-credentials"> Manage your credentials <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/create-rentals">Create Rentals</a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="/removed-rentals">View your inactive Properties</a>
+                        </li>
+
+                          
+            </ul>
+            </div>
+
+            <div class="topnav-right">
+                    <a href="#">Logout  <%= host_name %></a>
+            </div>
+    </nav>
+    <div class="jumbotron" align="center">
+            <h1 class="display-4">Make your property Unavailable!</h1>
+            <p class="lead">This property is not booked by anyone. You can delete this property.</p>
+            <hr class="my-4">
+            <div class="container" align="center">
+                    <p>You can make this property unavailable. Once you make this prpoerty unavailable, No renter can see this property when he searches for the property. Although you made this property unavailable, you can make it available again from your Host DashBoard.</p>
+            </div>
+            
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+          </div>
+          <br>
+          <br>
+          <div class="container">
+                <div class="container">
+                        <div class="row">
+                          <div class="col-sm">
+                            <img src="/images/homeimage.jpg" alt="Image" height="500" width="500">
+                          </div>
+                          <div class="col-sm">
+                            
+                          </div>
+                          <div class="col-sm">
+                              <div class='container'>
+                                    <p class="jumbotron">
+                                            Your property <%= host_property_details.property_name
+                                            %> located at <%= host_property_details.address%>, <%= host_property_details.city%> <%= host_property_details.city%> which was made available from <%= host_property_details.chk_in_date%> to <%= host_property_details.chk_out_date%> will no longer be available to the renters once you delete this property. You can make this property active again from the host DashBoard.
+                                            <div align="center">
+                                                    <form action="/delete-this-rental" method="POST">
+                                                        <input type="hidden" value="<%= host_property_details._id%>" name="host_property_id">
+                                                        <button type="submit" class="btn btn-danger">Delete this property</button>
+                                                    </form>
+                                            </div>
+                                            
+                                    </p>
+                              </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+          </div>
+          <br>
+          <br>
+          <br>
+
 </body>
 </html>

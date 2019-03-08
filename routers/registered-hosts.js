@@ -13,4 +13,5 @@ router.post('/delete-rental',registeredHostsController.postDeleteRental);
 router.post('/rental-details',registeredHostsController.postRentalDetails);
 router.post('/update-rental',registeredHostsController.postUpdatePropertyInformation);
 router.get('/host-dashboard',registeredHostsController.displayHostDashboard);
+router.post('/delete-this-rental',registeredHostsController.postdeleteThisProperty);
 module.exports = router;

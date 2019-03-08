@@ -51,6 +51,7 @@ static fetchHostPropertyById(hostId){
             console.log(err);
         });
 }
-}
+
+
 
 module.exports = ManageHostProperty;

@@ -230,10 +230,17 @@ exports.postDeleteRental = (req, res, next) => {
 
     Bookings.fetchHostPropertyById(host_property_id).then(result =>{
         if(result.length === 0){
+            Bookings.fetchPropertyDetailsFromhostProperty(host_property_id)
+            .then(result1 =>{
+                res.render('reg-hosts/delete-rental0',{
+                    host_name : sess.host_name,
+                    host_property_details : result1
+                });
+            }).catch(err =>{
+                console.log(err);
+            })
             // there are no bookings of this property. Then render the page as this case follows
-            res.render('reg-hosts/delete-rental0',{
-                host_property_id : host_property_id
-            }); // rendering ends.
+             // rendering ends.
         }
         else{
             let aux_array = [];
@@ -428,6 +435,13 @@ exports.displayHostDashboard = (req, res, next) =>{
 
 }
 
+
+exports.postdeleteThisProperty = (req, res, next) =>{
+    let sess = req.session;
+    const host_property_id = req.body.host_property_id;
+    
+    
+}
 
 
 
