@@ -229,6 +229,9 @@ exports.postDeleteRental = (req, res, next) => {
     Bookings.fetchHostPropertyById(host_property_id).then(result =>{
         if(result.length === 0){
             // there are no bookings of this property. Then render the page as this case follows
+            res.render('reg-hosts/delete-rental0',{
+                host_property_id : host_property_id
+            }); // rendering ends.
         }
         else{
             let aux_array = [];
