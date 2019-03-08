@@ -25,7 +25,7 @@ exports.postCreateOneRental = (req, res, next) => {
 exports.postFetchfromCreatefirstRentals = (req, res, next) => {
 
     let sess = req.session;
-     
+
     
 
     const unique_host_name = sess.unique_host_name;
@@ -439,6 +439,11 @@ exports.displayHostDashboard = (req, res, next) =>{
 exports.postdeleteThisProperty = (req, res, next) =>{
     let sess = req.session;
     const host_property_id = req.body.host_property_id;
+    ManageHostProperty.changeStatusOfProperty(host_property_id).then(result =>{
+        res.redirect('/host-dashboard');
+    }).catch(err =>{
+        console.log(err);
+    })
     
     
 }

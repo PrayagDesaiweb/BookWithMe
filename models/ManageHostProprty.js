@@ -51,6 +51,16 @@ static fetchHostPropertyById(hostId){
             console.log(err);
         });
 }
+    static changeStatusOfProperty(host_property_id){
+        let db = getDb();
+        return db.collection('hostProperty').updateOne({_id : new mongoDb.ObjectID(host_property_id)} , { $set: { status : 'inactive' } })
+        .then(result =>{
+            console.log(result);
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+}
 
 
 
