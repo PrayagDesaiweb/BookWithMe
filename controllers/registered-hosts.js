@@ -221,9 +221,46 @@ exports.postEditRental = (req, res, next) =>{
 
 exports.postDeleteRental = (req, res, next) => {
     let sess = req.session;
-    console.log('session is ' + sess);
-    console.log('request body is + ' + req.body);
-    res.send('This is delete rental handler. Deleting rentals will be implemeted later this is on 30 jan 2019');
+    const host_property_id = req.body.hostProperty_id;
+    let current_date = new Date();
+    // priority p1 is to implement the bookings case for values of the fields for property_is_booked scenario. i.e for future booking if the host deletes the property then the user's bookings will also delete and the user will see the message that the property is been deleted by the host
+    // fetch the prpoerties from the bookings in which from the collection bookings the field property_is_booked is True. This shows that there are prperty based on the 
+
+    Bookings.fetchHostPropertyById(host_property_id).then(result =>{
+        if(result.length === 0){
+            // there are no bookings of this property. Then render the page as this case follows
+        }
+        else{
+            let aux_array = [];
+            result.forEach(element =>{
+                Bookings.fetchUserCredentialsFromUserId(element.user_id).then(result1 =>{
+                    if (aux_array.length < result.length){
+                        aux_array.push(result1);
+                        console.log(aux_array);
+    
+                        if(aux_array.length === result.length){
+                            console.log(aux_array);
+                            res.render('reg-hosts/delete-rental1',{
+                                host_name : sess.host_name,
+                                bookingDetails : result,
+                                userDetails : aux_array, 
+
+                            }) // render ends
+                            
+                            
+                        } // inner if ends
+                    } // outer if ends
+                }) 
+                .catch(err =>{
+                    console.log(err);
+                }) // Bookings.fetchUserCredentialsFromUserId ends 
+
+            }) // forEach ends
+        }
+    }).catch(err =>{
+        console.log(err);
+    }) // promise ends 
+   
 }
 
 exports.postRentalDetails = (req, res, next) => {

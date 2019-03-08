@@ -136,6 +136,17 @@ class BookProperty{
             console.log(err);
         })
     }
+
+    // this is for implementing for deletion of the rentals from the host
+    static fetchHostPropertyById(host_property_id){
+        let db = getDb();
+        return db.collection("bookings").find({host_property_id : host_property_id , property_is_booked : true}).toArray()
+        .then(result =>{
+            return result
+        }).catch(err =>{
+            console.log(err);
+        })
+    } // method ends here
 }
 
 module.exports = BookProperty;
