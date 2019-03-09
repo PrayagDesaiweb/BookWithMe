@@ -60,6 +60,16 @@ static fetchHostPropertyById(hostId){
             console.log(err);
         })
     }
+
+    static findPropertyByHostIdThatAreActive(hostId){
+        let db = getDb();
+        return db.collection('hostProperty').find({host_id : hostId, status : "active"}).toArray().then(result =>{
+
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        });
+    }
 }
 
 

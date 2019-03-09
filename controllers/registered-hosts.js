@@ -409,13 +409,14 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
 }
 
 exports.displayHostDashboard = (req, res, next) =>{
+    // this will only fetch the information for active value of the status field of the host Property collection
     let sess = req.session;
     
     RegisterHost.fetchIdByName(sess.unique_host_name).then(result =>{
                 
         sess.host_id = result._id;
 
-        ManageHostProperty.findPropertyByHostId(result._id.toString()).then(result1 =>{
+        ManageHostProperty.findPropertyByHostIdThatAreActive(result._id.toString()).then(result1 =>{
 
             console.log(result1);
              res.render('reg-hosts/manage-rentals', {
