@@ -318,47 +318,41 @@ exports.getViewBookingsPage = (req, res, next) =>{
     const user_id = sess.userCredentials._id; // this is of type string
     let aux_array = [];
     Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
-        //console.log(currentlyBookedProperties);
-        
-        // fetch the information from hostPropertyid of every single element of the currnentlyBookedproperties 
-         currentlyBookedProperties.forEach( (element) =>{
-            //console.log(element);
-        Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
-                //console.log(ans)
+        if(currentlyBookedProperties.length === 0){
+            // if there are no bookings of this user in the bookings table
+            res.render('registered-users/view-booked-properties',{
+                a : [],
+                b : [],
+                username : user_name,
+                message : false
+        }); // render ends here
+    } // if ends here
+        else {
+            currentlyBookedProperties.forEach( (element) =>{
+                Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        aux_array.push(element)
+                        if(aux_array.length === currentlyBookedProperties.length){
+                            console.log(aux_array);
+                            res.render('registered-users/view-booked-properties',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : false
+                            }) // render ends
+                        } // inner if ends
+                } // if ends
                 
-                //console.log(aux_array)
-                if(aux_array.length < currentlyBookedProperties.length){
-                    //console.log(aux_array.length);
-                    //console.log('aux array is ' + aux_array);
-                    aux_array.push(ans);
-
-                    if(aux_array.length == currentlyBookedProperties.length){
-                        console.log('aux array is ' + aux_array.length);
-                        console.log(aux_array);
-                        res.render('registered-users/view-booked-properties',{
-                            a : aux_array,
-                            b : currentlyBookedProperties,
-                            username : user_name,
-                            message : false
-                        })
-                    }
-                    
-                }
-                
-                
-                
-            }).catch(err =>{
-                console.log(err);
-            })
-        })// foreach ends 
-
-       
-
-        
+                }).catch(err =>{
+                    console.log(err);
+                }) //  Bookings.fetchPropertyDetailsFromhostProperty promise ends 
+            }) // forEach ends
+            
+        } // else ends here
 
     }).catch(err =>{
-        console.log(err);
-    }); // outer promise over
+        console.log('error in fetching host properties from bookings')
+    }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
     
     
 }
