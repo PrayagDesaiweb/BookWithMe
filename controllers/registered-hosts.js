@@ -449,6 +449,34 @@ exports.postdeleteThisProperty = (req, res, next) =>{
     
 }
 
+exports.getRemovedRentals = (req, res, next) =>{
+    let sess = req.session;
+    let user_name = sess.unique_host_name;
+    let host_id = sess.host_id;
+    ManageHostProperty.findPropertyByHostIdThatAreInactive(host_id).then(listofhostProperties =>{
+        //console.log(listofhostProperties)
+        res.render('reg-hosts/view-inactive-property',{
+            name : user_name,
+            removedProperties : listofhostProperties
+        }); // rendering over
+    }).catch(err =>{
+        console.log(err);
+    })
+    
+}
+
+exports.makePropertyActive = (req, res, next) =>{
+    let sess = req.session;
+    res.send(req.body)
+    let date1 = new Date();
+    todays_date = date1.toISOString().split('T')[0]
+    ManageHostProperty.updatePropertyStatus(result =>{
+        console.log(result)
+    }).catch(err =>{
+        console.log(err)
+    })
+}
+
 
 
  

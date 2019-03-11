@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- This can also be made like a sidebar navigation just like mobile apps-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><strong>BookWithMe</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/host-dashboard">Host Dashboard</a>
+                      </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/update-credentials"> Manage your credentials <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/create-rentals">Create Rentals</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/removed-rentals">View your inactive Properties</a>
+                    </li>
+
+                      
+        </ul>
+        </div>
+
+        <div class="topnav-right">
+                <a href="#">Logout  <%= name %></a>
+        </div>
+</nav>
+
+<div class="jumbotron" align="center">
+    <h1 class="display-4">Removed Rentals</h1>
+    <p class="lead">These are your inactive Rentals. You can again make this rentals available</p>
+    <hr class="my-4">
+    <p>You can make your rentals active by entering the make property available to and from dates.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+  </div>
+
+  <div class='container' align="center">
+    <% if( removedProperties.length === 0) { %>
+        You have not made any properties Unavailable.
+        <br>
+        <br>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Host DashBoard</a>
+    <% } else {%>
+
+            <% for(var i = 0 ; i < removedProperties.length ; i++ ) { %>
+                <div class="card">
+                    <div class="card-header">
+                      <%= i+1 %>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= removedProperties[i].property_name %></h5>
+                      <p class="card-text"><%= removedProperties[i].address%>, <%= removedProperties[i].city%>, <%= removedProperties[i].state%> </p>
+                      
+                      <form action="make-property-active" method="post">
+                          <input type="hidden" value="<%= removedProperties[i]._id %>" name="property_id">
+                          <button type="submit" class='btn btn-success'>Make this property active </button>
+                      </form>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+
+                <% } %>
+        <% } %>
+  </div>
+</body>
+</html>

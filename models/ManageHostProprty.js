@@ -70,6 +70,28 @@ static fetchHostPropertyById(hostId){
             console.log(err);
         });
     }
+
+    static findPropertyByHostIdThatAreInactive(hostId){
+        let db = getDb();
+        return db.collection('hostProperty').find({host_id : hostId, status : "inactive"}).toArray().then(result =>{
+
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        });
+    }
+
+    static updatePropertyStatus(host_property_id){
+        let db = getDb();
+        db.collection("hostProperty").updateOne({_id : new mongoDb.ObjectID(host_property_id)}, { $set: { status : 'inactive' } }  )
+        .then(result =>{
+            // status changed
+        }).catch(err =>{
+            console.log(err)
+        });
+    }
+
+    
 }
 
 
