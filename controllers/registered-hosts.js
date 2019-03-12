@@ -467,15 +467,51 @@ exports.getRemovedRentals = (req, res, next) =>{
 
 exports.makePropertyActive = (req, res, next) =>{
     let sess = req.session;
-    res.send(req.body)
+    const property_id = req.body.property_id;
     let date1 = new Date();
     todays_date = date1.toISOString().split('T')[0]
-    ManageHostProperty.updatePropertyStatus(result =>{
-        console.log(result)
+    ManageHostProperty.updatePropertyStatus(property_id)
+    .then(result =>{
+        //console.log(result);
+        ManageHostProperty.findProperty(property_id).then(property =>{
+            res.render('reg-hosts/edit-to-make-property-available',{
+                today : todays_date,
+                name : sess.unique_host_name,
+                hostProperty : property
+            }) // rendering ends here
+        }).catch(err =>{
+            console.log(err);
+        }) // ManageHostProperty.fetchHostPropertyById ends
+        
+    }).catch(err =>{
+        console.log(err);
+    }) //  ManageHostProperty.updatePropertyStatus promise ends
+}
+
+exports.updatePropertiesAfterMakingAvailable = (req, res, next) =>{
+    let sess = req.session;
+    const property_name = req.body.property_name;
+    const description = req.body.description;
+    const specifications = req.body.specifications;
+    const amenities = req.body.amenities;
+    const chk_in_date = req.body.date[0];
+    const chk_out_date = req.body.date[1];
+    const host_property_id = req.body.host_property_id;
+    const address = req.body.address;
+    const city = req.body.city;
+    const state = req.body.state;
+    const rate = req.body.rate;
+    const property_class= req.body.property_class;
+    const cancellation_scheme = req.body.cancellation_scheme;
+    const accomodation_strength = req.body.accomodation_strength;
+    const date_updated  = new Date();
+    ManageHostProperty.updatePropertyAfterEditingCredentials(date_updated,cancellation_scheme,accomodation_strength,amenities,property_name,description,specifications,chk_in_date,chk_out_date,host_property_id,city,state,address,property_class,rate)
+    .then(result1 =>{
+        res.send(result1)
     }).catch(err =>{
         console.log(err)
-    })
-}
+    });
+}  
 
 
 

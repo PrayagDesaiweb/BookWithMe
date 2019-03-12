@@ -6,7 +6,7 @@ router.post('/create-first-rental',registeredHostsController.postCreateOneRental
 router.post('/path-to-manage-rentals',registeredHostsController.postFetchfromCreatefirstRentals);
 router.get('/create-rentals',registeredHostsController.getCreateRental);
 router.post('/create-rental',registeredHostsController.postCreateRental);
-router.get('/update-credentials',registeredHostsController.getUpdateCredentials); // error here
+router.get('/update-credentials',registeredHostsController.getUpdateCredentials);
 router.post('/updated-credentials',registeredHostsController.updateCredentials);
 router.post('/edit-rental',registeredHostsController.postEditRental);
 router.post('/delete-rental',registeredHostsController.postDeleteRental);
@@ -16,4 +16,5 @@ router.get('/host-dashboard',registeredHostsController.displayHostDashboard);
 router.post('/delete-this-rental',registeredHostsController.postdeleteThisProperty);
 router.get('/removed-rentals',registeredHostsController.getRemovedRentals);
 router.post('/make-property-active',registeredHostsController.makePropertyActive);
+router.post('/update-rental-after-making-active',registeredHostsController.updatePropertiesAfterMakingAvailable);
 module.exports = router;

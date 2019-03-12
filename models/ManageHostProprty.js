@@ -45,7 +45,7 @@ class ManageHostProperty {
 
 static fetchHostPropertyById(hostId){
     let db = getDb();
-        return db.collection('hostProperty').find({_id : hostPropertyId}).then(result =>{
+        return db.collection('hostProperty').find({_id : hostId}).then(result =>{
             return result;
         }).catch(err =>{
             console.log(err);
@@ -83,14 +83,24 @@ static fetchHostPropertyById(hostId){
 
     static updatePropertyStatus(host_property_id){
         let db = getDb();
-        db.collection("hostProperty").updateOne({_id : new mongoDb.ObjectID(host_property_id)}, { $set: { status : 'inactive' } }  )
+        return db.collection("hostProperty").updateOne({_id : new mongoDb.ObjectID(host_property_id)}, { $set: { status : 'active' } }  )
         .then(result =>{
             // status changed
+            console.log(result)
         }).catch(err =>{
             console.log(err)
         });
     }
 
+    static findProperty(hostId){
+        let db = getDb();
+        return db.collection("hostProperty").findOne({_id : new mongoDb.ObjectID(hostId)})
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
     
 }
 

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+                 <!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/"><strong>BookWithMe</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/host-dashboard">Host Dashboard</a>
+                              </li>
+                            
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/update-credentials"> Manage your credentials <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/create-rentals">Create Rentals</a>
+                          </li>
+                          
+    
+                              
+                </ul>
+                </div>
+    
+                <div class="topnav-right">
+                        <a href="#">Logout  <%= name %></a>
+                </div>
+        </nav>
+
+        <div class="jumbotron" align="center">
+                <h1 class="display-4">Hi again, <%= name %>!</h1>
+                <p class="lead">Make this property active again.</p>
+                <hr class="my-4">
+                <p>  You already have made this property active to our users.You can change the property details. You can still change the details about out rentals. This changes will be reflected to the renters looking at your property</p>
+                <p class="lead">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Take me to Host Dashboard</a>
+                </p>
+              </div>
+              <br>
+              <div class="container" align='center'> 
+                <p class="display-4">
+                    Fill in details about property that you want to change
+                    <br>
+                    <p class='display-5'>
+                        Change the fields that you intend to change. Leave others as it is. The other fields with retain their original value 
+                    </p>
+                </p>
+                <br>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="container" align='center'>
+                  <form action="/update-rental-after-making-active" method="POST">
+                    
+                    <input type="hidden" value="<%= hostProperty._id %>" name="host_id">
+          
+                      <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="property_name" placeholder="Enter name of your property" name="property_name" value="<%= hostProperty.property_name%>">
+                              <small id="property_name_Help" class="form-text text-muted">Your property must be having a name.Enter the name of your property</small>
+                            </div>
+          
+                          <div class="form-group">
+                            <label for="exampleInputaddress1">Address</label>
+                            <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter address of your property" name="address" value="<%= hostProperty.address%>">
+                            <small id="addressHelp" class="form-text text-muted">Enter the address where your property is located</small>
+                          </div>
+          
+          
+          
+          
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col">
+                                      <div class="form-group">
+                                          <label for="exampleInputaddress12">City</label>
+                                          <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter city of where your proprrty is located" name="city" value="<%= hostProperty.city%>">
+                                          <small id="addressHelp" class="form-text text-muted">Enter the city name</small>
+                                        </div>
+          
+                                  </div>
+                                  <div class="col">
+          
+                                      <div class="form-group">
+                                          <label for="exampleInputaddress1">State </label>
+                                          <input type="text" class="form-control" id="exampleInputaddress1" aria-describedby="emailHelp" placeholder="Enter the state information" name="state" value="<%= hostProperty.state%>">
+                                          <small id="addressHelp" class="form-text text-muted">Enter the state where your property is located</small>
+                                        </div>
+          
+                                  </div>
+                                </div>
+          
+                          </div>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+                          
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Property description</label>
+                            <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="describe your property" name="description" value="<%= hostProperty.description%>">
+                            <small id="addressHelp" class="form-text text-muted">Describe your property in brief</small>
+                          </div>
+                          <br>
+                          <br>
+          
+                         
+          
+                          <div class="form-group">
+                              <label for="exampleInputPassword1">Property specifications</label>
+                              <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="Describe why your property is special" name="specifications" value="<%= hostProperty.specifications%>">
+                              <small id="addressHelp" class="form-text text-muted">Describe why your property is special to our customers</small>
+                            </div>
+                            <br>
+                            <br>
+          
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Amenities</label>
+                                <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="List the amenities included in your property" name="amenities" value="<%= hostProperty.amenities%>">
+                                <small id="addressHelp" class="form-text text-muted">What Amenities does your property have?</small>
+                              </div>
+                              <br>
+                              <br>
+          
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">Rate per Night of your property</label>
+                                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter the rate of the property. This rate is the daily price for booking this rental" name="rate" value="<%= hostProperty.rate%>">
+                                  <small id="addressHelp" class="form-text text-muted">Describe the rate per night for your property. Remember the reasonable your rate is, The more renters will be interested to book this property</small>
+                                </div>
+                                <br>
+                                <br>
+          
+          
+                                
+                          <div class="form-check">
+                              <label for="exampletypeofpropety">Select the type of property</label>
+                              <br>
+                              <br>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="property_class" id="inlineRadio1" value="entire_home">
+                              <label class="form-check-label" for="inlineRadio1">Entire Home</label>
+                            </div>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="property_class" id="inlineRadio2" value="bwm_plus">
+                              <label class="form-check-label" for="inlineRadio1">BookWithMe plus</label>
+                            </div>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="property_class" id="inlineRadio3" value="boutique_rooms">
+                              <label class="form-check-label" for="inlineRadio1">Boutique Rooms</label>
+                            </div>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="property_class" id="inlineRadio4" value="unique_homes">
+                              <label class="form-check-label" for="inlineRadio1">Unique Homes</label>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="form-check">
+                              <label for="exampletypeofpropety">Select the rental cancellation scheme </label>
+                              <br>
+                              <br>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cancellation_scheme" id="inlineRadio1" value="Free_cancelation">
+                                <label class="form-check-label" for="inlineRadio1">Free cancellation</label>
+                              </div>
+          
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cancellation_scheme" id="inlineRadio1" value="Paid_cancelation">
+                                <label class="form-check-label" for="inlineRadio1">Paid cancellation</label>
+                              </div>
+          
+                            
+                                        <br>
+                                        <br>
+                                        <br>
+          
+          
+              
+                                        
+                                              <div class="row">
+                                                <div class="col-sm">
+          
+          
+          
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="date">Rent your property from</label>
+                                                        <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text"/>
+                                                      </div>
+                                                  
+                                                                                     
+                                                </div>
+                                                <div class="col-sm">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="date">Rent your property to</label>
+                                                        <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text"/>
+                                                      </div>
+          
+                                                      
+                                              </div>
+          
+                                              <div class="col-sm">
+                                                <div class="form-group">
+                                                  <label for="name">Accomodation strength per rental</label>
+                                                  <input type="number" class="form-control" id="property_name" placehoder="accomodation strength" name="accomodation_strength" value="<%= hostProperty.accomodation_strength%>">
+                                                  <small id="property_name_Help" class="form-text text-muted">Enter the accomodation strength i.e how many people can be accomodated in your rental property</small>
+                                                </div>
+                              
+                                              </div>
+                                          </div>
+          
+          
+                                                <br>
+                          
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+<br>
+<br>
+<br>
+
+              </div>
+              <script>
+                  $(document).ready(function(){
+            
+                    var date_input = $('input[name="date"]') //our date input has the name "date"
+                    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                    var options={
+                      startDate: '<%= today%>',
+                      endDate : '',
+                      format: 'yyyy-mm-dd',
+                      container: container,
+                      todayHighlight: true,
+                      autoclose: true,
+                      datesDisabled: []
+                    };
+                    date_input.datepicker(options);
+                  })
+              </script> 
+</body>
+</html>
