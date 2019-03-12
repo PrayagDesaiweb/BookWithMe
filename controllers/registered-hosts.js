@@ -380,15 +380,20 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
     
                         if(aux_array.length === propertyDetails.length){
                             console.log(aux_array);
-                            res.render('reg-hosts/rental-details',{
-                                hostPropertyDetails : req.body,
-                                userDetails : aux_array,
-                                bookingDetails : propertyDetails,
-                                message : true,
-                                chk_in_date : chk_in_date,
-                                chk_out_date : chk_out_date,
-                                host_name : sess.host_name
-                            }) // render ends
+                            Review.fetchReviewsByHostPropertyId(host_property_id).then(property_review =>{
+                                res.render('reg-hosts/rental-details',{
+                                    hostPropertyDetails : req.body,
+                                    userDetails : aux_array,
+                                    bookingDetails : propertyDetails,
+                                    message : true,
+                                    chk_in_date : chk_in_date,
+                                    chk_out_date : chk_out_date,
+                                    host_name : sess.host_name,
+                                    property_review : property_review
+
+                                }) // render ends
+                            })
+                            
                         } // inner if ends
                     } // outer if ends
                 })
@@ -522,16 +527,21 @@ exports.updatePropertiesAfterMakingAvailable = (req, res, next) =>{
                         console.log(aux_array);
     
                         if(aux_array.length === propertyDetails.length){
+                            Review.fetchReviewsByHostPropertyId(host_property_id).then(property_review =>{
+                                res.render('reg-hosts/rental-details',{
+                                    hostPropertyDetails : req.body,
+                                    userDetails : aux_array,
+                                    bookingDetails : propertyDetails,
+                                    message : true,
+                                    chk_in_date : chk_in_date,
+                                    chk_out_date : chk_out_date,
+                                    host_name : sess.host_name,
+                                    property_review : property_review
+
+                                }) // render ends
+                            })
                             console.log(aux_array);
-                            res.render('reg-hosts/rental-details',{
-                                hostPropertyDetails : req.body,
-                                userDetails : aux_array,
-                                bookingDetails : propertyDetails,
-                                message : true,
-                                chk_in_date : chk_in_date,
-                                chk_out_date : chk_out_date,
-                                host_name : sess.host_name
-                            }) // render ends
+                            
                         } // inner if ends
                     } // outer if ends
                 })
