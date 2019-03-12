@@ -490,6 +490,7 @@ exports.makePropertyActive = (req, res, next) =>{
 
 exports.updatePropertiesAfterMakingAvailable = (req, res, next) =>{
     let sess = req.session;
+    res.send(req.body)
     const property_name = req.body.property_name;
     const description = req.body.description;
     const specifications = req.body.specifications;
@@ -507,7 +508,7 @@ exports.updatePropertiesAfterMakingAvailable = (req, res, next) =>{
     const date_updated  = new Date();
     ManageHostProperty.updatePropertyAfterEditingCredentials(date_updated,cancellation_scheme,accomodation_strength,amenities,property_name,description,specifications,chk_in_date,chk_out_date,host_property_id,city,state,address,property_class,rate)
     .then(result1 =>{
-        res.send(result1)
+        console.log(result1)
     }).catch(err =>{
         console.log(err)
     });
