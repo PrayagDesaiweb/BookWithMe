@@ -15,4 +15,5 @@ router.post('/rate-property',RegisteredUsersController.postRatings);
 router.post('/rental-reviews-compeleted',RegisteredUsersController.postStoreRatings);
 router.get('/user-dashboard',RegisteredUsersController.getUserDashBoard);
 router.get('/book-properties-nav',RegisteredUsersController.getExploreAndBookProperties);
+router.get('/cancel-booking',RegisteredUsersController.getCancelProperty);
 module.exports = router;

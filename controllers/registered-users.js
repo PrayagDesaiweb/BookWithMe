@@ -518,5 +518,54 @@ exports.getExploreAndBookProperties = (req, res, next) =>{
             });
 }
 
+exports.getCancelProperty = (req, res, next) =>{
+    let sess = req.session;
+    // fetch the property booked properties pf this user.
+    const user_name = sess.userCredentials.user_name; // this is name and not the unique username of the user
+    const user_id = sess.userCredentials._id; // this is of type string
+    let aux_array = [];
+    Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
+        if(currentlyBookedProperties.length === 0){
+            // if there are no bookings of this user in the bookings table
+            res.render('registered-users/delete-booking',{
+                a : [],
+                b : [],
+                username : user_name,
+                message : false,
+                today : new Date()
+        }); // render ends here
+    } // if ends here
+        else {
+            currentlyBookedProperties.forEach( (element) =>{
+                Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        aux_array.push(element)
+                        if(aux_array.length === currentlyBookedProperties.length){
+                            console.log(aux_array);
+                            res.render('registered-users/delete-booking',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : false,
+                                today : new Date() // this is of the type object in ejs view
+                            }) // render ends
+                        } // inner if ends
+                } // if ends
+                
+                }).catch(err =>{
+                    console.log(err);
+                }) //  Bookings.fetchPropertyDetailsFromhostProperty promise ends 
+            }) // forEach ends
+            
+        } // else ends here
+
+    }).catch(err =>{
+        console.log('error in fetching host properties from bookings')
+    }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
+    
+
+    
+}
+
 // mean ratings on the search page
 

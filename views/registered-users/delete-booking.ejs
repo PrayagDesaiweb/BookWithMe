@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Delete Property</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                
+        <a class="navbar-brand" href="/">BookWithMe</a>
+        <div class='container'>
+        <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="manage-credentials">Manage your Credentials
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+
+                
+
+              <li class="nav-item active">
+                <a class="nav-link" href="/cancel-booking">Cancel Booking
+                  <span class="sr-only">(current)</span>
+                </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/book-properties-nav">Explore and Book Properties
+            <span class="sr-only">(current)</span>
+          </a>
+  </li>
+
+              
+                
+              </ul>
+            </div>
+
+  
+</nav>
+
+<div class="jumbotron" align="center">
+    <h1 class="display-4">Delete your booked property!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+  </div>
+
+  <% if (b.length === 0) { %>
+    <div class="container" align="center">
+            <div class="alert alert-danger" role="alert">
+                    You have currently no properties bookings!
+            </div>
+            <br>
+            <br>
+            <div class="container">
+                    <div class="row">
+                      <div class="col-sm">
+                            <p class="lead">
+                                    <a class="btn btn-primary btn-lg" href="#" role="button">Book and Explore Properties</a>
+                                  </p>
+                      </div>
+                                            
+                    </div>
+                  </div>
+
+    </div>
+    <% }  else { %>
+  <div align="center" class="container">
+      <% for (var i =0; i <  b.length  ; i++) { %>
+
+        <div class="card" align="center">
+                <div class="card-header" id="id1">
+                  <p class="h3">
+                      <%= a[i].property_name%> 
+                  </p>
+                </div>
+                
+
+
+                <div class="card-body">
+                  <h5 class="card-title"><%= a[i].property_name%></h5>
+                  <p class="card-text"><%= a[i].address%></p>
+                  <p class="display-5"> You booked this property located at <%= a[i].property_name%>  on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
+                  <div class="center">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                          <form action="/property-details" method ="POST">
+                          <input type="hidden" name="property_id" value="<%= a[i]._id%>">
+                          
+                          <button type="submit" class="btn btn-info">View Property Details</button>
+                          </form>
+                        </div>
+                        <div class="col-sm">
+                          <form action="/delete_property" method="POST">
+                          <input type="hidden" value="<%= a[i]._id%>" name="property_id">
+                          <input type="hidden" name="chk_in_date_from_booking" value="<%= b[i].check_in_date %>">
+                          <input type="hidden" name="chk_out_date_from_booking" value="<%= b[i].check_out_date %>">
+                          <input type="hidden" name="bookings_database_id" value="<%= b[i]._id %>">
+                          <button type="submit" class="btn btn-info">Rate this property</button>
+                          
+                          </form>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+
+              
+</div>
+<br>
+<br>
+    
+      <% } %>
+
+      <% } %>
+  </div>
+</body>
+</html>
