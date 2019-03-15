@@ -2,6 +2,15 @@ const ManageUser  = require('../models/ManageUser');
 const Bookings = require('../models/Bookings');
 const Review = require('../models/Review');
 
+/* 
+
+Session is 
+
+{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"userName":"prayagdesai","userCredentials":{"_id":"5c80e57cc9cc3e52a433ea74","user_name":"Prayag Desai","user_email":"prayagdesai777@gmail.com","user_password":"password","unique_user_name":"prayagdesai"}}
+
+
+*/
+
 exports.postSearchProperties = (req, res, next) => {
 
     // this is coming from request body
@@ -500,6 +509,13 @@ exports.getUserDashBoard = (req, res, next) =>{
             console.log(err);
         }); // outer promise over
         
+}
+
+exports.getExploreAndBookProperties = (req, res, next) =>{
+    let sess = req.session;
+    res.render('registered-users/startbookproperties',{
+                userName : sess.userCredentials.user_name
+            });
 }
 
 // mean ratings on the search page

@@ -14,4 +14,5 @@ router.post('/property-details',RegisteredUsersController.postPropertyDetails);
 router.post('/rate-property',RegisteredUsersController.postRatings);
 router.post('/rental-reviews-compeleted',RegisteredUsersController.postStoreRatings);
 router.get('/user-dashboard',RegisteredUsersController.getUserDashBoard);
+router.get('/book-properties-nav',RegisteredUsersController.getExploreAndBookProperties);
 module.exports = router;
