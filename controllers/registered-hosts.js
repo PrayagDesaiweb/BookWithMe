@@ -512,54 +512,11 @@ exports.updatePropertiesAfterMakingAvailable = (req, res, next) =>{
     const date_updated  = new Date();
     ManageHostProperty.updatePropertyAfterEditingCredentials(date_updated,cancellation_scheme,accomodation_strength,amenities,property_name,description,specifications,chk_in_date,chk_out_date,host_property_id,city,state,address,property_class,rate)
     .then(updateSuccessfull =>{
-        Bookings.fetchPropertiesFromhostProperty(host_property_id).then(propertyDetails =>{
-            console.log(propertyDetails)
-            // from propertyDetails, fetch the chk_in-date and chk_out_dates of the property and dates whrn the property is booked by the user
-            // from the userDetails fetch all the entries of the user Collection.
-            // hostPropertyDetails is the request's body. Which has the specificaitions of the host property. This is used for designing pages.
-            // fetch the perticular host property from bookings database. 
-            aux_array  = [];
-            // for each property in the bookings, each entry has user_id. So fetch the user credentials from the user_id
-            propertyDetails.forEach(element =>{
-                Bookings.fetchUserCredentialsFromUserId(element.user_id).then(result =>{
-                    if (aux_array.length < propertyDetails.length){
-                        aux_array.push(result);
-                        console.log(aux_array);
-    
-                        if(aux_array.length === propertyDetails.length){
-                            Review.fetchReviewsByHostPropertyId(host_property_id).then(property_review =>{
-                                res.render('reg-hosts/rental-details',{
-                                    hostPropertyDetails : req.body,
-                                    userDetails : aux_array,
-                                    bookingDetails : propertyDetails,
-                                    message : true,
-                                    chk_in_date : chk_in_date,
-                                    chk_out_date : chk_out_date,
-                                    host_name : sess.host_name,
-                                    property_review : property_review
-
-                                }) // render ends
-                            })
-                            console.log(aux_array);
-                            
-                        } // inner if ends
-                    } // outer if ends
-                })
-                .catch(err =>{
-                    console.log(err);
-                }) // Bookings.fetchUserCredentialsFromUserId ends 
-                
-                
-            }) // foreach ends            
-        }).catch(err =>{
-            console.log(err);
-        }); // Bookings.fetchPropertiesFromhostProperty promise ends 
+        res.redirect('/host-dashboard')
     }).catch(err =>{
         console.log(err)
-    });
-}  
-
-
+    })
+}
 
  
 // add password recovery
