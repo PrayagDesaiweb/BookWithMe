@@ -326,7 +326,7 @@ exports.getViewBookingsPage = (req, res, next) =>{
     const user_name = sess.userCredentials.user_name;
     const user_id = sess.userCredentials._id; // this is of type string
     let aux_array = [];
-    Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
+    Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
         if(currentlyBookedProperties.length === 0){
             // if there are no bookings of this user in the bookings table
             res.render('registered-users/view-booked-properties',{
@@ -340,8 +340,11 @@ exports.getViewBookingsPage = (req, res, next) =>{
             currentlyBookedProperties.forEach( (element) =>{
                 Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
                     if(aux_array.length < currentlyBookedProperties.length){
-                        aux_array.push(element)
+                        aux_array.push(ans)
                         if(aux_array.length === currentlyBookedProperties.length){
+                            //console.log('AUX ARRAY IS ')
+                            //console.log(aux_array);
+                            console.log('B IS ')
                             console.log(aux_array);
                             res.render('registered-users/view-booked-properties',{
                                 a : aux_array,
@@ -462,92 +465,35 @@ exports.postStoreRatings = (req, res, next) =>{
 
 exports.getUserDashBoard = (req, res, next) =>{
     
-        let sess = req.session;
-        const user_name = sess.userCredentials.user_name;
-        const user_id = sess.userCredentials._id; // this is of type string
-        let aux_array = [];
-        Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
-            //console.log(currentlyBookedProperties);
-            
-            // fetch the information from hostPropertyid of every single element of the currnentlyBookedproperties 
-             currentlyBookedProperties.forEach( (element) =>{
-                //console.log(element);
-            Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
-                    //console.log(ans)
-                    
-                    //console.log(aux_array)
-                    if(aux_array.length < currentlyBookedProperties.length){
-                        //console.log(aux_array.length);
-                        //console.log('aux array is ' + aux_array);
-                        aux_array.push(ans);
-    
-                        if(aux_array.length == currentlyBookedProperties.length){
-                            console.log('aux array is ' + aux_array.length);
-                            console.log(aux_array);
-                            res.render('registered-users/view-booked-properties',{
-                                a : aux_array,
-                                b : currentlyBookedProperties,
-                                username : user_name,
-                                message : true
-                            })
-                        }
-                        
-                    }
-                    
-                    
-                    
-                }).catch(err =>{
-                    console.log(err);
-                })
-            })// foreach ends 
-    
-           
-    
-            
-    
-        }).catch(err =>{
-            console.log(err);
-        }); // outer promise over
-        
-}
-
-exports.getExploreAndBookProperties = (req, res, next) =>{
     let sess = req.session;
-    res.render('registered-users/startbookproperties',{
-                userName : sess.userCredentials.user_name
-            });
-}
-
-exports.getCancelProperty = (req, res, next) =>{
-    let sess = req.session;
-    // fetch the property booked properties pf this user.
-    const user_name = sess.userCredentials.user_name; // this is name and not the unique username of the user
+    const user_name = sess.userCredentials.user_name;
     const user_id = sess.userCredentials._id; // this is of type string
     let aux_array = [];
-    Bookings.fetchCurrentlyBookedHostProperties(user_id).then(currentlyBookedProperties =>{
+    Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
         if(currentlyBookedProperties.length === 0){
             // if there are no bookings of this user in the bookings table
-            res.render('registered-users/delete-booking',{
+            res.render('registered-users/view-booked-properties',{
                 a : [],
                 b : [],
                 username : user_name,
-                message : false,
-                today : new Date()
+                message : false
         }); // render ends here
     } // if ends here
         else {
             currentlyBookedProperties.forEach( (element) =>{
                 Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
                     if(aux_array.length < currentlyBookedProperties.length){
-                        aux_array.push(element)
+                        aux_array.push(ans)
                         if(aux_array.length === currentlyBookedProperties.length){
+                            //console.log('AUX ARRAY IS ')
+                            //console.log(aux_array);
+                            console.log('B IS ')
                             console.log(aux_array);
-                            res.render('registered-users/delete-booking',{
+                            res.render('registered-users/view-booked-properties',{
                                 a : aux_array,
                                 b : currentlyBookedProperties,
                                 username : user_name,
-                                message : false,
-                                today : new Date() // this is of the type object in ejs view
+                                message : false
                             }) // render ends
                         } // inner if ends
                 } // if ends
@@ -563,8 +509,75 @@ exports.getCancelProperty = (req, res, next) =>{
         console.log('error in fetching host properties from bookings')
     }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
     
+    
+        
+        
+}
+
+exports.getExploreAndBookProperties = (req, res, next) =>{
+    let sess = req.session;
+    res.render('registered-users/startbookproperties',{
+                userName : sess.userCredentials.user_name
+            });
+}
+
+exports.getCancelProperty = (req, res, next) =>{
+    let sess = req.session;
+    const user_name = sess.userCredentials.user_name;
+    const user_id = sess.userCredentials._id; // this is of type string
+    let aux_array = [];
+    Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
+        if(currentlyBookedProperties.length === 0){
+            // if there are no bookings of this user in the bookings table
+            res.render('registered-users/delete-booking',{
+                a : [],
+                b : [],
+                username : user_name,
+                message : false
+        }); // render ends here
+    } // if ends here
+        else {
+            currentlyBookedProperties.forEach( (element) =>{
+                Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        aux_array.push(ans)
+                        if(aux_array.length === currentlyBookedProperties.length){
+                            //console.log('AUX ARRAY IS ')
+                            //console.log(aux_array);
+                            console.log('B IS ')
+                            console.log(aux_array);
+                            res.render('registered-users/delete-booking',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : false
+                            }) // render ends
+                        } // inner if ends
+                } // if ends
+                
+                }).catch(err =>{
+                    console.log(err);
+                }) //  Bookings.fetchPropertyDetailsFromhostProperty promise ends 
+            }) // forEach ends
+            
+        } // else ends here
+
+    }).catch(err =>{
+        console.log('error in fetching host properties from bookings')
+    }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
+    
+    
 
     
+}
+
+exports.postBookingDetails = (req, res, next) =>{
+    // booking details
+    res.send(req.body);
+}
+
+exports.postDeleteBookings = (req, res, next) =>{
+    res.send(req.body);
 }
 
 // mean ratings on the search page

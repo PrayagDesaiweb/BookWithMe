@@ -50,7 +50,7 @@ class BookProperty{
     
     }
 
-    static fetchCurrentlyBookedHostProperties(userId){
+    static fetchCurrentlyBookedUserProperties(userId){
         let db = getDb();
         return db.collection('bookings').find({user_id : userId, property_is_booked: true }).toArray()
         .then(result =>{
@@ -74,7 +74,8 @@ class BookProperty{
         let db = getDb();
         return db.collection('hostProperty').findOne({_id : new MongoDb.ObjectID(host_property_id)})
         .then(result =>{
-            //console.log(result);
+            console.log('frm the bookings class');
+            console.log(result);
             return result;
             
         }).catch(err =>{

@@ -85,27 +85,40 @@
 
                 <div class="card-body">
                   <h5 class="card-title"><%= a[i].property_name%></h5>
-                  <p class="card-text"><%= a[i].address%></p>
-                  <p class="display-5"> You booked this property located at <%= a[i].property_name%>  on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
+                  <p class="card-text"><%= a[i].address%>, <%= a[i].city%>, <%= a[i].state%></p>
+                  <p class="display-5"> You booked this property located at <%= a[i].address%>, <%= a[i].city%>, <%= a[i].state%>   on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
                   <div class="center">
                     <div class="container">
                       <div class="row">
                         <div class="col-sm">
                           <form action="/property-details" method ="POST">
                           <input type="hidden" name="property_id" value="<%= a[i]._id%>">
-                          
-                          <button type="submit" class="btn btn-info">View Property Details</button>
+                            <button type="submit" class="btn btn-info">View Property Details</button>
                           </form>
                         </div>
                         <div class="col-sm">
-                          <form action="/delete_property" method="POST">
+                          <form action="/delete_property" method="POST">    
                           <input type="hidden" value="<%= a[i]._id%>" name="property_id">
-                          <input type="hidden" name="chk_in_date_from_booking" value="<%= b[i].check_in_date %>">
                           <input type="hidden" name="chk_out_date_from_booking" value="<%= b[i].check_out_date %>">
                           <input type="hidden" name="bookings_database_id" value="<%= b[i]._id %>">
-                          <button type="submit" class="btn btn-info">Rate this property</button>
+                          <button type="submit" class="btn btn-danger">Delete this booking</button>
                           
                           </form>
+                        </div>
+
+                        <div class="col">
+                            <form action="/bookings-details" method="post">
+                                <input type="hidden" name="property_name" value="<%= a[i].property_name%>">
+                                <input type="hidden" name="available_from_property" value="<%= a[i].chk_in_date%>">
+                                <input type="hidden" name="available_to_property" value="<%= a[i].chk_out_date%>">
+                                <input type="hidden" name="address" value="<%= a[i].address%>">
+                                <input type="hidden" name="city" value="<%= a[i].city%>">
+                                <input type="hidden" name="state" value="<%= a[i].state%>">
+                                <input type="hidden" name="bookings_database_id" value="<%= b[i]._id%>">
+                                <input type="hidden" name="chk_out_date_from_booking" value="<%= b[i].check_out_date %>">
+                                <input type="hidden" name="chk_in_date_from_booking" value="<%= b[i].check_in_date %>">
+                                <button type="submit" class="btn btn-success">View Booking Details</button>
+                            </form>
                         </div>
                         
                       </div>
