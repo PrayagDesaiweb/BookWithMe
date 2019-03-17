@@ -95,9 +95,7 @@ exports.postAuthenticateUser = (req, res, next) => {
             sess.userCredentials = result;
             console.log(sess.userCredentials);
             //console.log(sess);
-            res.render('registered-users/startbookproperties',{
-                userName : sess.userCredentials.user_name
-            });
+            res.redirect('/user-dashboard');
         }).catch(err => {
             console.log(err);
         })
