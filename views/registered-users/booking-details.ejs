@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="/">BookWithMe</a>
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="manage-credentials">Manage your Credentials
+                                <span class="sr-only">(current)</span>
+                              </a>
+                            </li>
+  
+                            <li class="nav-item active">
+                                  <a class="nav-link" href="view/bookings">View your bookings
+                                    <span class="sr-only">(current)</span>
+                                  </a>
+                          </li>
+  
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/cancel-booking">Cancel Booking
+                              <span class="sr-only">(current)</span>
+                            </a>
+                    </li>
+
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/book-properties-nav">Explore and Book Properties
+                        <span class="sr-only">(current)</span>
+                      </a>
+              </li>
+
+  
+                          
+                            
+                          </ul>
+                </div>
+            </nav>
+            <div class="jumbotron" align="center">
+                    <h1 class="display-4"> Rental Booking Details</h1>
+                    <p class="lead">Booking details of your Rental.</p>
+                    <hr class="my-4">
+                    <p></p>
+                </div>
+
+                <div class="container" align="center">
+                    <p class="display-4">
+                        <%= property_name %>
+                        <br>
+                    
+                        <p class="lead">
+                            <%= address%>
+                            <br>
+                            <%= city%>, <%= state%>
+                            <br>
+                            <p>
+                              <h3 class="h4"> Rate per night of this rental is <%= rate%></h3>  
+                            </p>
+                            <br>
+                            <p class="lead"> 
+                                    This property is made available from <%=available_from_property %> to <%= available_to_property%>
+                                    <br>
+                                    You booked this property from <%=chk_in_date_from_booking %> to <%= chk_out_date_from_booking%> on <%=date_when_property_booked%> 
+                            </p>
+                        </p>
+                    </p>
+                </div>
+                <div class="container" align="center">
+                    <h4 class="h5">
+                        <strong>The transaction id for this booking is <%= bookings_database_id%></strong>
+                    </h4>
+                </div>
+                <br>
+                <div class="container" align="center">
+                        <div class="row">
+                          <div class="col-sm">
+                                <p class="lead">
+                                        <a class="btn btn-primary btn-lg" href="/user-dashboard" role="button">Navigate me to User DashBoard</a>
+                                      </p>
+                          </div>
+                          <div class="col-sm">
+                                <p class="lead">
+                                        <a class="btn btn-success btn-lg" href="/cancel-booking" role="button">Manage other Bookings</a>
+                                      </p>
+                          </div>
+                          
+                        </div>
+                      </div>
+                <br>
+                <br>
+</body>
+</html>
+
+            

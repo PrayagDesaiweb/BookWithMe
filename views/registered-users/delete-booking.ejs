@@ -114,9 +114,12 @@
                                 <input type="hidden" name="address" value="<%= a[i].address%>">
                                 <input type="hidden" name="city" value="<%= a[i].city%>">
                                 <input type="hidden" name="state" value="<%= a[i].state%>">
-                                <input type="hidden" name="bookings_database_id" value="<%= b[i]._id%>">
+                                <input type="hidden" name="bookings_database_id" value="<%= b[i]._id%>"
                                 <input type="hidden" name="chk_out_date_from_booking" value="<%= b[i].check_out_date %>">
                                 <input type="hidden" name="chk_in_date_from_booking" value="<%= b[i].check_in_date %>">
+                                <input type="hidden" value="<%=a[i].cancellation_scheme %>" name="cancellation_scheme">
+                                <input type="hidden" value="<%= a[i].rate%>" name="rate">
+                                <input type="hidden" value="<%= b[i].date_when_property_booked%>" name="date_when_property_booked">
                                 <button type="submit" class="btn btn-success">View Booking Details</button>
                             </form>
                         </div>

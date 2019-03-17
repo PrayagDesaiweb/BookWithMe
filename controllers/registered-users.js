@@ -573,7 +573,64 @@ exports.getCancelProperty = (req, res, next) =>{
 
 exports.postBookingDetails = (req, res, next) =>{
     // booking details
-    res.send(req.body);
+    let sess = req.session;
+    const property_name = req.body.property_name;
+    const available_from_property = req.body.available_from_property;
+    const available_to_property = req.body.available_to_property;
+    const address = req.body.address;
+    const city = req.body.city;
+    const state = req.body.state;
+    const bookings_database_id = req.body.bookings_database_id;
+    const chk_in_date_from_booking  = req.body.chk_out_date_from_booking;
+    const chk_out_date_from_booking = req.body.chk_in_date_from_booking;
+    const cancellation_scheme = req.body.cancellation_scheme;
+    const rate = req.body.rate;
+    const date_when_property_booked = req.body.date_when_property_booked;
+    
+    /* 
+    if(cancellation_scheme === "Free_cancelation")
+    {
+        res.render('registered-users/free-cancelation',{
+            property_name : property_name,
+            available_from_property : available_from_property,
+            address : address,
+            available_to_property : available_to_property,
+            city : city,
+            rate : rate,
+            state : state,
+            bookings_database_id : bookings_database_id,
+            chk_in_date_from_booking : chk_in_date_from_booking,
+            chk_out_date_from_booking : chk_out_date_from_booking
+        }) // render ends 
+    }
+    else{
+        res.render('registered-users/paid-cancelation',{
+            property_name : property_name,
+            available_from_property : available_from_property,
+            address : address,
+            rate : rate,
+            available_to_property : available_to_property,
+            city : city,
+            state : state,
+            bookings_database_id : bookings_database_id,
+            chk_in_date_from_booking : chk_in_date_from_booking,
+            chk_out_date_from_booking : chk_out_date_from_booking
+        })
+    } */
+    res.render('registered-users/booking-details',{
+            property_name : property_name,
+            available_from_property : available_from_property,
+            address : address,
+            rate : rate,
+            available_to_property : available_to_property,
+            city : city,
+            state : state,
+            bookings_database_id : bookings_database_id.toString(),
+            chk_in_date_from_booking : chk_in_date_from_booking,
+            chk_out_date_from_booking : chk_out_date_from_booking,
+            cancellation_scheme : cancellation_scheme,
+            date_when_property_booked : date_when_property_booked
+    });
 }
 
 exports.postDeleteBookings = (req, res, next) =>{
