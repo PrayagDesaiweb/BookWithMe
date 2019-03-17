@@ -46,17 +46,31 @@ exports.postbecomeUser = (req, res, next) => {
     const registeruser = new RegisterUser(
         
         user_name, user_email, user_password, unique_user_name)
-    registeruser.save().then(result => {
+    registeruser.save().then(result11 => {
+
+        let sess = req.session;
+        sess.userName = unique_user_name;
+        //console.log(sess)
+        const manageuser = new ManageUser(sess.userName);
+        manageuser.fetchUserIdByUserName(sess.userName)
+        .then(result =>{
+            
+            sess.userCredentials = result;
+            console.log(sess.userCredentials);
+            //console.log(sess);
+            res.render('registered-users/startbookproperties',{
+                userName : sess.userCredentials.user_name
+            });
+        }).catch(err => {
+            console.log(err);
+        })
         //console.log(result);
     }).catch(err =>{
         //console.log(err);
     });
 
     // fetching the userId from the user collection in which the credenatials are added
-
-    res.render('registered-users/welcome-registered-users',{
-        user_name : user_name
-    });
+    
 }
 
 exports.postAuthenticateUser = (req, res, next) => {

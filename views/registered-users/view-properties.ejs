@@ -58,21 +58,21 @@
                 </div>
                 <br>
 
-                  <div>
+                  <div align="center">
                     <p>
                         <h5 class='display-5'>
                             <%= properties.length %> properties found in <%= city%>, <%= state%>
                         </h5>
                     </p>
                     <br>
-                   
+                   <br>
                   </div>
 
                       <% if (properties.length > 0) { %>
 
                         <% for (let p of properties) {%>
                         
-                        <div class="card" style="width: 36rem;">
+                        <div class="card" style="width: 24rem;">
                                 <img class="card-img-top" src="images/homeimage.jpg" alt="Card image cap">
                                 <div class="card-body">
                                   <p class="card-text display-4"><%= p.property_name %> </p>
