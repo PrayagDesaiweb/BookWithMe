@@ -18,4 +18,5 @@ router.get('/book-properties-nav',RegisteredUsersController.getExploreAndBookPro
 router.get('/cancel-booking',RegisteredUsersController.getCancelProperty);
 router.post('/bookings-details',RegisteredUsersController.postBookingDetails);
 router.post('/delete_property',RegisteredUsersController.postDeleteBookings);
+
 module.exports = router;

@@ -4,9 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
-    Paid cancellation
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="/">BookWithMe</a>
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="manage-credentials">Manage your Credentials
+                                <span class="sr-only">(current)</span>
+                              </a>
+                            </li>
+  
+                            <li class="nav-item active">
+                                  <a class="nav-link" href="view/bookings">View your bookings
+                                    <span class="sr-only">(current)</span>
+                                  </a>
+                          </li>
+  
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/cancel-booking">Cancel Booking
+                              <span class="sr-only">(current)</span>
+                            </a>
+                    </li>
+
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/book-properties-nav">Explore and Book Properties
+                        <span class="sr-only">(current)</span>
+                      </a>
+              </li>
+
+  
+                          
+                            
+                          </ul>
+                </div>
+            </nav>
+            <div class="jumbotron" align="center">
+                    <h1 class="display-4"> Rental Booking Details</h1>
+                    <br>
+                    <p class="lead text-danger"><strong>Paid Cancellation.</strong></p>
+                    <hr class="my-4">
+                    <div align="center">
+                        <p align="center class="align-content-center>
+                            This property can be cancelled only on paying of cancellation fee. The standard Cancellation fee is 25% of the Ratr of the rental. Once you cancel this booking, you will no longer be able to stay in this property. You can still book this property again if it is available
+                        </p>
+                    </div>
+                    
+                </div>
+
+                <div class="container" align="center">
+                    <p class="display-4">
+                        <%= property_name %>
+                        <br>
+                    
+                        <p class="lead">
+                            <%= address%>
+                            <br>
+                            <%= city%>, <%= state%>
+                            <br>
+                            <p>
+                              <h3 class="h4"> Rate per night of this rental is <%= rate%></h3>  
+                            </p>
+                            <br>
+                            <p class="lead"> 
+                                    This property is made available from <%=available_from_property %> to <%= available_to_property%>
+                                    <br>
+                                    You booked this property from <%=chk_in_date_from_booking %> to <%= chk_out_date_from_booking%> on <%=date_when_property_booked%> 
+                            </p>
+                        </p>
+                    </p>
+                </div>
+                <div class="container" align="center">
+                    <h4 class="h5">
+                        <strong>The transaction id for this booking is <%= bookings_database_id%></strong>
+                    </h4>
+
+                    <h4 class="h5">
+                        <strong>The cancellation charge for this booking is <%= cancellation_charge%></strong>
+                    </h4>
+                </div>
+                <br>
+                <div class="container" align="center">
+                        <div class="row">
+                          <div class="col-sm">
+                                <p class="lead">
+                                        <a class="btn btn-primary btn-lg" href="/user-dashboard" role="button">Navigate me to User DashBoard</a>
+                                      </p>
+                          </div>
+                          <div class="col-sm">
+                                <p class="lead">
+                                        <a class="btn btn-success btn-lg" href="/cancel-booking" role="button">Manage other Bookings</a>
+                                      </p>
+                          </div>
+                          
+                        </div>
+                        <div class="col-sm">
+                            <br>
+                            <form action="/paid-cancellation" method="post">
+                            <input type="hidden" value="<%= bookings_database_id%>">
+                            <button class="btn btn-danger">Pay cancellation fees and Delete this Booking</button>
+                            </form>
+                        </div>
+                      </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                
 </body>
 </html>
+
+            
