@@ -30,7 +30,7 @@
                         
 
                       <li class="nav-item active">
-                        <a class="nav-link" href="/cancel-booking">Cancel Booking
+                        <a class="nav-link" href="/manage-booking">Manage Bookings
                           <span class="sr-only">(current)</span>
                         </a>
                 </li>
@@ -40,7 +40,11 @@
                     <span class="sr-only">(current)</span>
                   </a>
           </li>
-
+          <li class="nav-item active">
+              <a class="nav-link" href="/previous-bookings">Show My Previous Bookings
+                <span class="sr-only">(current)</span>
+              </a>
+      </li>
                       
                         
                       </ul>
@@ -97,7 +101,7 @@
                         <div class="card-body">
                           <h5 class="card-title"><%= a[i].property_name%> %></h5>
                           <p class="card-text"><%= a[i].address%></p>
-                          <p class="lead"> You booked this property on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
+                          <p class="display-5"> You booked this property on <%= b[i].date_when_property_booked %> from <%= b[i].check_in_date %> to <%= b[i].check_out_date %></p>
                           <div class="center">
                             <div class="container">
                               <div class="row">

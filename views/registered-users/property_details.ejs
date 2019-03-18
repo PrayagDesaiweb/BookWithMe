@@ -24,7 +24,7 @@
                 
 
               <li class="nav-item active">
-                <a class="nav-link" href="/cancel-booking">Cancel Booking
+                <a class="nav-link" href="/manage-booking">Manage Bookings
                   <span class="sr-only">(current)</span>
                 </a>
         </li>
@@ -41,6 +41,11 @@
       </a>
 </li>
 
+<li class="nav-item active">
+    <a class="nav-link" href="/previous-bookings">Show My Previous Bookings
+      <span class="sr-only">(current)</span>
+    </a>
+</li>
               
                 
               </ul>
@@ -185,10 +190,10 @@
       
 </div>
 <br>
-<div class='container-fluid' align="center">
+<div class='container' align="center">
     <h3 class='display-4'> Directions </h3>
 </div>
-<div class='container-fluid' align="center">
+<div class='container' align="center">
   <h3 class='display-4'> Reviews </h3>
   <br>
   <br>
@@ -198,7 +203,7 @@
     </div>
     <% } else { %>
       <%for (var i = 0; i < property_review.length; i++ ) { %>
-      <blockquote class="blockquote">
+      <blockquote class="blockquote" align="center">
         <p><%= property_review[i].experience%>.
           <%= property_review[i].feedback_of_property%>. 
           <%= property_review[i].feedback_about_host%></p>.

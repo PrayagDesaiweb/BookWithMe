@@ -15,10 +15,11 @@ router.post('/rate-property',RegisteredUsersController.postRatings);
 router.post('/rental-reviews-compeleted',RegisteredUsersController.postStoreRatings);
 router.get('/user-dashboard',RegisteredUsersController.getUserDashBoard);
 router.get('/book-properties-nav',RegisteredUsersController.getExploreAndBookProperties);
-router.get('/cancel-booking',RegisteredUsersController.getCancelProperty);
+router.get('/manage-booking',RegisteredUsersController.getCancelProperty);
 router.post('/bookings-details',RegisteredUsersController.postBookingDetails);
 router.post('/delete_property',RegisteredUsersController.postDeleteBookings);
 router.post('/free-cancellation',RegisteredUsersController.postFreeCancellation);
 router.post('/paid-cancellation',RegisteredUsersController.postPaidCancellation);
+router.get('/previous-bookings',RegisteredUsersController.getPreviousBookings);
 
 module.exports = router;

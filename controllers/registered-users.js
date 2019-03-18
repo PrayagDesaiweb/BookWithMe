@@ -766,5 +766,9 @@ exports.postPaidCancellation = (req, res, next) =>{
         console.log(err);
     })
 }
+
+exports.getPreviousBookings = (req, res, next) =>{
+    res.send('I am handled')
+} 
 // mean ratings on the search page
 
