@@ -148,6 +148,17 @@ class BookProperty{
             console.log(err);
         })
     } // method ends here
+
+    // this deletes the booking. Deleting booking means making property_is_booked to false
+    static deleteBooking(booking_id){
+        let db = getDb();
+        return db.collection('bookings').updateOne({_id : new MongoDb.ObjectID(booking_id)}, {$set : {property_is_booked : false}})
+        .then(result =>{
+            console.log(result)
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
 }
 
 module.exports = BookProperty;

@@ -653,7 +653,27 @@ exports.postDeleteBookings = (req, res, next) =>{
             cancellation_charge : cancellation_charge 
         })
     
+    }
 }
+
+exports.postFreeCancellation = (req, res, next) =>{
+    let sess = req.session;
+    const booking_id = req.body.booking_id
+    Bookings.deleteBooking(booking_id).then(result =>{
+        console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+}
+
+exports.postPaidCancellation = (req, res, next) =>{
+    let sess = req.session;
+    const booking_id = req.body.booking_id;
+    Bookings.deleteBooking(booking_id).then(result =>{
+        console.log(result);
+    }).catch(err =>{
+        console.log(err);
+    })
 }
 // mean ratings on the search page
 
