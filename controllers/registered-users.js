@@ -333,7 +333,8 @@ exports.getViewBookingsPage = (req, res, next) =>{
                 a : [],
                 b : [],
                 username : user_name,
-                message : false
+                message : false,
+                delete_message : false
         }); // render ends here
     } // if ends here
         else {
@@ -350,7 +351,8 @@ exports.getViewBookingsPage = (req, res, next) =>{
                                 a : aux_array,
                                 b : currentlyBookedProperties,
                                 username : user_name,
-                                message : false
+                                message : false,
+                                delete_message : false
                             }) // render ends
                         } // inner if ends
                 } // if ends
@@ -476,7 +478,8 @@ exports.getUserDashBoard = (req, res, next) =>{
                 a : [],
                 b : [],
                 username : user_name,
-                message : false
+                message : false,
+                delete_message : false
         }); // render ends here
     } // if ends here
         else {
@@ -493,7 +496,8 @@ exports.getUserDashBoard = (req, res, next) =>{
                                 a : aux_array,
                                 b : currentlyBookedProperties,
                                 username : user_name,
-                                message : false
+                                message : false,
+                                delete_message : false
                             }) // render ends
                         } // inner if ends
                 } // if ends
@@ -660,7 +664,50 @@ exports.postFreeCancellation = (req, res, next) =>{
     let sess = req.session;
     const booking_id = req.body.booking_id
     Bookings.deleteBooking(booking_id).then(result =>{
-        console.log(result);
+    const user_name = sess.userCredentials.user_name;
+    const user_id = sess.userCredentials._id; // this is of type string
+    let aux_array = [];
+    Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
+        if(currentlyBookedProperties.length === 0){
+            // if there are no bookings of this user in the bookings table
+            res.render('registered-users/view-booked-properties',{
+                a : [],
+                b : [],
+                username : user_name,
+                message : false,
+                delete_message : true
+        }); // render ends here
+    } // if ends here
+        else {
+            currentlyBookedProperties.forEach( (element) =>{
+                Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        aux_array.push(ans)
+                        if(aux_array.length === currentlyBookedProperties.length){
+                            //console.log('AUX ARRAY IS ')
+                            //console.log(aux_array);
+                            console.log('B IS ')
+                            console.log(aux_array);
+                            res.render('registered-users/view-booked-properties',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : false,
+                                delete_message : true
+                            }) // render ends
+                        } // inner if ends
+                } // if ends
+                
+                }).catch(err =>{
+                    console.log(err);
+                }) //  Bookings.fetchPropertyDetailsFromhostProperty promise ends 
+            }) // forEach ends
+            
+        } // else ends here
+
+    }).catch(err =>{
+        console.log('error in fetching host properties from bookings')
+    }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
     }).catch(err =>{
         console.log(err);
     })
@@ -670,7 +717,51 @@ exports.postPaidCancellation = (req, res, next) =>{
     let sess = req.session;
     const booking_id = req.body.booking_id;
     Bookings.deleteBooking(booking_id).then(result =>{
-        console.log(result);
+        let sess = req.session;
+    const user_name = sess.userCredentials.user_name;
+    const user_id = sess.userCredentials._id; // this is of type string
+    let aux_array = [];
+    Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
+        if(currentlyBookedProperties.length === 0){
+            // if there are no bookings of this user in the bookings table
+            res.render('registered-users/view-booked-properties',{
+                a : [],
+                b : [],
+                username : user_name,
+                message : false,
+                delete_message : true
+        }); // render ends here
+    } // if ends here
+        else {
+            currentlyBookedProperties.forEach( (element) =>{
+                Bookings.fetchPropertyDetailsFromhostProperty(element.host_property_id).then(ans =>{
+                    if(aux_array.length < currentlyBookedProperties.length){
+                        aux_array.push(ans)
+                        if(aux_array.length === currentlyBookedProperties.length){
+                            //console.log('AUX ARRAY IS ')
+                            //console.log(aux_array);
+                            console.log('B IS ')
+                            console.log(aux_array);
+                            res.render('registered-users/view-booked-properties',{
+                                a : aux_array,
+                                b : currentlyBookedProperties,
+                                username : user_name,
+                                message : false,
+                                delete_message : true
+                            }) // render ends
+                        } // inner if ends
+                } // if ends
+                
+                }).catch(err =>{
+                    console.log(err);
+                }) //  Bookings.fetchPropertyDetailsFromhostProperty promise ends 
+            }) // forEach ends
+            
+        } // else ends here
+
+    }).catch(err =>{
+        console.log('error in fetching host properties from bookings')
+    }) //  Bookings.fetchCurrentlyBookedHostProperties promise over
     }).catch(err =>{
         console.log(err);
     })
