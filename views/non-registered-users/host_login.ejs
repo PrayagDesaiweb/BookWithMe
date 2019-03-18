@@ -31,40 +31,55 @@
               </nav>
 
 
-    <div class="container" align="center">
-        <p class="display-3">Log in</p>
-        <p class="display-4">Host Log in for renting your properties with us</p>
-        <br>
-        <br>
-        <div align="center md-5">
-                <form method="POST" action="host-auth">
-                        <div class="form-group md-5">
-                          <label for="exampleInputEmail1"> Host user Name</label>
-                          <input type="text" class="form-control" id="exampleInputusername" aria-describedby="usernameHelp" placeholder="Enter your username" name="user_name">
-                          <small id="usernameHelp" class="form-text text-muted">Enter the username that you had used for registration</small>
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="user_password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-        </div>
-    </div>
-    <br>
+              <div class="jumbotron" align="center">
+                  <h1 class="display-4">Hello, Guest!</h1>
+                  <p class="lead"></p>
+                  <hr class="my-4">
+                  <p>Sign-in with BookWithMe to start renting your property on your convenience, Maintain existing properties and Accessing details about your current property on rent</p>
+                  <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more about Registered hosts </a>
+                  </p>
+                </div>
 
-    <div class="container" align='center'>
+    
+
+
+   <br>
+   
+    <div class="container" align="center">
         <%if (message) { %>
           <div class="alert alert-danger" role="alert">
               Invalid Credentials. Please enter your Credentials again
             </div>
-      <% } else { %>
-        <div>
+            <% } %>
+        <form class="form-signin" action="host-auth" method="POST">
+            <div class="text-center mb-4 container" align="center">
+              <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+              <h1 class="h3 mb-3 font-weight-normal">Host Login</h1>
+              <p>Keep properties on rent by Logging in First. <a href="become-certified-host">If you are not Registered Host, Click here to become one.</a></p>
+            </div>
+      
+            <div class="form-label-group container" align="center">
+              <input type="text" id="inputEmail" class="form-control" placeholder="Enter Username" required autofocus name="user_name">
+              <label for="inputEmail">Username</label>
+            </div>
+      
+            <div class="form-label-group container" align='center'>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="user_password">
+              <label for="inputPassword">Password</label>
+            </div>
+      
+          
+            </div>
+            <div class="container" align="center">
+                <button class="btn btn-primary" type="submit" align="center">Log in</button>
+            </div>
+            <br>
+            <br>
 
-        </div>
-        <% } %>
+            
+          </form>
     </div>
-
-
-   
+    
+  
 </html>
