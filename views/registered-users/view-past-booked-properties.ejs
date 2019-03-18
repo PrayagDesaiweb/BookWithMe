@@ -55,11 +55,11 @@
     <div class="jumbotron" align="center">
       
         <h1 class="display-4">Hello, <%= username %></h1>
-        <p class="lead">View properties booked by you.</p>
+        <p class="lead">View properties that were either booked by you or you cancelled the booking.</p>
         <hr class="my-4">
-        <p>We have your currently booked properties and also maintain properties booked by you in near past.</p>
+        <p></p>
         <p class="lead">
-          
+                <a class="btn btn-primary" href="/book-properties-nav" role="button">Book and Explore new Properties</a>
         </p>
       </div>    
 <br>
@@ -83,7 +83,10 @@
         <%if (a.length === 0) { %>
           <div class="container">
             <p class="lead">
-              You have not booked any properties.
+              You have not booked any properties in the past.
+              <br>
+              To Book and Explore new properties click here
+
             </p>
           </div>
             <% } else { %>
