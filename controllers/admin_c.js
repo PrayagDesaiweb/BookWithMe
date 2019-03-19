@@ -25,15 +25,32 @@ exports.postbecomeHost = (req,res,next) =>{
     })
 
     RegisterHost. fetchIdByName(sess.unique_host_name).then(hostId =>{
-        console.log(hostId);
+
+        // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_6SY2LcDXwkLcXil0lCEIFvXq005Xa3W26F");
+
+// Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+const token = req.body.stripeToken; // Using Express
+
+(async () => {
+  const charge = await stripe.charges.create({
+    amount: 7500,
+    currency: 'usd',
+    description: 'Example charge',
+    source: token,
+  });
+})(); // stripe payment gateway backend integration
         sess.host_id = hostId;
+        res.render('reg-hosts/host_reg_succ',{
+            name: name
+        });
     }).catch(err =>{
         console.log(err);
     })
 
-    res.render('reg-hosts/host_reg_succ',{
-        name: name
-    });
+    
 
 }
 

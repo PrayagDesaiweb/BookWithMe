@@ -26,10 +26,10 @@
           </div>
         </nav>
 
-        <div class="d-flex justify-content-center row-hl mt-5">
+        <div class="d-flex justify-content-center row-hl mt-5" align="center">
             <div class="p-4 item-hl">
                 <p class="display-5"> You are just a click away from registering yourself</p>
-                <p class="text-center font-weight-bold"> Register here</p>
+                <p class="text-center font-weight-bold"> Register here. There is a one time ₹1500 fee for registering as our certified host</p>
                 <div>
                         <form action="/registerhost" method="POST">
 
@@ -67,14 +67,26 @@
                                   </div>
 
                                   
-                                
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                    <script
+                                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                  data-key= "pk_test_lTBbKqJaAHjYeHSiPApsthZ4002LwGrb9h"
+                                  data-amount="7500"
+                                  data-name="Host Registration Payment"
+                                  data-description="We charge a one time fee of 75$ "
+                                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                  data-locale="auto">
+                                </script>
+                              
+                                  
+                               <!--  <button type="submit" class="btn btn-primary">Submit</button> -->
                               </form>
                 </div>
                 
             </div>
             
-                
+            <form action="your-server-side-code" method="POST">
+             
+            </form>
 
         </div>
 
