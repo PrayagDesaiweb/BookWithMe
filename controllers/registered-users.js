@@ -200,7 +200,8 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
                                 property_details : hostProperty,
                                 property_review : reviews,
                                  bookedProperties: [],
-                                 hostDetails : hostInformation                 
+                                 hostDetails : hostInformation,
+                                 amount : hostProperty.rate                 
                                 }) // rendering ends
                         }).catch(err =>{
                             console.log(err);
@@ -250,7 +251,8 @@ exports.postExplorePropertiesByCity = (req, res, next) => {
                                 property_review : reviews,
                                 property_details : hostProperty,
                                  bookedProperties: propertyBookedDatesArray,
-                                 hostDetails : hostInformation                 
+                                 hostDetails : hostInformation,
+                                 amount : hostProperty.rate * 100                 
                                 }) // rendering ends
                         }).catch(err =>{
                             console.log(err);
@@ -294,9 +296,13 @@ exports.postBookProperty2 =(req, res, next) =>{
     const property_name = req.body.property_name;
     const status = true;
     const host_name = req.body.host_name;
-
-    Bookings.bookProperty(check_in_date, check_out_date,host_id,host_property_id,status,date_when_property_booked, user_id)
-    .then(result =>{
+    const rate = req.body.rate;
+    
+    const date1 = new Date(check_in_date);
+    const date2 = new Date(check_out_date);
+    const total_no_of_days = ((date2-date1) / 86400000);
+    const booking_cost = (rate * total_no_of_days);
+    
 
         
         //console.log(result);
@@ -307,11 +313,11 @@ exports.postBookProperty2 =(req, res, next) =>{
             host_property_id : host_property_id,
             property_name : property_name,
             host_name : host_name,
-            host_id : host_id
-        })
-    }).catch(err =>{
-        console.log(err);
-    });
+            booking_cost : booking_cost,
+            total_no_of_days: total_no_of_days,
+            display_cost : booking_cost * 100
+        });
+    
 
     // display the page that leads you to the view/bookings page
 
@@ -817,6 +823,76 @@ exports.getPreviousBookings = (req, res, next) =>{
     
 
 } 
+
+exports.postBookProperty3 = (req, res, next) => {
+    
+    let sess = req.session;
+    // This will book the property
+    const user_id = sess.userCredentials._id; 
+    let date_when_property_booked = new Date();
+    const check_in_date = req.body.check_in_date;
+    const check_out_date = req.body.check_out_date;
+    const host_id = req.body.host_id;
+    console.log(host_id);
+    const host_property_id = req.body.host_property_id;
+   //console.log(host_property_id);
+    const property_name = req.body.property_name;
+    const status = true;
+    const host_name = req.body.host_name;
+    const rate = req.body.rate;
+    
+    const date1 = new Date(check_in_date);
+    const date2 = new Date(check_out_date);
+    const total_no_of_days = ((date2-date1) / 86400000);
+    const booking_cost = (rate * total_no_of_days);
+    console.log(typeof(booking_cost))
+    
+    Bookings.bookProperty(total_no_of_days,booking_cost,rate,check_in_date, check_out_date,host_id,host_property_id,status,date_when_property_booked, user_id)
+    .then(result =>{
+
+        // fetch the booking id from the Booking Database for this preticular booking
+        Bookings.fetchIdOfBooking(check_in_date, check_out_date).then(booking_id =>{
+             // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_6SY2LcDXwkLcXil0lCEIFvXq005Xa3W26F");
+
+// Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+const token = req.body.stripeToken; // Using Express
+
+(async () => {
+  const charge = await stripe.charges.create({
+    amount: booking_cost,
+    currency: 'usd',
+    description: 'Charge for booking Property',
+    source: token,
+  
+  });
+})();
+
+res.render('registered-users/booking-successfull1',{
+    check_in_date : check_in_date,
+    check_out_date: check_out_date,
+    host_id : req.body.host_id,
+    host_property_id : host_property_id,
+    property_name : property_name,
+    host_name : host_name,
+    booking_cost : booking_cost,
+    total_no_of_days: total_no_of_days,
+    display_cost : booking_cost * 100
+});
+        }).catch(err =>{
+            console.log(err);
+        }) // Bookings.fetchIdOfBooking promise ends here
+       
+        //console.log(result);
+        
+
+    }).catch(err =>{
+        console.log(err);
+    });
+    
+}
 // mean ratings on the search page
 
 

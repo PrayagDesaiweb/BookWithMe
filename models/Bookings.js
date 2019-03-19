@@ -7,9 +7,9 @@ class BookProperty{
 
     }
 
-    static bookProperty(check_in_date, check_out_date,host_id,host_property_id, status, date_when_property_booked, user_id){
+    static bookProperty(total_no_of_days,booking_cost,rate,check_in_date, check_out_date,host_id,host_property_id, status, date_when_property_booked, user_id){
         let db = getDb();
-        return db.collection('bookings').insertOne({check_in_date : check_in_date, check_out_date : check_out_date, host_id : host_id, host_property_id : host_property_id, property_is_booked : status, date_when_property_booked:date_when_property_booked, user_id : user_id})
+        return db.collection('bookings').insertOne({total_no_of_days:total_no_of_days,booking_cost:booking_cost,rate:rate,check_in_date : check_in_date, check_out_date : check_out_date, host_id : host_id, host_property_id : host_property_id, property_is_booked : status, date_when_property_booked:date_when_property_booked, user_id : user_id})
         .then(result =>{
             return result;
         }).catch(err =>{
@@ -155,6 +155,18 @@ class BookProperty{
         return db.collection('bookings').updateOne({_id : new MongoDb.ObjectID(booking_id)}, {$set : {property_is_booked : false}})
         .then(result =>{
             console.log(result)
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
+
+    static fetchIdOfBooking(check_in_date, check_out_date)
+    {
+        let db = getDb();
+        return db.collection('bookings').findOne({check_in_date:check_in_date , check_out_date:check_out_date})
+        .then(result =>{
+            console.log(result._id);
+            return result._id;
         }).catch(err =>{
             console.log(err)
         })

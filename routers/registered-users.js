@@ -21,5 +21,7 @@ router.post('/delete_property',RegisteredUsersController.postDeleteBookings);
 router.post('/free-cancellation',RegisteredUsersController.postFreeCancellation);
 router.post('/paid-cancellation',RegisteredUsersController.postPaidCancellation);
 router.get('/previous-bookings',RegisteredUsersController.getPreviousBookings);
+router.post('/book1',RegisteredUsersController.postBookProperty3);
+
 
 module.exports = router;

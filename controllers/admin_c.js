@@ -13,7 +13,7 @@ exports.postbecomeHost = (req,res,next) =>{
     sess.unique_host_name = req.body.unique_user_name;
     const unique_user_name = req.body.unique_user_name;
     const name = req.body.name;
-    const email = req.body.password;
+    const email = req.body.email;
     const password = req.body.password;
     const contactNo = req.body.contactNo;
     const something_about_me = req.body.something_about_me;
@@ -40,8 +40,16 @@ const token = req.body.stripeToken; // Using Express
     currency: 'usd',
     description: 'Example charge',
     source: token,
+    metadata : {Purpose : "One time Host Registration fee", Hostname : req.body.name}
   });
 })(); // stripe payment gateway backend integration
+
+     // emailing the receipt to the host after payment
+     // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+    // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+
         sess.host_id = hostId;
         res.render('reg-hosts/host_reg_succ',{
             name: name

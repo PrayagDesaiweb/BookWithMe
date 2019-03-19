@@ -55,15 +55,46 @@
             </div>
   
 </nav>
-    <div class="jumbotron">
-        <h1 class="display-4">Booking Successfull !!</h1>
-        <p class="lead">Your Booking for this property is Successfull </p>
+    <div class="jumbotron" align="center">
+        <h1 class="display-4">Confirm Booking</h1>
+        <p class="lead">Confirm booking and make Payment </p>
         <hr class="my-4">
-        <p>Booking of property <%= property_name %> is done from <%= check_in_date %> to <%=check_out_date %>. The property is hosted by <%= host_name %>. </p>
+        
         <br>
         <p class="lead" align="center">
           <a class="btn btn-primary btn-lg" href="http://localhost:3000/view/bookings" role="button">Click here to view properties you have booked</a>
         </p>
+      </div>
+      <div class="container" align="center">
+          <p class="display-5">Booking of property <%= property_name %> is done from <%= check_in_date %> to <%=check_out_date %>. Which is <%= total_no_of_days%>. <p>Booking of property <%= property_name %> is done from <%= check_in_date %> to <%=check_out_date %>. Which is <%= total_no_of_days%> The property is hosted by <%= host_name %>. </p>
+          <br>
+          <p class="lead">
+<strong><h5>The total cost for this booking is <%= booking_cost%></h5></strong>
+          </p>
+      </div>
+
+      <div class="container" align="center">
+        <form action="/book1" method="POST">
+        <input type="hidden" value="<%= check_in_date%>" name="check_in_date">
+        <input type="hidden" value="<%= check_out_date%>" name="check_out_date">
+        <input type="hidden" value="<%= host_id %>" name="host_id ">
+        <input type="hidden" value="<%= host_property_id%>" name="host_property_id">
+        <input type="hidden" value="<%= property_name%>" name="property_name">
+        <input type="hidden" value="<%= host_name%>" name="host_name">
+        <input type="hidden" value="<%= booking_cost%>" name="booking_cost">
+        <input type="hidden" value="<%=total_no_of_days %>" name="total_no_of_days">
+        <br>
+        <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_lTBbKqJaAHjYeHSiPApsthZ4002LwGrb9h"
+    data-amount=" <%=display_cost %>"
+    data-name="Make Payment"
+    data-description="Pay for booking <%= property_name%>"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto">
+  </script>
+        
+        </form>
       </div>
 </body>
 </html>

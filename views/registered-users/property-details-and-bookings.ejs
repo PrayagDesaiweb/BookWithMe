@@ -236,8 +236,9 @@
 <div class='container-fluid' align="center">
     <h3 class='display-4'> Book this property </h3>
     <br>
+<!--
 
-    <form action="/book" method="POST">
+  <form action="/book" method="POST">
     <div class='row'>
       <div class='col'>
           <div class="form-group">
@@ -272,12 +273,54 @@
     </div>
   </form>
 
- 
-  <div class="container" id="idis">
-      <div class="alert alert-danger" role="alert" align="center" id = "error">
-          
+
+-->
+<form action="/book" method="POST">
+
+  <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <div class="form-group">
+                <label class="control-label" for="date">Check-in-Date</label>
+                <input class="form-control" id="date" name="date" placeholder="Enter the check-in information in the form of yyyy-mm-dd" type="text" onchange="check_dates1()" />
+              </div>
         </div>
-  </div>
+        <div class="col-sm">
+            <div class="form-group">
+                <label class="control-label" for="date">Check-out-Date</label>
+                <input class="form-control" id="date1" name="date" placeholder="Enter the check-out information in the form of yyyy-mm-dd" type="text" onchange="check_dates1()"/>
+                <input type="hidden" name="rate" value="<%= property_details.rate%>">
+                <input type="hidden" name="host_property_id" value="<%= property_details._id %>">
+                <input type = "hidden" name="property_name" value = "<%= property_details. property_name %>" >
+                <input type="hidden" name="host_name" value="<%= hostDetails.name %>">
+                <input type="hidden" name="host_id" value=" <%= hostDetails._id %>">
+              </div>
+        </div>
+        <div class="col-sm">
+            <div class="form-group">
+          
+                <br>
+                
+                  <button class="btn btn-primary" type="submit" id = 'submit_button'>Book this property</button>
+                </div>
+        </div>
+      </div>
+      <div class="row">
+  
+      </div>
+      <div class="row">
+          <div class="container" id="idis">
+              <div class="alert alert-danger" role="alert" align="center" id = "error">
+                  
+                </div>
+          </div>
+      </div>
+    </div>
+  
+
+</form>
+ 
+  
 
   
    
