@@ -110,7 +110,7 @@
 
                             <form action="/paid-cancellation" method="post">
                             <input type="hidden" value="<%= bookings_database_id%>" name="booking_id">
-                            <input type="hidden" value="<%= cancellation_charge%>" value="cancellation_charge">
+                            <input type="hidden" value=" <%= cancellation_charge_display %>" value="cancellation_charge">
                             <div class="container" align="center">
                               <script
                               src="https://checkout.stripe.com/checkout.js" class="stripe-button"

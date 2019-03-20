@@ -742,10 +742,11 @@ const token = req.body.stripeToken; // Using Express
 
 (async () => {
   const charge = await stripe.charges.create({
-    amount: 999,
+    amount:  req.body.cancellation_charge,
     currency: 'usd',
-    description: 'Example charge',
+    description: 'Cancellation Charge',
     source: token,
+    metadata : {Booking_id_canceled : req.body.booking_id, User_who_canceled_this_property : sess.userCredentials.user_name}
   }) // charge ends
   Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
     if(currentlyBookedProperties.length === 0){
