@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
-    Hi
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">BookWithMe</a>
+            <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="manage-credentials">Manage your Credentials
+                        <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item active">
+                          <a class="nav-link" href="view/bookings">View your bookings
+                            <span class="sr-only">(current)</span>
+                          </a>
+                  </li>
+
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/manage-booking">Manage Bookings
+                      <span class="sr-only">(current)</span>
+                    </a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/previous-bookings">Show My Previous Bookings
+                  <span class="sr-only">(current)</span>
+                </a>
+        </li>
+                    
+                  </ul>
+        </div>
+    </nav>
+    <div class="jumbotron" align="center">
+        <h1 class="display-4">Booking Successfull!</h1>
+        <p class="lead">
+            <strong> <p class="active text-success"> PAYMENT OF $<%= booking_cost%> SUCCESSFULL</p></strong>
+        </p>
+        <hr class="my-4">
+        <div class="container" align="center">
+            <p>Booking of property <%= property_name%> is Booked from <%= check_in_date%> to <%= check_out_date%> for <%= total_no_of_days%> days.</p>
+            <p>Rate for single day is <%= rate%>. Total cost for booking this rental for <%=total_no_of_days%> days is <%= booking_cost%> </p>
+        <p>This property belongs to <%= host_name%></p>
+        </div>
+        
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="/user-dashboard" role="button">Navigate to User Dashboard</a>
+        </p>
+      </div>
 </body>
 </html>

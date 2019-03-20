@@ -869,7 +869,18 @@ const token = req.body.stripeToken; // Using Express
     metadata : {user_id:user_id,total_no_of_days:total_no_of_days,host_property_id:host_property_id,Booking_id : booking_id.toString(), check_in_date:check_in_date, check_out_date:check_out_date, }
     //metadata : {host_name:host_name,host_property_id : host_property_id,property_name:property_name, BookingId :booking_id.toString(), check_in_date : check_in_date, check_out_date:check_out_date }
   }) // charge ends here
-  res.render('registered-users/booking-successfull1')
+  res.render('registered-users/booking-successfull1',{
+    rate : rate,
+    booking_cost : req.body.booking_cost * 100,
+    date_when_property_booked : date_when_property_booked,
+    check_in_date : check_in_date,
+    check_out_date : check_out_date,
+    host_property_id : host_property_id,
+    property_name : property_name,
+    host_name : host_name,
+    total_no_of_days : total_no_of_days,
+    booking_id : booking_id
+  })
   
 })();
 
