@@ -107,9 +107,22 @@
                         </div>
                         <div class="col-sm">
                             <br>
+
                             <form action="/paid-cancellation" method="post">
                             <input type="hidden" value="<%= bookings_database_id%>" name="booking_id">
-                            <button class="btn btn-danger">Pay cancellation fees and Delete this Booking</button>
+                            <input type="hidden" value="<%= cancellation_charge%>" value="cancellation_charge">
+                            <div class="container" align="center">
+                              <script
+                              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_lTBbKqJaAHjYeHSiPApsthZ4002LwGrb9h"
+                            data-amount= "<%= cancellation_charge_display %>"
+                            data-name="Cancel Booking"
+                            data-description="Cancel this booking"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto">
+                          </script>
+                            </div>
+                            
                             </form>
                         </div>
                       </div>
