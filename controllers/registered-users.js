@@ -725,7 +725,7 @@ exports.postPaidCancellation = (req, res, next) =>{
     let sess = req.session;
     const booking_id = req.body.booking_id;
     console.log(booking_id);
-    const cancellation_charge = req.body.cancellation_charge;
+    const cancelation_charge = req.body.cancellation_charge;
     Bookings.deleteBooking(booking_id).then(result =>{
     const user_name = sess.userCredentials.user_name;
     const user_id = sess.userCredentials._id; // this is of type string
@@ -742,11 +742,11 @@ const token = req.body.stripeToken; // Using Express
 
 (async () => {
   const charge = await stripe.charges.create({
-    amount:  req.body.cancellation_charge,
+    amount:   req.body.cancellation_charge * 100,
     currency: 'usd',
     description: 'Cancellation Charge',
     source: token,
-    metadata : {Booking_id_canceled : req.body.booking_id, User_who_canceled_this_property : sess.userCredentials.user_name}
+    metadata : {Booking_id_canceled : req.body.booking_id.toString(), User_who_canceled_this_property : sess.userCredentials.user_name}
   }) // charge ends
   Bookings.fetchCurrentlyBookedUserProperties(user_id).then(currentlyBookedProperties =>{
     if(currentlyBookedProperties.length === 0){
