@@ -26,37 +26,14 @@ exports.postbecomeHost = (req,res,next) =>{
 
     RegisterHost. fetchIdByName(sess.unique_host_name).then(hostId =>{
 
-        // Set your secret key: remember to change this to your live secret key in production
-// See your keys here: https://dashboard.stripe.com/account/apikeys
-var stripe = require("stripe")("sk_test_6SY2LcDXwkLcXil0lCEIFvXq005Xa3W26F");
-
-// Token is created using Checkout or Elements!
-// Get the payment token ID submitted by the form:
-const token = req.body.stripeToken; // Using Express
-
-(async () => {
-  const charge = await stripe.charges.create({
-    amount: 7500,
-    currency: 'usd',
-    description: 'Example charge',
-    source: token,
-    metadata : {Purpose : "One time Host Registration fee", Hostname : req.body.name}
-  });
-})(); // stripe payment gateway backend integration
-
-     // emailing the receipt to the host after payment
-     // Set your secret key: remember to change this to your live secret key in production
-// See your keys here: https://dashboard.stripe.com/account/apikeys
-    // Set your secret key: remember to change this to your live secret key in production
-// See your keys here: https://dashboard.stripe.com/account/apikeys
-
+// metadata : {Purpose : "One time Host Registration fee", Hostname : req.body.name}
         sess.host_id = hostId;
         res.render('reg-hosts/host_reg_succ',{
             name: name
         });
     }).catch(err =>{
         console.log(err);
-    })
+    });
 
     
 
@@ -68,34 +45,70 @@ exports.postbecomeUser = (req, res, next) => {
     const user_name = req.body.user_name;
     const user_email = req.body.user_email;
     const user_password = req.body.user_password;
-    const registeruser = new RegisterUser(
-        
-        user_name, user_email, user_password, unique_user_name)
-    registeruser.save().then(result11 => {
-
-        let sess = req.session;
-        sess.userName = unique_user_name;
-        //console.log(sess)
-        const manageuser = new ManageUser(sess.userName);
-        manageuser.fetchUserIdByUserName(sess.userName)
-        .then(result =>{
-            
-            sess.userCredentials = result;
-            console.log(sess.userCredentials);
-            //console.log(sess);
-            res.render('registered-users/startbookproperties',{
-                userName : sess.userCredentials.user_name
+    UserAuthentication.checkIfUserNameIsUnique(unique_user_name)
+    .then(result =>{
+        if (result == "Duplicate"){
+            console.log(result);
+            // same username existes in database. Redirect the login page
+            res.render("non-registered-users/become-registered-user",{
+                duplicateMessage : true
             });
-        }).catch(err => {
-            console.log(err);
-        })
-        //console.log(result);
+        }
+
+        else{
+                // save the entry in the database
+                const registeruser = new RegisterUser(user_name, user_email, user_password, unique_user_name);
+                registeruser.save().then(result11 => {
+            
+                    let sess = req.session;
+                    sess.userName = unique_user_name;
+                    //console.log(sess)
+                    const manageuser = new ManageUser(sess.userName);
+                    manageuser.fetchUserIdByUserName(sess.userName)
+                    .then(result =>{
+                        
+                        sess.userCredentials = result;
+                        var stripe = require("stripe")("sk_test_6SY2LcDXwkLcXil0lCEIFvXq005Xa3W26F");
+
+                        // Token is created using Checkout or Elements!
+                        // Get the payment token ID submitted by the form:
+                        const token = req.body.stripeToken; // Using Express
+
+                        (async () => {
+                        const charge = await stripe.charges.create({
+                            amount: 4500,
+                            currency: 'usd',
+                            description: 'One time membership fee for Becoming Certified User',
+                            source: token,
+                            metadata : {userName : req.body.unique_user_name, Name : req.body.user_name}
+                        });
+                        })();
+        
+
+                        res.render('registered-users/startbookproperties',{
+                            userName : sess.userCredentials.user_name
+                        });
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    //console.log(result);
+                }).catch(err =>{
+                    //console.log(err);
+                });
+        }            
     }).catch(err =>{
-        //console.log(err);
-    });
+        console.log(err);
+    }) // RegisterUser.checkIfUserNameIsUnique promise ends here
+
+    /*
+
+    // See your keys here: https://dashboard.stripe.com/account/apikeys
+
+
+    
 
     // fetching the userId from the user collection in which the credenatials are added
-    
+    */
 }
 
 exports.postAuthenticateUser = (req, res, next) => {

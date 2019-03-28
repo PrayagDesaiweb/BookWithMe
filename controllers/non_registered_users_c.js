@@ -7,7 +7,9 @@ exports.getIndexPage = (req, res, next) =>{
 }
 
 exports.getbecomeHost = (req, res, next) => {
-    res.render('non-registered-users/become_certified_host');
+    res.render('non-registered-users/become_certified_host',{
+        duplicateMessage : false
+    });
 }
 
 exports.getbecomeUser = (req, res, next) => {

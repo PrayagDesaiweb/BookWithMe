@@ -26,6 +26,23 @@ class AuthenticateUser {
         });
         //console.log('function ended');
     }
+
+    static checkIfUserNameIsUnique(user_name){
+        let db = getDb();
+        return db.collection('user').findOne({unique_user_name : user_name})
+        .then(result =>{
+            
+            if(result === null){
+                return "Not-Duplicate"; // No usernaeme found of the same username in the database 
+                
+            }
+            else{
+                return "Duplicate"; // Found The same Username in the Database. Duplicate userName
+            }
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = AuthenticateUser;
