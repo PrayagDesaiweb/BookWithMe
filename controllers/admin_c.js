@@ -7,8 +7,9 @@ const ManageHostProperty = require('../models/ManageHostProprty');
 const RegisterHost = require('../models/RegisterHost');
 
 exports.postbecomeHost = (req,res,next) =>{
-
-    console.log(req.body)
+    
+    
+    
     let sess = req.session;
     sess.unique_host_name = req.body.unique_user_name;
     const unique_user_name = req.body.unique_user_name;
@@ -17,26 +18,58 @@ exports.postbecomeHost = (req,res,next) =>{
     const password = req.body.password;
     const contactNo = req.body.contactNo;
     const something_about_me = req.body.something_about_me;
-    const registered_host = new RegisterHost(name, email, password, contactNo, unique_user_name, something_about_me);
-    registered_host.save().then(result =>{
-       // console.log(result);
-    }).catch(err => {
-        //console.log(err)
-    })
+    HostAuthentication.checkHostNameUnique(unique_user_name).then(ans =>{
+        if(ans === "Duplicate"){
+            // duplicate present. Means that this username is not Unique.
+            res.render('non-registered-users/become_certified_host',{
+                duplicateMessage : true
+            });
+               
+            
+        }
 
-    RegisterHost. fetchIdByName(sess.unique_host_name).then(hostId =>{
+        else{
+            const registered_host = new RegisterHost(name, email, password, contactNo, unique_user_name, something_about_me);
+            registered_host.save().then(result =>{
+                RegisterHost. fetchIdByName(sess.unique_host_name).then(hostId =>{
+        
+                    var stripe = require("stripe")("sk_test_6SY2LcDXwkLcXil0lCEIFvXq005Xa3W26F");
 
-// metadata : {Purpose : "One time Host Registration fee", Hostname : req.body.name}
-        sess.host_id = hostId;
-        res.render('reg-hosts/host_reg_succ',{
-            name: name
-        });
-    }).catch(err =>{
-        console.log(err);
-    });
+// Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+const token = req.body.stripeToken; // Using Express
 
+(async () => {
+  const charge = await stripe.charges.create({
+    amount: 15000,
+    currency: 'usd',
+    description: 'Membership charge for being Registered Hosts',
+    source: token,
+    metadata:{description:"Membership charge for being Registered Hosts", Hostname : req.body.name, HostUserName : req.body.unique_user_name}
+  })
+
+  res.render('reg-hosts/host_reg_succ',{
+    name: name
+}); 
+
+})();
+                            sess.host_id = hostId;
+                         
+                        }).catch(err =>{
+                            console.log(err);
+                        }); // promise ends RegisterHost. fetchIdByName
+            }).catch(err => {
+                console.log(err)
+            }); // promise ends registered_host.save()
+        
+             } // else ends
+    
+            
     
 
+    }).catch(err =>{
+        console.log(err)
+    }) // HostAuthentication.checkHostNameUnique promise ends
 }
 
 exports.postbecomeUser = (req, res, next) => {

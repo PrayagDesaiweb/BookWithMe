@@ -22,6 +22,21 @@ class AuthenticateHost {
             //console.log(err);
         });
     }
+
+    static checkHostNameUnique(host_name){
+        let db = getDb();
+        return db.collection('host').findOne({unique_user_name : host_name})
+        .then(ans =>{
+            if(ans === null){
+                return "Not Duplicate";
+            }
+            else{
+                return "Duplicate";
+            }
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 }
 
 module.exports = AuthenticateHost;

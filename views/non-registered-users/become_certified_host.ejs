@@ -8,28 +8,44 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light mb-5" id="main-nav">
-          <div class="container">
-            <a class="navbar-brand font-weight-bold" href="/">BookWithMe</a>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#welcome">Welcome</a>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+                <strong>BookWithMe</strong>
+        </a>
+        <ul class="navbar-nav md-5">
+          <li class="nav-item">
+            <a class="nav-link navbar active" href="host-login">Host Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navbar active" href="user-login">User Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navbar active" href="become-registered-user">Become Registered User</a>
+          </li>
+          <li class="nav-item">
+                <a class="nav-link navbar active" href="#">Help</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#t&c">Terms & Conditions</a>
-              </li class="nav-item">
-            </ul>
-          </div>
-        </nav>
-
+        </ul>
+      
+      </nav>
+      <div class="jumbotron" align="center">
+          <h1 class="display-4">Hello, Guest!</h1>
+          <p class="lead">You are just a click away from registering yourself.</p>
+          <hr class="my-4">
+          <p>Register here. There is a one time $150 fee for registering as our certified host.</p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+          </p>
+        </div>
         <div class="d-flex justify-content-center row-hl mt-5" align="center">
             <div class="p-4 item-hl">
-                <p class="display-5"> You are just a click away from registering yourself</p>
-                <p class="text-center font-weight-bold"> Register here. There is a one time ₹1500 fee for registering as our certified host</p>
+                <p class="display-5">
+                  
+                <p class="text-center text-success display-5">
+                  <strong>Register Here. We only accept Credit Card Payments. </strong>
+                </p>
+                </p>
+                <p class="text-center font-weight-bold"> </p>
                 <div>
                         <form action="/registerhost" method="POST">
 
@@ -37,7 +53,15 @@
                               <label for="uniqueUsername">Userame</label>
                               <input type="text" class="form-control" id="unique_user_name" placeholder="Enter Name" name="unique_user_name">
                             </div>
-
+                            <% if(duplicateMessage === true) { %>
+                              <div align="center">
+                                <p class="text-danger">
+                                  <strong>This UserName is already taken by somebody else.</strong>
+                                  <br>
+                                  <strong>Payment and Registration Unsuccessfull</strong>
+                                </p>
+                              </div>
+                              <% } %>
 
                             <div class="form-group">
                                     <label for="name">Name</label>
@@ -70,7 +94,7 @@
                                     <script
                                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                   data-key= "pk_test_lTBbKqJaAHjYeHSiPApsthZ4002LwGrb9h"
-                                  data-amount="7500"
+                                  data-amount="150000"
                                   data-name="Host Registration Payment"
                                   data-description="We charge a one time fee of 75$ "
                                   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
