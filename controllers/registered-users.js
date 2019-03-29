@@ -952,7 +952,11 @@ exports.Bwmplus = (req, res, next) =>{
     const city = req.body.city
     const state = req.body.state;
     ManageHostProperty.getBWMPlusProperties(city, state).then(ans =>{
-
+        res.render('registered-users/view-properties-bwmplus',{
+            properties : ans,
+            city : city,
+            state : state
+        });
     }).catch(err =>{
 
     });
@@ -962,6 +966,11 @@ exports.EntireRooms = (req, res, next) =>{
     const city = req.body.city
     const state = req.body.state;
     ManageHostProperty.getBWMEntireHome(city, state).then(ans =>{
+        res.render('registered-users/view-properties-entireRooms',{
+            properties : ans,
+            city : city,
+            state : state
+        });
 
     }).catch(err =>{
 
@@ -972,7 +981,11 @@ exports.UniqueProperties = (req, res, next) =>{
     const city = req.body.city
     const state = req.body.state;
     ManageHostProperty.getUniqueHomes(city, state).then(ans =>{
-
+        res.render('registered-users/view-properties-unqproperty',{
+            properties : ans,
+            city : city,
+            state : state
+        });
     }).catch(err =>{
 
     });

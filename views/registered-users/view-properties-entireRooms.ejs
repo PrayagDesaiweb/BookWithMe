@@ -63,7 +63,7 @@
                           <nav aria-label="breadcrumb" align="center">
                             <ol class="breadcrumb">
                               <li class="breadcrumb-item"><p class="text-primary">Properties in <%= city%>, <%= state%></p></li>
-                              <li class="breadcrumb-item"><a href="boutuque-rooms-info">Boutique Rooms</a></li>
+                              <li class="breadcrumb-item"><a href="boutuque-rooms-info">BookWithMe Entire Home</a></li>
                             
                             </ol>
                           </nav>
@@ -71,7 +71,7 @@
                         <div align = "center">
         
                                 <h1 class="display-4">BookWithMe Boutique Rooms..</h1>
-                                <p class="lead">BookWithMe Boutique Rooms in <%= city%> , <%= state%></p>
+                                <p class="lead">BookWithMe Entire Home in <%= city%> , <%= state%></p>
                                 <hr class="my-4">
                                 <p>Click here for viewing your rented properties across the world</p>
                                 <p class="lead">
@@ -112,17 +112,17 @@
                                   </form>
                                 
                               </li>
-        
+                              <li class="nav-item-active">
+                                    <form action="/boutique-rooms" method="POST">
+                                      <input type="hidden" name="state" value="<%= state%>">
+                                      <input type="hidden" name="city" value="<%= city%>">
+                                      <button type="submit" class="btn">Show only Boutique rooms</button>
+                                    </form>
+                                  
+                                </li>
                               
         
-                              <li class="nav-item-active">
-                                  <form action="/entire-home" method="POST">
-                                    <input type="hidden" name="state" value="<%= state%>">
-                                    <input type="hidden" name="city" value="<%= city%>">
-                                    <button type="submit" class="btn">Show only BookWithMe Entire Home</button>
-                                  </form>
-                  
-                              </li>
+                              
         
                               <li class="nav-item-active">
                                   <form action="/unique-properties" method="POST">
@@ -141,7 +141,7 @@
                           <div align="center">
                             <p>
                                 <h5 class='display-5 text-primary'>
-                                    <%= properties.length %>  Boutique Rooms properties found in <%= city%>, <%= state%>
+                                    <%= properties.length %>  BookWithMe Entire Home found in <%= city%>, <%= state%>
                                 </h5>
                             </p>
                             <br>
@@ -198,7 +198,7 @@
                                       <br>
                                      <img src="images/cry.png" alt="">
                                      <br>
-                                     <br> We could not find any properties on location entered 
+                                     <br> We could not find any BookWithMe Entire Home on location entered 
                                      <br>
                                     </p>
                                     <br>
