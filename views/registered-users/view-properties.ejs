@@ -74,7 +74,7 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item">
-                        <form action="/sort-properties-by-rate">
+                        <form action="/sort-properties-by-rate" method="POST">
                           <input type="hidden" name="state" value="<%= state%>">
                           <input type="hidden" name="city" value="<%= city%>">
                           <button type="submit" class="btn">Sort properties by rate</button>
@@ -83,7 +83,7 @@
                       </li>
                       
                       <li class="nav-item">
-                          <form action="/bookwithme-plus">
+                          <form action="/bookwithme-plus" method="POST">
                             <input type="hidden" name="state" value="<%= state%>">
                             <input type="hidden" name="city" value="<%= city%>">
                             <button type="submit" class="btn">Show only BookWithMe Plus properties</button>
@@ -92,7 +92,7 @@
                       </li>
 
                       <li class="nav-item-active">
-                          <form action="/boutique-rooms">
+                          <form action="/boutique-rooms" method="POST">
                             <input type="hidden" name="state" value="<%= state%>">
                             <input type="hidden" name="city" value="<%= city%>">
                             <button type="submit" class="btn">Show only Boutique rooms</button>
@@ -101,7 +101,7 @@
                       </li>
 
                       <li class="nav-item-active">
-                          <form action="/entire-home">
+                          <form action="/entire-home" method="POST">
                             <input type="hidden" name="state" value="<%= state%>">
                             <input type="hidden" name="city" value="<%= city%>">
                             <button type="submit" class="btn">Show only BookWithMe Entire Home</button>
@@ -110,7 +110,7 @@
                       </li>
 
                       <li class="nav-item-active">
-                          <form action="/unique-properties">
+                          <form action="/unique-properties" method="POST">
                             <input type="hidden" name="state" value="<%= state%>">
                             <input type="hidden" name="city" value="<%= city%>">
                             <button type="submit" class="btn">Show only BookWithMe Unique Properties</button>

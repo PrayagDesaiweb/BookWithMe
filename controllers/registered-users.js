@@ -1,6 +1,7 @@
 const ManageUser  = require('../models/ManageUser');
 const Bookings = require('../models/Bookings');
 const Review = require('../models/Review');
+const ManageHostProperty = require('../models/ManageHostProprty');
 
 /* 
 
@@ -924,23 +925,57 @@ const token = req.body.stripeToken; // Using Express
 }
 
 exports.postSortPropertyByRate =(req, res, next) =>{
+    const city = req.body.city
+    const state = req.body.state;
+     // get proeprties from city and state that has boutique_rooms
 
 }
 
 exports.BoutiqueRooms = (req, res, next) =>{
+    const city = req.body.city
+    const state = req.body.state;
+    console.log(city);
+    // get proeprties from city and state that has boutique_rooms
+    ManageHostProperty.getBoutiqueRoomsProperty(city, state).then(ans =>{
+    
+        res.render('registered-users/view-properties-boutiquerooms',{
+            properties : ans,
+            city : city,
+            state : state
+        });
+    }).catch(err =>{
 
+    });
 }
 
 exports.Bwmplus = (req, res, next) =>{
+    const city = req.body.city
+    const state = req.body.state;
+    ManageHostProperty.getBWMPlusProperties(city, state).then(ans =>{
 
+    }).catch(err =>{
+
+    });
 }
 
 exports.EntireRooms = (req, res, next) =>{
+    const city = req.body.city
+    const state = req.body.state;
+    ManageHostProperty.getBWMEntireHome(city, state).then(ans =>{
 
+    }).catch(err =>{
+
+    });
 }
 
-exports.UniqueProperties = (req, rs, next) =>{
-    
+exports.UniqueProperties = (req, res, next) =>{
+    const city = req.body.city
+    const state = req.body.state;
+    ManageHostProperty.getUniqueHomes(city, state).then(ans =>{
+
+    }).catch(err =>{
+
+    });
 }
 // mean ratings on the search page
 

@@ -22,10 +22,10 @@ router.post('/free-cancellation',RegisteredUsersController.postFreeCancellation)
 router.post('/paid-cancellation',RegisteredUsersController.postPaidCancellation);
 router.get('/previous-bookings',RegisteredUsersController.getPreviousBookings);
 router.post('/book1',RegisteredUsersController.postBookProperty3);
-router.post('/sort-properties-by-rate',RegisteredUsersController.postSortPropertyByRate)
-router.post('/boutique-rooms',RegisteredUsersController.BoutiqueRooms)
-router.post('/bookwithme-plus',RegisteredUsersController.Bwmplus)
-router.post('/entire-home',RegisteredUsersController.EntireRooms)
-router.post('/unique-properties',RegisteredUsersController.UniqueProperties)
+router.post('/sort-properties-by-rate',RegisteredUsersController.postSortPropertyByRate);
+router.post('/boutique-rooms',RegisteredUsersController.BoutiqueRooms);
+router.post('/bookwithme-plus',RegisteredUsersController.Bwmplus);
+router.post('/entire-home',RegisteredUsersController.EntireRooms);
+router.post('/unique-properties',RegisteredUsersController.UniqueProperties);
 
 module.exports = router;

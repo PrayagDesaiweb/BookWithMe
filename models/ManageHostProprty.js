@@ -102,6 +102,48 @@ static fetchHostPropertyById(hostId){
             console.log(err);
         })
     }
+
+    static getBoutiqueRoomsProperty(city, state){
+        let db = getDb();
+        return db.collection("hostProperty").find({city : city, state:state, property_class : "boutique_rooms", status : "active"}).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
+    static getBWMPlusProperties(city, state){
+        let db = getDb();
+        return db.collection("hostProperty").find({city : city, state:state, property_class : "bwm_plus", status : "active"}).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
+    static getBWMEntireHome(city, state){
+        let db = getDb();
+        return db.collection("hostProperty").find({city : city, state:state, property_class : "entire_home", status : "active"}).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
+    static getUniqueHomes(city, state){
+        
+        let db = getDb();
+        return db.collection("hostProperty").find({city : city, state:state, property_class : "unique_homes", status : "active"}).toArray()
+        .then(result =>{
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+
+    }
     
 }
 
