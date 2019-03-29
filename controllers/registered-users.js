@@ -922,6 +922,26 @@ const token = req.body.stripeToken; // Using Express
     });
     
 }
+
+exports.postSortPropertyByRate =(req, res, next) =>{
+
+}
+
+exports.BoutiqueRooms = (req, res, next) =>{
+
+}
+
+exports.Bwmplus = (req, res, next) =>{
+
+}
+
+exports.EntireRooms = (req, res, next) =>{
+
+}
+
+exports.UniqueProperties = (req, rs, next) =>{
+    
+}
 // mean ratings on the search page
 
 

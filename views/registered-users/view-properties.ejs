@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
@@ -61,7 +63,66 @@
 
                 </div>
                 <br>
+                <div class="container" align="center">
+                  <p class="display-4 text-success" >
+                     <strong>Filter properties in <%= city%>, <%= state%></strong>
+                  </p>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  
+                <br>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                        <form action="/sort-properties-by-rate">
+                          <input type="hidden" name="state" value="<%= state%>">
+                          <input type="hidden" name="city" value="<%= city%>">
+                          <button type="submit" class="btn">Sort properties by rate</button>
+                        </form>
+                        
+                      </li>
+                      
+                      <li class="nav-item">
+                          <form action="/bookwithme-plus">
+                            <input type="hidden" name="state" value="<%= state%>">
+                            <input type="hidden" name="city" value="<%= city%>">
+                            <button type="submit" class="btn">Show only BookWithMe Plus properties</button>
+                          </form>
+                        
+                      </li>
 
+                      <li class="nav-item-active">
+                          <form action="/boutique-rooms">
+                            <input type="hidden" name="state" value="<%= state%>">
+                            <input type="hidden" name="city" value="<%= city%>">
+                            <button type="submit" class="btn">Show only Boutique rooms</button>
+                          </form>
+                        
+                      </li>
+
+                      <li class="nav-item-active">
+                          <form action="/entire-home">
+                            <input type="hidden" name="state" value="<%= state%>">
+                            <input type="hidden" name="city" value="<%= city%>">
+                            <button type="submit" class="btn">Show only BookWithMe Entire Home</button>
+                          </form>
+          
+                      </li>
+
+                      <li class="nav-item-active">
+                          <form action="/unique-properties">
+                            <input type="hidden" name="state" value="<%= state%>">
+                            <input type="hidden" name="city" value="<%= city%>">
+                            <button type="submit" class="btn">Show only BookWithMe Unique Properties</button>
+                          </form>
+                        
+                      </li>
+                      
+                      
+                    </ul>
+                    <br>
+                  </div>
+                </nav>
                   <div align="center">
                     <p>
                         <h5 class='display-5'>
