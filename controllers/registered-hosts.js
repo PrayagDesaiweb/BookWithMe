@@ -41,7 +41,7 @@ exports.postFetchfromCreatefirstRentals = (req, res, next) => {
     const amenities = req.body.amenities;
     const chk_in_date = req.body.date[0];
     const chk_out_date = req.body.date[1];
-    const rate = req.body.rate;
+    const rate = Number(req.body.rate);
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
     const date_when_booked = new Date();
@@ -96,7 +96,7 @@ exports.postCreateRental = (req, res, next) => {
     const accomodation_strength = req.body.accomodation_strength;
     const cancellation_scheme = req.body.cancellation_scheme;
     const date_when_booked = new Date();
-    const rate = req.body.rate;
+    const rate = Number(req.body.rate);
     const specifications = req.body.specifications;
     const amenities = req.body.amenities; 
     const status = "active";
@@ -357,7 +357,7 @@ exports.postUpdatePropertyInformation = (req, res, next) =>{
     const address = req.body.address;
     const city = req.body.city;
     const state = req.body.state;
-    const rate = req.body.rate;
+    const rate = Number(req.body.rate);
     const property_class= req.body.property_class;
     const cancellation_scheme = req.body.cancellation_scheme;
     const accomodation_strength = req.body.accomodation_strength;

@@ -144,6 +144,19 @@ static fetchHostPropertyById(hostId){
         })
 
     }
+
+    static sortPropertyByRate(city, state){
+        let db = getDb();
+        return db.collection("hostProperty").find({city : city, state:state, status : "active"}).sort({rate : 1}).toArray()
+        .then(result =>{
+            console.log('sort is');
+            console.log(result)
+            return result;
+        }).catch(err =>{
+            console.log(err);
+        })
+
+    }
     
 }
 

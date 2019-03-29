@@ -927,7 +927,11 @@ const token = req.body.stripeToken; // Using Express
 exports.postSortPropertyByRate =(req, res, next) =>{
     const city = req.body.city
     const state = req.body.state;
-     // get proeprties from city and state that has boutique_rooms
+    ManageHostProperty.sortPropertyByRate(city, state).then(ans =>{
+        console.log('hi');
+    }).catch(err =>{
+        console.log(err);
+    })
 
 }
 
