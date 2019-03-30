@@ -928,7 +928,11 @@ exports.postSortPropertyByRate =(req, res, next) =>{
     const city = req.body.city
     const state = req.body.state;
     ManageHostProperty.sortPropertyByRate(city, state).then(ans =>{
-        console.log('hi');
+        res.render('registered-users/sort_by_rate',{
+            properties : ans,
+            city : city,
+            state : state
+        });
     }).catch(err =>{
         console.log(err);
     })
