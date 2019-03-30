@@ -5,3 +5,8 @@
     background-position: center center;    
 }
 
+.propertylist  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

@@ -768,8 +768,8 @@ const token = req.body.stripeToken; // Using Express
                     if(aux_array.length === currentlyBookedProperties.length){
                         //console.log('AUX ARRAY IS ')
                         //console.log(aux_array);
-                        console.log('B IS ')
-                        console.log(aux_array);
+                        //console.log('B IS ')
+                        //console.log(aux_array);
                         res.render('registered-users/view-booked-properties',{
                             a : aux_array,
                             b : currentlyBookedProperties,
