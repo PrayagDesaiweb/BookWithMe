@@ -4,70 +4,97 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
+      <x>220</x>
       <y>0</y>
-      <w>240</w>
-      <h>190</h>
+      <w>350</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>Host
 --
--id: ObjectId
-_-ClassAttribute: Long_
+- id: ObjectId
+- name : String
+- email : String
+- password: String
+- contactNo : Number
+- user_name : String
+- something_about_me : String
 --
+/+ getId(): ObjectId /
+/+ getName() : String /
+/+ getEmail() : String /
+/+ getPassword() : String /
+/+ getcontactNo() : Number /
+/+ getUserName() : String /
+/+ checkHostNameUnique() : String/
+/+ fetchHostInformation() : Object/
+/+ fetchPropertyDetailsFromhostProperty() : Object/
+/+ checkHostNameUnique() : String/
+/+ checkHostNameUnique() : String/
+/+ fetchIdByName() : ObjectId /
+/+ fetchHostCredentials() : Object/
 
-/+checkHostNameUnique() : String/
-/+fetchHostInformation() : Object/
-/+fetchPropertyDetailsFromhostProperty() : Object/
-/+checkHostNameUnique() : String/
-/+checkHostNameUnique() : String/
-/+checkHostNameUnique() : String/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>0</y>
-      <w>210</w>
-      <h>190</h>
+      <x>820</x>
+      <y>30</y>
+      <w>270</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>Admin
 -
--id: Long {composite}
-_-ClassAttribute: Long_
+-id: ObjectId
+- User_name : String
+- password : String
 --
-#Operation(i: int): int
-/+AbstractOperation()/
---
-Responsibilities
--- Resp1
--- Resp2</panel_attributes>
+/+ getAdminName() : String/
+/+ getAdminId() : ObjectId/
+/+ getAdminPassword() : String/
+/+ authenticateHost() : Boolean/
+/+ authenticateUser() : Boolean/
+/+ updateUserCredentials() : Boolean/
+/+ updateHostCredentials() : Boolean/
+/+ managePayments() : Boolean/
+/+ updatePropertyStatus() : Boolean/
+/+ registerUser() : Boolean/
+/+ registerHost() : Boolean/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
-      <y>310</y>
-      <w>210</w>
-      <h>190</h>
+      <x>180</x>
+      <y>600</y>
+      <w>310</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>RegisteredUser
 --
--id: Long {composite}
-_-ClassAttribute: Long_
+- id: ObjectId
+- userId : ObjectId
+- UserName : String
+- Name : String
+- Email : String
+- Password : String
 --
-#Operation(i: int): int
-/+fetchUserCredentialsFromUserId() : Object/
+/+ fetchUserCredentialsFromUserId() : Object/
+/+ getuserId() : ObjectId /
+/+ getUserName : String /
+/+ getName() : String /
+/+ getEmail() : String /
+/+ getPassword() : String /
+/+ fetchUserIdByUserName() : ObjectId/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>310</y>
+      <x>750</x>
+      <y>340</y>
       <w>400</w>
       <h>500</h>
     </coordinates>
@@ -110,61 +137,224 @@ _-ClassAttribute: Long_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>590</y>
-      <w>210</w>
-      <h>190</h>
+      <x>140</x>
+      <y>420</y>
+      <w>290</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Non-RegisteredUser
--
--id: Long {composite}
-_-ClassAttribute: Long_
+
 --
-#Operation(i: int): int
-/+AbstractOperation()/
+/+ becomeRegisteredUser() : Boolean/
+/+ becomeRegisteredHost() : Boolean/
 --
-Responsibilities
--- Resp1
--- Resp2</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>860</y>
-      <w>210</w>
-      <h>190</h>
+      <x>110</x>
+      <y>960</y>
+      <w>440</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>Ratings&amp;Reviews
 --
--id: Long {composite}
-_-ClassAttribute: Long_
+- id: ObjectId
+- experience : String
+- feedback_of_property : String
+- feedback_about_host : String
+- rating : Number
+- bookings_id : Objectid
+- user_id: ObjectId
+- user_name : String
+- chk_in_date : Date
+- chk_out_date : Date
+- property_id : ObjectId
+
 --
-#Operation(i: int): int
-/+AbstractOperation()/
---
-Responsibilities
--- Resp1
--- Resp2</panel_attributes>
+/+ saveFeedback() : Boolean/
+/+ fetchReviewsByHostPropertyId() : String&lt;Object&gt;/
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>850</y>
-      <w>210</w>
-      <h>330</h>
+      <x>840</x>
+      <y>970</y>
+      <w>410</w>
+      <h>590</h>
     </coordinates>
     <panel_attributes>HostProperty
 --
--id: Long {composite}
-_-ClassAttribute: Long_
+- id: ObjectId
+- host_id : ObjectId
+- property_name : String
+- property_class : String
+- address : String
+- description : String
+- chk_in_date : Date
+- chk_out_date : Date
+- city : String
+- state : String
+- accomodation_strength : Number
+- cancellation_scheme : String
+- specifications : String
+- amenities : String
+- rate : Double
+- date_when_booked : Date
+- status : Boolean
+
 --
-#Operation(i: int): int
-/+fetchPropertyFromHostProperty() : List&lt;HostProperty&gt;/
-</panel_attributes>
+/+ fetchPropertyFromHostProperty() : List&lt;HostProperty&gt;/
+/+ fetchPropertyFromId() : Object/
+/+ fetchPropertyFromHostProperty() : Object/
+/+ fetchPropertyDetailsFromhostProperty() : Object/
+/+ updatePropertyAfterEditingCredentials() : Boolean/
+/+ fetchHostPropertyById() : Object/
+/+ changeStatusOfProperty() : Boolean/
+/+ findPropertyByHostIdThatAreActive() : List&lt;Object&gt;/
+/+ findPropertyByHostIdThatAreInactive() : List&lt;Object&gt;/
+/+ updatePropertyStatus() : Boolean/
+/+ findProperty() : Object/
+/+ getBoutiqueRoomsProperty() : List&lt;Object&gt;/
+/+ getBWMPlusProperties() : List&lt;Object&gt;/
+/+ getBWMEntireHome() : List&lt;Object&gt; /
+/+ getUniqueHomes() : List&lt;Object&gt; /
+/+ sortPropertyByRate() : List&lt;Object&gt;/</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>840</y>
+      <w>50</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;120.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>800</y>
+      <w>380</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>360.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>830</y>
+      <w>110</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>480</y>
+      <w>290</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>120</y>
+      <w>280</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+                       manages &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>280</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+                 manages &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>350</y>
+      <w>150</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+  manages &gt;</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>320</y>
+      <w>240</w>
+      <h>730</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+ manages &gt;</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;10.0;10.0;700.0;110.0;700.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>0</y>
+      <w>920</w>
+      <h>1050</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+manages &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;830.0;10.0;830.0;1020.0;690.0;1020.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>1070</y>
+      <w>320</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;300.0;90.0</additional_attributes>
   </element>
 </diagram>
