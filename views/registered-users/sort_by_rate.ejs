@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -145,75 +146,73 @@
                    <br>
                   </div>
 
-                      <% if (properties.length > 0) { %>
+                  <% if (properties.length > 0) { %>
+                    <div class="propertylist">
+                    <% for (let p of properties) {%>
+                    <div class="card bg-secondary text-white" style="width: 24rem;">
+                            <img class="card-img-top" src="images/homeimage.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <p class="card-text display-4"><%= p.property_name %> </p>
+                              <p class='display-5'>
+                                  Your Host <%= p.host_name%>  
+                              </p>
+                              <p class='display-5'>
+                                <%= p.property_class %>
+                              </p>
+                              
+              
+                              <p class='display-5'>
+                                <%= p.address %>
+                                <br>
+                                <%= p.city %>, <%= p.state %>
+                              </p>
+                              <p class='display-5'>
+                                Accomodation per rental property <%= p.accomodation_strength %>
+                              </p>
+                              
 
-                        <% for (let p of properties) {%>
-                        
-                        <div class="card bg-secondary text-white" style="width: 24rem;">
-                                <img class="card-img-top" src="images/homeimage.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                  <p class="card-text display-4"><%= p.property_name %> </p>
-                                  <p class='display-5'>
-                                      Your Host <%= p.host_name%>  
-                                  </p>
-                                  <p class='display-5'>
-                                    <%= p.property_class %>
-                                  </p>
-                                  
-                  
-                                  <p class='display-5'>
-                                    <%= p.address %>
-                                    <br>
-                                    <%= p.city %>, <%= p.state %>
-                                  </p>
-                                  <p class='display-5'>
-                                    Accomodation per rental property <%= p.accomodation_strength %>
-                                  </p>
-                                  
-
-                                  <div class='container' align='center'>
-                                        <form action="/book-property" method="POST">
-                                        <input type="hidden" name="property_id" value="<%= p._id %>"> 
-                                        <button type="submit" class="btn btn-success"> Book and Explore this property</button>
-                                        </form>
-                                  </div>
-                                </div>
+                              <div class='container' align='center'>
+                                    <form action="/book-property" method="POST">
+                                    <input type="hidden" name="property_id" value="<%= p._id %>"> 
+                                    <button type="submit" class="btn btn-success"> Book and Explore this property</button>
+                                    </form>
                               </div>
-                              <br>
-                              <br>
-                       <% } %>       
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                   <% } %>       
+                    </div>
 
-
-                      <% } else {%>
+                  <% } else {%>
+                    <br>
+                    <br>
+                    <div class='container'>
+                        <p align='center' class='display-3'>
+                         Sorry
+                    
+                         <br>
+                          <br>
+                         <img src="images/cry.png" alt="">
+                         <br>
+                         <br> We could not find any properties on location entered 
+                         <br>
+                        </p>
                         <br>
                         <br>
-                        <div class='container'>
-                            <p align='center' class='display-3'>
-                             Sorry
+
+                        <p align='center' class='display-5'>
+                            Go back to explore properties on other locations
+                        </p>
+                        <br>
+                        <br>
+
                         
-                             <br>
-                              <br>
-                             <img src="images/cry.png" alt="">
-                             <br>
-                             <br> We could not find any properties on location entered 
-                             <br>
-                            </p>
-                            <br>
-                            <br>
+                        <br>
 
-                            <p align='center' class='display-5'>
-                                Go back to explore properties on other locations
-                            </p>
-                            <br>
-                            <br>
-
-                            
-                            <br>
-
-                        </div>
-                                    
-                        <% } %>
-
+                    </div>
+                                
+                    <% } %> 
                         <!-- Implement this first-->
 </body>
 </html>
