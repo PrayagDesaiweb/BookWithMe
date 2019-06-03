@@ -31,7 +31,7 @@
       <w>180</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>login as registered user</panel_attributes>
+    <panel_attributes>login as registered host</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -335,8 +335,8 @@ information</panel_attributes>
       <w>120</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>show
-previous bookings</panel_attributes>
+    <panel_attributes>edit all information
+of the property</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
